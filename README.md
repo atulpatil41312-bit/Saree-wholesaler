@@ -1,3 +1,33 @@
+# WholeMarket Saree Wholesaler
+
+A Laravel marketplace for wholesale saree shops, seller sign-up, seller storefront themes, administrator activation, and public catalogues.
+
+## Deploy on Render
+
+The repository includes `render.yaml` and a Docker build for a full Laravel deployment with Render Postgres. The Blueprint provisions both the web service and the database, then deploys each push to `main`.
+
+1. Open [Deploy to Render](https://render.com/deploy?repo=https://github.com/atulpatil41312-bit/Saree-wholesaler).
+2. Sign in to Render and connect the GitHub repository.
+3. Enter a private `INITIAL_ADMIN_EMAIL` and strong `INITIAL_ADMIN_PASSWORD` when prompted. They create the only initial administrator; demo credentials are never created in production.
+4. Deploy the Blueprint. The health endpoint is `/up`; Render supplies the public `onrender.com` URL when the build completes.
+
+The first request can take longer when running on Render's free plan. Every later push to `main` triggers a deployment automatically.
+
+## Local development
+
+```powershell
+composer install
+npm install --ignore-scripts
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan serve
+```
+
+The local development database is SQLite; Render uses managed PostgreSQL.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

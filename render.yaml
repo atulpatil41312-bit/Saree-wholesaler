@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: saree-wholesaler
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /up
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_NAME
+        value: WholeMarket
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: saree-wholesaler-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      # Render prompts for these private values when the Blueprint is created.
+      - key: INITIAL_ADMIN_EMAIL
+        sync: false
+      - key: INITIAL_ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: saree-wholesaler-db
+    databaseName: wholemarket
+    user: wholemarket
+    plan: free
+    region: singapore
