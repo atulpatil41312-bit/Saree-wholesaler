@@ -1,0 +1,6 @@
+/* Template-specific accessibility and contrast refinements. */
+body.vastra-emerald .ve-primary,
+body.vastra-emerald .ve-primary:visited {
+    color: #fff !important;
+    font-weight: 600;
+}

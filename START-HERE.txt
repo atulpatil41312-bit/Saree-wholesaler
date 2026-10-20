@@ -1,0 +1,15 @@
+WHOLEMARKET STARTER
+
+Extract this ZIP directly into F:\Codex proejcts\wholemarket.
+You should see approved-storefront and BUILD-BRIEF.md immediately inside that folder.
+Open the folder in Codex. Ask it to read BUILD-BRIEF.md and inspect approved-storefront.
+
+The template is a frontend demo: no working admin, seller login, or database yet.
+Do not overwrite an existing project; extract into a separate subfolder if files conflict.
+
+For a simple preview, if Python is installed:
+python -m http.server 8000 --directory approved-storefront
+Then open http://localhost:8000
+Stop the server with Ctrl+C. This is a local preview, not production hosting.
+
+Sample photography from Unsplash; see ASSETS.md. Replace with seller product photos before live trading.
