@@ -11,14 +11,14 @@
     @php
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
-        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Minimum order: '.$product->minimum_order_quantity.' pieces. Product link: '.route('shops.products.show', [$shop, $product])) : null;
+        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Minimum order: '.$product->minimum_order_quantity.' pieces. Product link: '.$product->publicUrl().'. Shop link: '.$shop->publicUrl()) : null;
         $shopEmail = filter_var($shop->email, FILTER_VALIDATE_EMAIL) ? $shop->email : null;
     @endphp
 
     <div class="ve-announcement">{{ Str::upper($shop->name) }} <span>WHOLESALE COLLECTION</span></div>
     <header class="ve-header">
-        <a class="ve-brand" href="{{ route('shops.show', $shop) }}"><span class="ve-emblem">V</span><span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span></a>
-        <nav class="ve-nav" aria-label="Shop navigation"><a href="{{ route('shops.show', $shop) }}#collection">Back to collection</a><a href="{{ route('market.index') }}">Market</a></nav>
+        <a class="ve-brand" href="{{ $shop->publicUrl() }}"><span class="ve-emblem">V</span><span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span></a>
+        <nav class="ve-nav" aria-label="Shop navigation"><a href="{{ $shop->publicUrl() }}#collection">Back to collection</a><a href="{{ route('market.index') }}">Market</a></nav>
     </header>
 
     <main class="ve-main">

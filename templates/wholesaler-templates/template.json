@@ -1,0 +1,22 @@
+{
+  "id": "wholemarket-wholesaler-templates",
+  "key": "wholesaler-templates",
+  "name": "Wholesale Atelier",
+  "version": "1.0.0",
+  "entry": "resources/views/shop/wholesaler-templates.blade.php",
+  "product_entry": "resources/views/shop/wholesaler-templates-product.blade.php",
+  "supported_shop_types": ["wholesaler", "retailer"],
+  "compatible_project_version": "WholeMarket Laravel 13 / template registry v1",
+  "template_engine": "Laravel Blade",
+  "assets": [
+    "public/templates/wholesaler-templates/style.css",
+    "public/templates/wholesaler-templates/placeholder-hero.svg",
+    "public/templates/wholesaler-templates/placeholder-product.svg"
+  ],
+  "settings": {
+    "colour_key": ["heritage", "ruby", "indigo"],
+    "font_key": ["editorial", "classic", "modern"],
+    "sections": ["hero_title", "hero_subtitle", "hero_cta_label", "visible", "order"],
+    "show_prices": true
+  }
+}

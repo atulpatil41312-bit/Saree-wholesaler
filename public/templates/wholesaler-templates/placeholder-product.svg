@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract saree product placeholder</title>
+  <desc id="desc">An original geometric woven pattern used when a catalogue item has no photo.</desc>
+  <defs>
+    <linearGradient id="ground" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f2dfbe"/><stop offset=".5" stop-color="#b55d46"/><stop offset="1" stop-color="#42281f"/></linearGradient>
+    <pattern id="diamond" width="90" height="90" patternUnits="userSpaceOnUse"><path d="m45 5 35 40-35 40L10 45Z" fill="none" stroke="#fff0c9" stroke-opacity=".45" stroke-width="3"/><circle cx="45" cy="45" r="6" fill="#fff0c9" fill-opacity=".5"/></pattern>
+  </defs>
+  <rect width="720" height="960" fill="url(#ground)"/>
+  <path d="M0 635 720 170v790H0Z" fill="#6b3342" fill-opacity=".58"/>
+  <rect width="720" height="960" fill="url(#diamond)"/>
+  <path d="M0 122h720M0 164h720M0 796h720M0 838h720" stroke="#fff2cc" stroke-opacity=".75" stroke-width="14"/>
+  <circle cx="360" cy="480" r="175" fill="#fff4d8" fill-opacity=".1" stroke="#fff4d8" stroke-opacity=".6" stroke-width="3"/>
+  <path d="m360 325 43 108 116 8-89 76 29 113-99-59-99 59 29-113-89-76 116-8Z" fill="#fff2cf" fill-opacity=".7"/>
+</svg>

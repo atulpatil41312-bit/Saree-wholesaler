@@ -8,7 +8,7 @@
                 <h2>Apply to sell</h2>
                 <p>Submit your details to create a seller account and a pending wholesale shop. An admin will review and activate it before it is shown in the market.</p>
 
-                <form method="post" action="{{ route('seller.signup.store') }}">
+                <form method="post" action="{{ route('seller.signup.store') }}" data-shop-slug-form>
                     @csrf
 
                     <label>
@@ -25,15 +25,15 @@
 
                     <label>
                         Shop name
-                        <input name="name" type="text" value="{{ old('name') }}" required>
+                        <input name="name" type="text" value="{{ old('name') }}" required data-shop-name>
                     </label>
                     @error('name')<p>{{ $message }}</p>@enderror
 
                     <label>
                         Shop URL
-                        <input name="slug" type="text" value="{{ old('slug') }}" pattern="[A-Za-z0-9-]+" required>
+                        <span>{{ request()->getSchemeAndHttpHost() }}/wholesaler/</span><input name="slug" type="text" value="{{ old('slug') }}" pattern="[A-Za-z0-9-]+" required data-shop-slug>
                     </label>
-                    <p>Use letters, numbers, and hyphens only.</p>
+                    <p>Generated from your shop name. You can edit it; use letters, numbers, and hyphens only.</p>
                     @error('slug')<p>{{ $message }}</p>@enderror
 
                     <label>
@@ -55,3 +55,26 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        document.querySelectorAll('[data-shop-slug-form]').forEach((form) => {
+            const name = form.querySelector('[data-shop-name]');
+            const slug = form.querySelector('[data-shop-slug]');
+            let customSlug = slug.value.trim() !== '';
+            const slugify = (value) => value.toLowerCase().normalize('NFKD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+
+            name.addEventListener('input', () => {
+                if (!customSlug) slug.value = slugify(name.value);
+            });
+
+            slug.addEventListener('input', () => {
+                slug.value = slugify(slug.value);
+                customSlug = slug.value !== slugify(name.value);
+            });
+        });
+    </script>
+@endpush

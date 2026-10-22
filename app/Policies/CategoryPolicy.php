@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Category;
+use App\Models\Shop;
 use App\Models\User;
 
 class CategoryPolicy
@@ -14,26 +15,26 @@ class CategoryPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->shop !== null;
+        return $user->memberships()->exists() || $user->ownedShops()->exists();
     }
 
     public function view(User $user, Category $category): bool
     {
-        return $user->shop?->is($category->shop) ?? false;
+        return $user->canManageShop($category->shop, 'manage_catalogue');
     }
 
-    public function create(User $user): bool
+    public function create(User $user, Shop $shop): bool
     {
-        return $user->shop !== null;
+        return $user->canManageShop($shop, 'manage_catalogue');
     }
 
     public function update(User $user, Category $category): bool
     {
-        return $user->shop?->is($category->shop) ?? false;
+        return $user->canManageShop($category->shop, 'manage_catalogue');
     }
 
     public function delete(User $user, Category $category): bool
     {
-        return $user->shop?->is($category->shop) ?? false;
+        return $user->canManageShop($category->shop, 'manage_catalogue');
     }
 }

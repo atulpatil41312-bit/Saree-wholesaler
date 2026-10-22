@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1440" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract textile placeholder</title>
+  <desc id="desc">An original warm-toned woven textile composition used when a shop has no banner image.</desc>
+  <defs>
+    <linearGradient id="base" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#542f22"/><stop offset=".44" stop-color="#b96542"/><stop offset="1" stop-color="#f0d6a1"/></linearGradient>
+    <linearGradient id="stripe" x1="0" x2="1"><stop stop-color="#ffdf9e" stop-opacity=".15"/><stop offset=".5" stop-color="#fff5dc" stop-opacity=".9"/><stop offset="1" stop-color="#ffdf9e" stop-opacity=".15"/></linearGradient>
+    <pattern id="weave" width="86" height="86" patternUnits="userSpaceOnUse"><path d="M-20 23 106 23M-20 64 106 64M23-20 23 106M64-20 64 106" stroke="#fff6e4" stroke-opacity=".14" stroke-width="7"/></pattern>
+  </defs>
+  <rect width="1200" height="1440" fill="url(#base)"/>
+  <path d="M0 0h1200v265C976 220 824 296 648 347 401 420 202 341 0 440Z" fill="#28150f" opacity=".33"/>
+  <path d="M0 936c261-177 463-84 665-187 191-97 308-175 535-90v781H0Z" fill="#742f3e" opacity=".55"/>
+  <rect width="1200" height="1440" fill="url(#weave)"/>
+  <path d="M-58 1120 1258 310" stroke="url(#stripe)" stroke-width="74" opacity=".68"/>
+  <path d="M-62 1263 1262 453" stroke="#f4c471" stroke-opacity=".32" stroke-width="24"/>
+  <circle cx="935" cy="358" r="186" fill="none" stroke="#fbe8bd" stroke-opacity=".52" stroke-width="2"/>
+  <circle cx="935" cy="358" r="137" fill="none" stroke="#fbe8bd" stroke-opacity=".33" stroke-width="17"/>
+  <path d="m935 196 32 82 88 6-67 58 22 86-75-45-75 45 22-86-67-58 88-6Z" fill="#f7ddb0" fill-opacity=".68"/>
+</svg>

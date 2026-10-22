@@ -20,6 +20,7 @@ class ShopFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'type' => 'wholesaler',
             'name' => fake()->company().' Sarees',
             'slug' => fake()->unique()->slug(3),
             'status' => 'pending',
@@ -31,6 +32,7 @@ class ShopFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'status' => 'active',
+            'approved_at' => now(),
         ]);
     }
 }

@@ -14,26 +14,47 @@ class ShopPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->memberships()->exists() || $user->ownedShops()->exists();
     }
 
     public function view(User $user, Shop $shop): bool
     {
-        return $user->shop?->is($shop) ?? false;
-    }
-
-    public function create(User $user): bool
-    {
-        return $user->isAdmin();
+        return $this->isMember($user, $shop);
     }
 
     public function update(User $user, Shop $shop): bool
     {
-        return $user->shop?->is($shop) ?? false;
+        return $user->canManageShop($shop, 'manage_branding');
     }
 
-    public function delete(User $user, Shop $shop): bool
+    public function manageCatalogue(User $user, Shop $shop): bool
     {
-        return $user->isAdmin();
+        return $user->canManageShop($shop, 'manage_catalogue');
+    }
+
+    public function viewEnquiries(User $user, Shop $shop): bool
+    {
+        return $user->canManageShop($shop, 'manage_enquiries');
+    }
+
+    public function manageBilling(User $user, Shop $shop): bool
+    {
+        return $shop->user_id === $user->id || $user->membershipFor($shop)?->role === 'owner';
+    }
+
+    public function manageSponsorships(User $user, Shop $shop): bool
+    {
+        return $shop->isWholesaler()
+            && ($shop->user_id === $user->id || $user->membershipFor($shop)?->role === 'owner');
+    }
+
+    public function manageMemberships(User $user, Shop $shop): bool
+    {
+        return $shop->user_id === $user->id || $user->membershipFor($shop)?->role === 'owner';
+    }
+
+    private function isMember(User $user, Shop $shop): bool
+    {
+        return $shop->user_id === $user->id || $user->membershipFor($shop) !== null;
     }
 }

@@ -11,13 +11,14 @@
         $assetBase = asset($templateDetails['asset_path']);
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
-        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I would like to enquire about '.$shop->name.'.') : null;
+        $shopUrl = $shop->publicUrl();
+        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I would like to enquire about '.$shop->name.'. Shop link: '.$shopUrl) : null;
         $phoneNumber = preg_replace('/\D/', '', $shop->phone ?? '');
         $phoneUrl = strlen($phoneNumber) >= 8 && strlen($phoneNumber) <= 15 ? 'tel:'.$phoneNumber : null;
         $instagramUrl = filter_var($shop->instagram_url, FILTER_VALIDATE_URL) && in_array(parse_url($shop->instagram_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->instagram_url : null;
         $facebookUrl = filter_var($shop->facebook_url, FILTER_VALIDATE_URL) && in_array(parse_url($shop->facebook_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->facebook_url : null;
         $shopEmail = filter_var($shop->email, FILTER_VALIDATE_EMAIL) ? $shop->email : null;
-        $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : route('shops.show', $shop);
+        $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/'.$templateDetails['hero_image'];
         $categoryImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg'];
     @endphp
@@ -31,7 +32,7 @@
         <div class="stp-topline"><span>Sarees for your store. Conversations that matter.</span><small>WHOLESALE CATALOGUE</small></div>
 
         <header class="stp-header">
-            <a class="stp-brand" href="{{ route('shops.show', $shop) }}">
+            <a class="stp-brand" href="{{ $shopUrl }}">
                 @if ($shop->logo_path)
                     <img class="stp-logo" src="{{ Storage::url($shop->logo_path) }}" alt="{{ $shop->name }}">
                 @else
@@ -79,7 +80,7 @@
                             @php
                                 $categoryUrl = ! empty($previewingTemplate)
                                     ? route('seller.design.preview', ['template' => $template, 'category' => $category->id])
-                                    : route('shops.show', ['shop' => $shop, 'category' => $category->id]);
+                                    : $shop->publicUrl(['category' => $category->id]);
                             @endphp
                             <a class="stp-edit-card" href="{{ $categoryUrl }}#collection">
                                 <img src="{{ $assetBase }}/{{ $categoryImages[$index] }}" alt="{{ $category->name }} saree collection">
@@ -113,7 +114,7 @@
                             @forelse ($products as $product)
                                 <article class="stp-product">
                                     <div class="stp-product-photo">
-                                        <a href="{{ route('shops.products.show', [$shop, $product]) }}"><img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/saree1.jpg' }}" alt="{{ $product->name }}"></a>
+                                        <a href="{{ $product->publicUrl() }}"><img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/saree1.jpg' }}" alt="{{ $product->name }}"></a>
                                         <button class="stp-heart" type="button" data-product-id="{{ $product->id }}" aria-label="Save {{ $product->name }}" aria-pressed="false">♡</button>
                                         @if ($product->category)<span class="stp-badge">{{ $product->category->name }}</span>@endif
                                     </div>
@@ -122,7 +123,7 @@
                                     <div class="stp-price">{{ $product->wholesale_price !== null ? '₹'.number_format($product->wholesale_price, 2) : 'Contact for price' }}</div>
                                     <p class="stp-meta">{{ $product->colour ?: 'Colour on enquiry' }} · {{ $product->fabric?->name ?: 'Fabric on enquiry' }}</p>
                                     <div class="stp-minimum">Minimum order: {{ $product->minimum_order_quantity }} pieces</div>
-                                    <a class="stp-details" href="{{ route('shops.products.show', [$shop, $product]) }}">View saree <span>↗</span></a>
+                                    <a class="stp-details" href="{{ $product->publicUrl() }}">View saree <span>↗</span></a>
                                 </article>
                             @empty
                                 <div class="stp-empty">No sarees match these filters. <a href="{{ $collectionUrl }}#collection">View the full collection</a></div>
@@ -158,8 +159,8 @@
             </section>
         </main>
 
-        <footer class="stp-footer"><a class="stp-footer-brand" href="{{ route('shops.show', $shop) }}">{{ $shop->name }}</a><p>Curated for stores. Chosen with care.</p><small>{{ $templateDetails['label'] }} · Wholesale catalogue by {{ $shop->name }}</small></footer>
-        <nav class="stp-mobile-nav" aria-label="Mobile shortcuts"><a href="{{ route('shops.show', $shop) }}">⌂<span>Home</span></a><a href="#collection">▦<span>Collection</span></a><a href="#contact">✉<span>Contact</span></a></nav>
+        <footer class="stp-footer"><a class="stp-footer-brand" href="{{ $shopUrl }}">{{ $shop->name }}</a><p>Curated for stores. Chosen with care.</p><small>{{ $templateDetails['label'] }} · Wholesale catalogue by {{ $shop->name }}</small></footer>
+        <nav class="stp-mobile-nav" aria-label="Mobile shortcuts"><a href="{{ $shopUrl }}">⌂<span>Home</span></a><a href="#collection">▦<span>Collection</span></a><a href="#contact">✉<span>Contact</span></a></nav>
     </div>
 
     <script>

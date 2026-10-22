@@ -26,6 +26,54 @@ php artisan serve
 
 The local development database is SQLite; Render uses managed PostgreSQL.
 
+## WholeMarket operational notes
+
+### Local-only demo access
+
+The development seeder creates local demonstration accounts only. They are never created in
+production: production requires `INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD`. Do not use
+the local credentials outside a disposable development database.
+
+### Queue and scheduler
+
+The local default queue connection is `database`. In a separate terminal, start a worker before
+testing queued notifications or jobs:
+
+```powershell
+php artisan queue:work
+```
+
+Run the scheduler continuously in development, or configure a one-minute scheduler trigger in
+production. Sponsorship expiry checks remain enforced at request time even if a scheduled task is
+delayed.
+
+```powershell
+php artisan schedule:work
+```
+
+### Backup and restore
+
+Back up the production database and product-media disk together. Test restoration in an isolated
+staging environment before relying on a backup. For the local SQLite demo, stop the app and copy
+`database/database.sqlite`; restore by replacing it only while the application is stopped, then run
+`php artisan migrate --force` to verify the schema.
+
+### Deployment and rollback
+
+Before deployment, run migrations, build frontend assets, restart queue workers, and verify the
+health endpoint at `/up`. Keep the immediately preceding release and a database backup available
+for rollback. A rollback must not run destructive reverse migrations against a live database;
+restore a tested backup only when the migration plan explicitly calls for it.
+
+### PWA boundary and current limitations
+
+WholeMarket is one market-level installable PWA, not a separate installable app per shop. The
+service worker caches only static public assets and a neutral offline page. It never caches
+dashboard, authentication, payment, enquiry, API, or mutable storefront HTML responses.
+
+Live payments, custom domains, carts, checkout, shipping, inventory synchronisation, and an
+unrestricted page builder are intentionally out of scope for this release.
+
 ---
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>

@@ -11,7 +11,8 @@
     @php
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
-        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I would like to enquire about '.$shop->name.'.') : null;
+        $shopUrl = $shop->publicUrl();
+        $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I would like to enquire about '.$shop->name.'. Shop link: '.$shopUrl) : null;
         $instagramUrl = filter_var($shop->instagram_url, FILTER_VALIDATE_URL) && in_array(parse_url($shop->instagram_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->instagram_url : null;
         $facebookUrl = filter_var($shop->facebook_url, FILTER_VALIDATE_URL) && in_array(parse_url($shop->facebook_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->facebook_url : null;
         $shopEmail = filter_var($shop->email, FILTER_VALIDATE_EMAIL) ? $shop->email : null;
@@ -23,7 +24,7 @@
 
     <div class="ve-announcement">For the stores that celebrate beautiful Indian textiles. <span>WHOLESALE COLLECTION</span></div>
     <header class="ve-header">
-        <a class="ve-brand" href="{{ route('shops.show', $shop) }}">
+        <a class="ve-brand" href="{{ $shopUrl }}">
             <span class="ve-emblem">V</span>
             <span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span>
         </a>
@@ -66,7 +67,7 @@
                 <div class="ve-section-heading"><div class="ve-eyebrow">FIND YOUR INSPIRATION</div><h2>Find your signature.</h2></div>
                 <div class="ve-category-grid">
                     @foreach ($categories->take(3)->values() as $index => $category)
-                        <a class="ve-category-tile" href="{{ route('shops.show', ['shop' => $shop, 'category' => $category->id]) }}#collection">
+                        <a class="ve-category-tile" href="{{ $shop->publicUrl(['category' => $category->id]) }}#collection">
                             <img src="{{ asset('templates/vastra-emerald/saree'.$index.'.jpg') }}" alt="{{ $category->name }} saree collection">
                             <span><small>{{ Str::upper($shop->name) }}</small><b>{{ $category->name }}</b><i>↗</i></span>
                         </a>
@@ -80,13 +81,13 @@
                 <div><div class="ve-eyebrow">CURATED FOR YOUR NEXT COLLECTION</div><h2>The considered collection.</h2></div>
                 <p>Thoughtfully selected. Beautifully presented.<br>Find the next favourite for your store.</p>
             </div>
-            <form class="ve-controls" method="get" action="{{ route('shops.show', $shop) }}">
+            <form class="ve-controls" method="get" action="{{ $shopUrl }}">
                 <label>Category<select name="category"><option value="">All sarees</option>@foreach ($categories as $category)<option value="{{ $category->id }}" @selected(request('category') == $category->id)>{{ $category->name }}</option>@endforeach</select></label>
                 <label>Fabric<select name="fabric"><option value="">All fabrics</option>@foreach ($fabrics as $fabric)<option value="{{ $fabric->id }}" @selected(request('fabric') == $fabric->id)>{{ $fabric->name }}</option>@endforeach</select></label>
                 <label class="ve-search">⌕ <input name="q" value="{{ request('q') }}" placeholder="Search sarees or product code" aria-label="Search sarees"></label>
                 <button class="ve-filter-button">Filter collection</button>
             </form>
-            <div class="ve-result-line"><span>{{ $products->count() }} {{ Str::plural('piece', $products->count()) }} in the collection</span><a href="{{ route('shops.show', $shop) }}#collection">Clear filters ×</a></div>
+            <div class="ve-result-line"><span>{{ $products->count() }} {{ Str::plural('piece', $products->count()) }} in the collection</span><a href="{{ $shopUrl }}#collection">Clear filters ×</a></div>
             <div class="ve-products">
                 @forelse ($products as $product)
                     <article class="ve-product">
@@ -99,10 +100,10 @@
                         <h3>{{ $product->name }}</h3>
                         <div class="ve-price">{{ $product->wholesale_price ? '₹'.number_format($product->wholesale_price, 2) : 'Contact for price' }}</div>
                         <div class="ve-moq">Minimum order: {{ $product->minimum_order_quantity }} pieces</div>
-                        <a class="ve-details" href="{{ route('shops.products.show', [$shop, $product]) }}">View saree <span>↗</span></a>
+                        <a class="ve-details" href="{{ $product->publicUrl() }}">View saree <span>↗</span></a>
                     </article>
                 @empty
-                    <div class="ve-empty">No sarees match these filters. <a href="{{ route('shops.show', $shop) }}#collection">View the full collection</a></div>
+                    <div class="ve-empty">No sarees match these filters. <a href="{{ $shopUrl }}#collection">View the full collection</a></div>
                 @endforelse
             </div>
         </section>
@@ -161,7 +162,7 @@
         </section>
     </main>
 
-    <footer class="ve-footer"><a class="ve-brand" href="{{ route('shops.show', $shop) }}"><span class="ve-emblem">V</span><span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span></a><p>Beautiful collections. Meaningful connections.</p><small>Wholesale catalogue by {{ $shop->name }}</small></footer>
+    <footer class="ve-footer"><a class="ve-brand" href="{{ $shopUrl }}"><span class="ve-emblem">V</span><span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span></a><p>Beautiful collections. Meaningful connections.</p><small>Wholesale catalogue by {{ $shop->name }}</small></footer>
 
     <script>
         const favouriteKey = 'wholemarket:{{ $shop->id }}:vastra-emerald:favourites';

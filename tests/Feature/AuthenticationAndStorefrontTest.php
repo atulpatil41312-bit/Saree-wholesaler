@@ -44,6 +44,22 @@ class AuthenticationAndStorefrontTest extends TestCase
         $response->assertSeeText('TEST SAREES');
     }
 
+    public function test_active_shop_uses_a_typed_canonical_url_and_legacy_links_redirect(): void
+    {
+        $shop = Shop::factory()->active()->create([
+            'name' => 'Vidhya Saree',
+            'slug' => 'vidhyasaree',
+        ]);
+
+        $this->get('/vidhyasaree')
+            ->assertRedirect('/wholesaler/vidhyasaree');
+
+        $this->get('/shops/vidhyasaree')
+            ->assertRedirect('/wholesaler/vidhyasaree');
+
+        $this->assertStringEndsWith('/wholesaler/vidhyasaree', route('shops.show', $shop));
+    }
+
     public function test_authenticated_seller_sees_a_dashboard_link_on_the_marketplace(): void
     {
         $seller = User::factory()->create([
@@ -73,7 +89,7 @@ class AuthenticationAndStorefrontTest extends TestCase
         $seller = User::query()->where('email', 'aarohi@example.test')->sole();
 
         $this->assertModelExists($seller);
-        $this->assertSame('seller', $seller->role);
+        $this->assertSame('wholesaler', $seller->role);
         $this->assertDatabaseHas('shops', [
             'user_id' => $seller->id,
             'name' => 'Aarohi Sarees',
@@ -81,6 +97,27 @@ class AuthenticationAndStorefrontTest extends TestCase
             'status' => 'pending',
         ]);
         $this->get('/shops/aarohi-sarees')->assertNotFound();
+    }
+
+    public function test_shop_signup_shows_an_auto_generated_url_field_and_reserves_platform_paths(): void
+    {
+        $this->get(route('seller.signup'))
+            ->assertOk()
+            ->assertSee('data-shop-name', false)
+            ->assertSee('data-shop-slug', false)
+            ->assertSeeText('Generated from your shop name.');
+
+        $response = $this->from(route('seller.signup'))->post(route('seller.signup.store'), [
+            'seller_name' => 'Vidhya Shah',
+            'seller_email' => 'vidhya@example.test',
+            'seller_password' => 'a-secure-password',
+            'seller_password_confirmation' => 'a-secure-password',
+            'name' => 'Vidhya Saree',
+            'slug' => 'login',
+        ]);
+
+        $response->assertRedirect(route('seller.signup'));
+        $response->assertSessionHasErrors('slug');
     }
 
     public function test_seller_signup_validates_required_details(): void
