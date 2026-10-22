@@ -1,89 +1,60 @@
 @extends('layouts.storefront')
 
+@section('body_class', 'seller-dashboard-page')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('storefront/seller-dashboard.css') }}?v={{ filemtime(public_path('storefront/seller-dashboard.css')) }}">
+@endpush
+
 @section('content')
-    <header>
-        <a class="brand" href="{{ route('seller.dashboard') }}">
-            <span class="emblem">{{ Str::upper(Str::substr($shop->name, 0, 1)) }}</span>
-            <span>{{ Str::upper($shop->name) }}<small>{{ $shop->isRetailer() ? 'RETAILER DASHBOARD' : 'WHOLESALER DASHBOARD' }}</small></span>
-        </a>
-        <nav>
-            <a href="{{ route('seller.profile.edit') }}">Shop profile</a>
-            <a href="{{ route('seller.design') }}">Design</a>
-            <a href="{{ route('seller.enquiries.index') }}">Enquiries</a>
-            @if ($shop->isWholesaler())
-                <a href="{{ route('seller.sponsorships.index') }}">Retailer sponsors</a>
-            @endif
-        </nav>
-        <form method="post" action="{{ route('logout') }}">@csrf<button>Logout</button></form>
-    </header>
-
-    <main>
-        <section class="collection">
-            <div class="eyebrow">{{ $shop->isRetailer() ? 'RETAILER WEBSITE' : 'WHOLESALE CATALOGUE' }}</div>
-            <h2>Your catalogue</h2>
-            <p>Shop URL: <a href="{{ $shop->publicUrl() }}">{{ $shop->publicUrl() }}</a></p>
-            <p>
-                Plan: <strong>{{ $subscription?->plan?->name ?? 'Legacy access' }}</strong>
-                · Status: {{ $shop->suspended_at ? 'Suspended' : $shop->status }}
-            </p>
-            <p>
-                Usage: {{ $shop->categories()->count() }}/{{ $limits['category_limit'] }} categories
-                · {{ $shop->products()->count() }}/{{ $limits['product_limit'] }} products
-                · {{ $limits['product_image_limit'] }} images per product
-            </p>
-
-            @if (session('status'))<p>{{ session('status') }}</p>@endif
-            @foreach ($errors->all() as $error)<p>{{ $error }}</p>@endforeach
-
-            <div class="products">
-                <article class="product">
-                    <div class="product-code">CATALOGUE SETUP</div>
-                    <h3>Add a category</h3>
-                    <form method="post" action="{{ route('seller.categories.store') }}">
-                        @csrf
-                        <label>Category name<input name="name" placeholder="Wedding sarees" required></label>
-                        <button>Create category</button>
-                    </form>
-                </article>
-
-                <article class="product">
-                    <div class="product-code">NEW PRODUCT</div>
-                    <h3>Add a saree</h3>
-                    @if ($shop->categories->isEmpty())
-                        <p>Create a category first.</p>
-                    @else
-                        <form method="post" action="{{ route('seller.products.store') }}">
-                            @csrf
-                            <label>Category<select name="category_id" required>@foreach($shop->categories as $category)<option value="{{ $category->id }}">{{ $category->name }}</option>@endforeach</select></label>
-                            <label>Product name<input name="name" placeholder="Royal silk saree" required></label>
-                            <label>Design code<input name="code" placeholder="RS-001" required></label>
-                            <label>Wholesale price (₹)<input name="wholesale_price" inputmode="decimal" placeholder="1250"></label>
-                            <label>Minimum order quantity<input name="minimum_order_quantity" type="number" min="1" value="1" required></label>
-                            <label>Pack size (optional)<input name="pack_size" type="number" min="1" placeholder="6"></label>
-                            <label>Availability<select name="availability"><option value="available">Available</option><option value="out_of_stock">Out of stock</option><option value="on_enquiry">On enquiry</option></select></label>
-                            <button class="primary">Add product</button>
-                        </form>
-                    @endif
-                </article>
-
-                <article class="product">
-                    <div class="product-code">SHOP TOOLS</div>
-                    <h3>Present your business</h3>
-                    <p>Update your contact details, public address, social links and search description.</p>
-                    <a class="details-btn" href="{{ route('seller.profile.edit') }}">Edit shop profile <span>↗</span></a>
-                    <a class="details-btn" href="{{ route('seller.design') }}">Choose design <span>↗</span></a>
-                    <a class="details-btn" href="{{ $shop->publicUrl() }}">Preview storefront <span>↗</span></a>
-                </article>
-
+    <div class="seller-shell">
+        <aside class="seller-sidebar">
+            <a class="seller-brand" href="{{ route('seller.dashboard') }}" aria-label="{{ $shop->name }} dashboard">
+                <span class="seller-brand-mark">{{ Str::upper(Str::substr($shop->name, 0, 1)) }}</span>
+                <span><strong>{{ $shop->name }}</strong><small>{{ $shop->isRetailer() ? 'Retailer workspace' : 'Wholesaler workspace' }}</small></span>
+            </a>
+            <nav class="seller-nav" aria-label="Seller navigation">
+                <span class="seller-nav-label">Workspace</span>
+                <a class="seller-nav-link is-active" href="{{ route('seller.dashboard') }}"><span aria-hidden="true">⌂</span>Overview</a>
+                <a class="seller-nav-link" href="{{ route('seller.profile.edit') }}"><span aria-hidden="true">◉</span>Shop profile</a>
+                <a class="seller-nav-link" href="{{ route('seller.design') }}"><span aria-hidden="true">◇</span>Design</a>
+                <a class="seller-nav-link" href="{{ route('seller.enquiries.index') }}"><span aria-hidden="true">↗</span>Enquiries</a>
                 @if ($shop->isWholesaler())
-                    <article class="product">
-                        <div class="product-code">RETAILER SPONSORS</div>
-                        <h3>{{ $sponsorships->count() }} retailer sponsorships</h3>
-                        <p>Retailer sponsor slots are available on the Pro plan.</p>
-                        <a class="details-btn" href="{{ route('seller.sponsorships.index') }}">Manage retailer sponsorships <span>↗</span></a>
-                    </article>
+                    <a class="seller-nav-link" href="{{ route('seller.sponsorships.index') }}"><span aria-hidden="true">♡</span>Retailer sponsors</a>
                 @endif
+                <span class="seller-nav-label seller-nav-label-spaced">Shortcuts</span>
+                <a class="seller-nav-link" href="#catalogue-setup"><span aria-hidden="true">＋</span>Add catalogue item</a>
+                <a class="seller-nav-link" href="{{ $shop->publicUrl() }}" target="_blank" rel="noopener"><span aria-hidden="true">↗</span>View storefront</a>
+            </nav>
+            <div class="seller-sidebar-footer">
+                <div class="seller-user-chip"><span class="seller-user-avatar">{{ Str::upper(Str::substr(auth()->user()->name, 0, 1)) }}</span><span><strong>{{ auth()->user()->name }}</strong><small>{{ auth()->user()->email }}</small></span></div>
+                <form method="post" action="{{ route('logout') }}">@csrf<button class="seller-signout" type="submit">Sign out <span aria-hidden="true">↗</span></button></form>
             </div>
-        </section>
-    </main>
+        </aside>
+
+        <div class="seller-workspace">
+            <header class="seller-topbar"><div><p class="seller-overline">{{ $shop->isRetailer() ? 'Retailer workspace' : 'Wholesaler workspace' }}</p><p class="seller-breadcrumb">{{ $shop->name }} / Overview</p></div><a class="seller-store-link" href="{{ $shop->publicUrl() }}" target="_blank" rel="noopener">Open storefront <span aria-hidden="true">↗</span></a></header>
+            <main class="seller-content">
+                @if (session('status'))<div class="seller-alert seller-alert-success" role="status"><span aria-hidden="true">✓</span>{{ session('status') }}</div>@endif
+                @if ($errors->any())<div class="seller-alert seller-alert-error" role="alert"><strong>There’s something to review.</strong><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+
+                <section class="seller-page-heading"><div><p class="seller-overline">Your wholesale catalogue</p><h1>Your catalogue</h1><p class="seller-page-intro">Welcome back, {{ Str::before($shop->name, ' ') }}. Build your catalogue, keep your storefront fresh, and turn enquiries into business.</p></div><span class="seller-status seller-status-{{ $shop->suspended_at ? 'suspended' : $shop->status }}">{{ $shop->suspended_at ? 'Suspended' : Str::headline($shop->status) }}</span></section>
+
+                <section class="seller-shop-banner"><div><span class="seller-shop-banner-label">Public shop address</span><a href="{{ $shop->publicUrl() }}" target="_blank" rel="noopener">{{ $shop->publicUrl() }} <span aria-hidden="true">↗</span></a></div><div class="seller-plan-summary"><span>Current plan</span><strong>{{ $subscription?->plan?->name ?? 'Legacy access' }}</strong><small>{{ $subscription ? Str::headline($subscription->status) : 'Access inherited' }}</small></div></section>
+
+                <section class="seller-metrics" aria-label="Catalogue metrics"><article class="seller-metric-card seller-metric-primary"><span class="seller-metric-icon" aria-hidden="true">▦</span><div><span class="seller-metric-label">Products</span><strong>{{ $shop->products->count() }}<small> / {{ $limits['product_limit'] }}</small></strong><p>Pieces in your catalogue</p></div></article><article class="seller-metric-card"><span class="seller-metric-icon" aria-hidden="true">◌</span><div><span class="seller-metric-label">Categories</span><strong>{{ $shop->categories->count() }}<small> / {{ $limits['category_limit'] }}</small></strong><p>Organised collections</p></div></article><article class="seller-metric-card"><span class="seller-metric-icon" aria-hidden="true">▧</span><div><span class="seller-metric-label">Images per product</span><strong>{{ $limits['product_image_limit'] }}</strong><p>Included with your plan</p></div></article><article class="seller-metric-card"><span class="seller-metric-icon" aria-hidden="true">♡</span><div><span class="seller-metric-label">Retailer sponsors</span><strong>{{ $shop->isWholesaler() ? $sponsorships->count() : '—' }}</strong><p>{{ $shop->isWholesaler() ? 'Active relationships' : 'Not available' }}</p></div></article></section>
+
+                <section class="seller-section-heading" id="catalogue-setup"><div><p class="seller-overline">Catalogue setup</p><h2>Keep your catalogue moving</h2></div><span class="seller-section-note">Start with a category, then add your first saree.</span></section>
+                <section class="seller-action-grid">
+                    <article class="seller-panel seller-form-panel"><div class="seller-panel-heading"><div><span class="seller-panel-kicker">01 · Collection</span><h3>Add a category</h3></div><span class="seller-panel-number">01</span></div><p class="seller-panel-copy">Group your sarees so buyers can browse your catalogue with ease.</p><form method="post" action="{{ route('seller.categories.store') }}" class="seller-form">@csrf<label>Category name<input name="name" value="{{ old('name') }}" placeholder="Wedding sarees" required></label><button class="seller-primary-button" type="submit">Create category <span aria-hidden="true">→</span></button></form></article>
+
+                    <article class="seller-panel seller-product-panel"><div class="seller-panel-heading"><div><span class="seller-panel-kicker">02 · Catalogue</span><h3>Add a saree</h3></div><span class="seller-panel-number">02</span></div><p class="seller-panel-copy">Add the product details buyers need before they enquire.</p>@if ($shop->categories->isEmpty())<div class="seller-empty-inline"><span aria-hidden="true">◌</span><strong>Create a category first.</strong><p>Your product form will appear here once the catalogue has a collection.</p></div>@else<form method="post" action="{{ route('seller.products.store') }}" class="seller-form seller-product-form">@csrf<div class="seller-form-grid"><label>Category<select name="category_id" required>@foreach($shop->categories as $category)<option value="{{ $category->id }}">{{ $category->name }}</option>@endforeach</select></label><label>Product name<input name="name" value="{{ old('name') }}" placeholder="Royal silk saree" required></label><label>Design code<input name="code" value="{{ old('code') }}" placeholder="RS-001" required></label><label>Wholesale price (₹)<input name="wholesale_price" value="{{ old('wholesale_price') }}" inputmode="decimal" placeholder="1250"></label><label>Minimum order quantity<input name="minimum_order_quantity" type="number" min="1" value="{{ old('minimum_order_quantity', 1) }}" required></label><label>Pack size <span class="seller-label-muted">optional</span><input name="pack_size" type="number" min="1" value="{{ old('pack_size') }}" placeholder="6"></label><label>Availability<select name="availability"><option value="available">Available</option><option value="out_of_stock">Out of stock</option><option value="on_enquiry">On enquiry</option></select></label></div><button class="seller-primary-button" type="submit">Add product <span aria-hidden="true">→</span></button></form>@endif</article>
+
+                    <article class="seller-panel seller-tools-panel"><div class="seller-panel-heading"><div><span class="seller-panel-kicker">03 · Storefront</span><h3>Present your business</h3></div><span class="seller-panel-number">03</span></div><p class="seller-panel-copy">Make your shop feel complete with a clear profile, a strong design, and a live preview.</p><div class="seller-link-stack"><a href="{{ route('seller.profile.edit') }}"><span><strong>Edit shop profile</strong><small>Contact, address, social links</small></span><b aria-hidden="true">↗</b></a><a href="{{ route('seller.design') }}"><span><strong>Choose design</strong><small>Pick your storefront template</small></span><b aria-hidden="true">↗</b></a><a href="{{ $shop->publicUrl() }}" target="_blank" rel="noopener"><span><strong>Preview storefront</strong><small>See your public catalogue</small></span><b aria-hidden="true">↗</b></a></div></article>
+                </section>
+
+                @if ($shop->isWholesaler())<section class="seller-sponsor-panel"><div><p class="seller-overline">Grow your network</p><h2>{{ $sponsorships->count() }} retailer sponsorships</h2><p>Invite retailers to sell your catalogue with a Pro plan sponsorship. Track active relationships and upcoming renewals in one place.</p></div><a class="seller-secondary-button" href="{{ route('seller.sponsorships.index') }}">Manage retailer sponsors <span aria-hidden="true">→</span></a></section>@endif
+            </main>
+        </div>
+    </div>
 @endsection
