@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->restrictOnDelete();
-            $table->foreignId('saree_type_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('fabric_id')->nullable()->constrained()->nullOnDelete();
+            // Lookup tables are created immediately after products. The foreign keys are
+            // attached by the follow-up migration once both tables exist on PostgreSQL.
+            $table->unsignedBigInteger('saree_type_id')->nullable();
+            $table->unsignedBigInteger('fabric_id')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->string('code');
