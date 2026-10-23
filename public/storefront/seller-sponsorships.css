@@ -1,0 +1,641 @@
+/* Seller retailer sponsorship workspace */
+body.seller-sponsorships-page .sponsorships-content {
+    max-width: 1290px;
+}
+
+body.seller-sponsorships-page .sponsorships-heading {
+    align-items: flex-end;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+body.seller-sponsorships-page .sponsorships-heading h1 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 4.5vw, 56px);
+    font-weight: 400;
+    letter-spacing: -.045em;
+    line-height: 1;
+    margin: 10px 0;
+}
+
+body.seller-sponsorships-page .sponsorships-heading-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: flex-end;
+}
+
+body.seller-sponsorships-page .sponsorships-slot-summary {
+    color: var(--seller-muted);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+body.seller-sponsorships-page .sponsorships-slot-summary strong {
+    color: var(--seller-plum);
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-right: 3px;
+}
+
+body.seller-sponsorships-page .sponsorships-metrics {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 23px;
+}
+
+body.seller-sponsorships-page .sponsorship-metric {
+    align-items: flex-start;
+    background: var(--seller-surface);
+    border: 1px solid var(--seller-border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 13px;
+    min-height: 108px;
+    padding: 18px;
+}
+
+body.seller-sponsorships-page .sponsorship-metric-primary {
+    background: var(--seller-plum);
+    border-color: var(--seller-plum);
+}
+
+body.seller-sponsorships-page .sponsorship-metric-icon {
+    align-items: center;
+    background: #f5ebef;
+    border-radius: 9px;
+    color: var(--seller-plum);
+    display: grid;
+    flex: 0 0 34px;
+    font-size: 17px;
+    height: 34px;
+    place-items: center;
+    width: 34px;
+}
+
+body.seller-sponsorships-page .sponsorship-metric-primary .sponsorship-metric-icon {
+    background: #e4b888;
+    color: var(--seller-plum-dark);
+}
+
+body.seller-sponsorships-page .sponsorship-metric div > span,
+body.seller-sponsorships-page .sponsorship-metric small {
+    color: var(--seller-muted);
+    display: block;
+    font-size: 11px;
+}
+
+body.seller-sponsorships-page .sponsorship-metric-primary div > span,
+body.seller-sponsorships-page .sponsorship-metric-primary small {
+    color: #e6d6e0;
+}
+
+body.seller-sponsorships-page .sponsorship-metric strong {
+    color: var(--seller-ink);
+    display: block;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 7px 0 5px;
+}
+
+body.seller-sponsorships-page .sponsorship-metric-primary strong {
+    color: #fff;
+}
+
+body.seller-sponsorships-page .sponsorship-metric small {
+    font-size: 10px;
+}
+
+body.seller-sponsorships-page .sponsorship-link-alert {
+    align-items: flex-start;
+    background: #eaf6ef;
+    border: 1px solid #cce9d6;
+    border-radius: 11px;
+    color: #21653b;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 15px 17px;
+}
+
+body.seller-sponsorships-page .sponsorship-link-icon {
+    align-items: center;
+    background: #cce9d6;
+    border-radius: 50%;
+    color: #21653b;
+    display: grid;
+    flex: 0 0 22px;
+    font-size: 12px;
+    height: 22px;
+    place-items: center;
+    width: 22px;
+}
+
+body.seller-sponsorships-page .sponsorship-link-alert strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+body.seller-sponsorships-page .sponsorship-link-alert p {
+    font-size: 11px;
+    line-height: 1.45;
+    margin: 0 0 5px;
+}
+
+body.seller-sponsorships-page .sponsorship-link-alert a {
+    color: #21653b;
+    font-size: 11px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-panel {
+    margin-bottom: 20px;
+    padding-bottom: 25px;
+}
+
+body.seller-sponsorships-page .sponsorship-panel-heading {
+    align-items: flex-start;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 23px 25px 0;
+}
+
+body.seller-sponsorships-page .sponsorship-panel-heading h2,
+body.seller-sponsorships-page .sponsorship-list-heading h2 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: 400;
+    letter-spacing: -.03em;
+    margin: 7px 0 0;
+}
+
+body.seller-sponsorships-page .sponsorship-panel-heading p:not(.seller-panel-kicker),
+body.seller-sponsorships-page .sponsorship-list-heading p:not(.seller-panel-kicker) {
+    color: var(--seller-muted);
+    font-size: 12px;
+    line-height: 1.55;
+    margin: 9px 0 0;
+    max-width: 650px;
+}
+
+body.seller-sponsorships-page .sponsorship-panel-number {
+    background: #f5ebef;
+    border-radius: 99px;
+    color: var(--seller-plum);
+    font-family: Georgia, serif;
+    font-size: 16px;
+    padding: 3px 8px;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form {
+    align-items: flex-end;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1.35fr .7fr auto;
+    margin: 23px 25px 0;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form label {
+    color: #514354;
+    display: grid;
+    font-size: 11px;
+    font-weight: 700;
+    gap: 7px;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form label > span {
+    color: #9a8f9a;
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form input,
+body.seller-sponsorships-page .sponsorship-invite-form select {
+    background: #fff;
+    border: 1px solid #ddd4dc;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: var(--seller-ink);
+    font: inherit;
+    font-size: 12px;
+    outline: none;
+    padding: 11px 12px;
+    width: 100%;
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form input:focus,
+body.seller-sponsorships-page .sponsorship-invite-form select:focus {
+    border-color: #a56e8f;
+    box-shadow: 0 0 0 3px rgba(165, 110, 143, .13);
+}
+
+body.seller-sponsorships-page .sponsorship-invite-form .seller-primary-button {
+    margin-top: 0;
+    min-height: 41px;
+    white-space: nowrap;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-panel {
+    align-items: flex-start;
+    background: linear-gradient(115deg, #342034, #54233f);
+    border-radius: 13px;
+    color: #fff;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 23px 26px;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-icon {
+    align-items: center;
+    background: #e4b888;
+    border-radius: 9px;
+    color: #341b32;
+    display: grid;
+    flex: 0 0 34px;
+    font-size: 17px;
+    height: 34px;
+    place-items: center;
+    width: 34px;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-panel > div:nth-child(2) {
+    flex: 1;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-panel .seller-overline {
+    color: #d4a16b;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-panel h2 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 7px 0 6px;
+}
+
+body.seller-sponsorships-page .sponsorship-upgrade-panel p:not(.seller-overline) {
+    color: #d6c5d2;
+    font-size: 11px;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 700px;
+}
+
+body.seller-sponsorships-page .sponsorship-plan-pill {
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 99px;
+    color: #f4dbc1;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 10px;
+    white-space: nowrap;
+}
+
+body.seller-sponsorships-page .sponsorship-list-panel,
+body.seller-sponsorships-page .invitation-history-panel {
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+body.seller-sponsorships-page .sponsorship-list-heading {
+    align-items: flex-start;
+    display: flex;
+    gap: 18px;
+    justify-content: space-between;
+    padding: 23px 25px 19px;
+}
+
+body.seller-sponsorships-page .sponsorship-list-count {
+    background: #f5ebef;
+    border-radius: 99px;
+    color: var(--seller-plum);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 11px;
+    white-space: nowrap;
+}
+
+body.seller-sponsorships-page .sponsorship-row,
+body.seller-sponsorships-page .invitation-row {
+    align-items: center;
+    border-top: 1px solid var(--seller-border);
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    padding: 19px 25px;
+}
+
+body.seller-sponsorships-page .sponsorship-avatar,
+body.seller-sponsorships-page .invitation-avatar {
+    align-items: center;
+    background: #f3e5e9;
+    border-radius: 50%;
+    color: var(--seller-plum);
+    display: grid;
+    flex: 0 0 40px;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    height: 40px;
+    place-items: center;
+    width: 40px;
+}
+
+body.seller-sponsorships-page .sponsorship-row > div,
+body.seller-sponsorships-page .invitation-recipient > div {
+    flex: 1;
+    min-width: 0;
+}
+
+body.seller-sponsorships-page .sponsorship-row-title,
+body.seller-sponsorships-page .invitation-recipient {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
+body.seller-sponsorships-page .sponsorship-row h3,
+body.seller-sponsorships-page .invitation-row h3 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+body.seller-sponsorships-page .sponsorship-row p,
+body.seller-sponsorships-page .invitation-row p {
+    color: var(--seller-muted);
+    font-size: 11px;
+    margin: 5px 0 0;
+}
+
+body.seller-sponsorships-page .sponsorship-row p span {
+    color: #9d8f9b;
+}
+
+body.seller-sponsorships-page .sponsorship-status,
+body.seller-sponsorships-page .invitation-status {
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 10px;
+    white-space: nowrap;
+}
+
+body.seller-sponsorships-page .sponsorship-status-active,
+body.seller-sponsorships-page .invitation-status-accepted {
+    background: #eaf6ef;
+    color: #257044;
+}
+
+body.seller-sponsorships-page .sponsorship-status-grace {
+    background: #fff4df;
+    color: #96601e;
+}
+
+body.seller-sponsorships-page .sponsorship-status-expired,
+body.seller-sponsorships-page .invitation-status-revoked,
+body.seller-sponsorships-page .invitation-status-expired {
+    background: #f1e9ee;
+    color: #73576d;
+}
+
+body.seller-sponsorships-page .invitation-status-pending {
+    background: #fff4df;
+    color: #96601e;
+}
+
+body.seller-sponsorships-page .sponsorship-view-link {
+    color: var(--seller-plum);
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+body.seller-sponsorships-page .sponsorship-view-link:hover,
+body.seller-sponsorships-page .sponsorship-text-link:hover {
+    text-decoration: underline;
+}
+
+body.seller-sponsorships-page .sponsorship-empty-state,
+body.seller-sponsorships-page .invitation-empty-state {
+    align-items: center;
+    border-top: 1px solid var(--seller-border);
+    display: flex;
+    gap: 12px;
+    padding: 22px 25px;
+}
+
+body.seller-sponsorships-page .sponsorship-empty-icon,
+body.seller-sponsorships-page .invitation-empty-icon {
+    align-items: center;
+    background: #f5ebef;
+    border-radius: 50%;
+    color: var(--seller-plum);
+    display: grid;
+    flex: 0 0 34px;
+    font-size: 16px;
+    height: 34px;
+    place-items: center;
+    width: 34px;
+}
+
+body.seller-sponsorships-page .sponsorship-empty-state strong,
+body.seller-sponsorships-page .invitation-empty-state strong {
+    color: var(--seller-ink);
+    display: block;
+    font-size: 12px;
+}
+
+body.seller-sponsorships-page .sponsorship-empty-state p,
+body.seller-sponsorships-page .invitation-empty-state p {
+    color: var(--seller-muted);
+    font-size: 11px;
+    line-height: 1.45;
+    margin: 4px 0 0;
+}
+
+body.seller-sponsorships-page .invitation-row-actions {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 12px;
+}
+
+body.seller-sponsorships-page .invitation-row-actions form {
+    margin: 0;
+}
+
+body.seller-sponsorships-page .invitation-revoke-button {
+    background: transparent;
+    border: 1px solid #dfcad3;
+    border-radius: 6px;
+    color: var(--seller-plum);
+    cursor: pointer;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 8px 10px;
+}
+
+body.seller-sponsorships-page .invitation-revoke-button:hover {
+    background: #f5ebef;
+}
+
+body.seller-sponsorships-page .sponsorship-help-panel {
+    align-items: center;
+    background: var(--seller-plum-dark);
+    border-radius: 13px;
+    color: #fff;
+    display: grid;
+    gap: 22px;
+    grid-template-columns: 1.1fr 1.4fr auto;
+    margin-top: 20px;
+    padding: 24px 27px;
+}
+
+body.seller-sponsorships-page .sponsorship-help-panel .seller-overline {
+    color: #d4a16b;
+}
+
+body.seller-sponsorships-page .sponsorship-help-panel h2 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 7px 0 0;
+}
+
+body.seller-sponsorships-page .sponsorship-help-panel > p {
+    color: #d6c5d2;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+body.seller-sponsorships-page .sponsorship-text-link {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 1050px) {
+    body.seller-sponsorships-page .sponsorship-invite-form {
+        grid-template-columns: 1fr 1fr;
+    }
+    body.seller-sponsorships-page .sponsorship-invite-form .seller-primary-button {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+    body.seller-sponsorships-page .sponsorship-help-panel {
+        grid-template-columns: 1fr 1fr;
+    }
+    body.seller-sponsorships-page .sponsorship-text-link {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px) {
+    body.seller-sponsorships-page .sponsorships-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    body.seller-sponsorships-page .sponsorships-heading-actions {
+        justify-content: flex-start;
+    }
+    body.seller-sponsorships-page .sponsorships-metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    body.seller-sponsorships-page .sponsorship-metric {
+        display: block;
+        gap: 8px;
+        min-height: 102px;
+        padding: 12px;
+    }
+    body.seller-sponsorships-page .sponsorship-metric-icon {
+        height: 28px;
+        margin-bottom: 8px;
+        width: 28px;
+    }
+    body.seller-sponsorships-page .sponsorship-metric strong {
+        font-size: 24px;
+    }
+    body.seller-sponsorships-page .sponsorship-panel-heading,
+    body.seller-sponsorships-page .sponsorship-list-heading,
+    body.seller-sponsorships-page .sponsorship-row,
+    body.seller-sponsorships-page .invitation-row,
+    body.seller-sponsorships-page .sponsorship-empty-state,
+    body.seller-sponsorships-page .invitation-empty-state {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    body.seller-sponsorships-page .sponsorship-invite-form {
+        grid-template-columns: 1fr;
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+    body.seller-sponsorships-page .sponsorship-invite-form .seller-primary-button {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
+    }
+    body.seller-sponsorships-page .sponsorship-upgrade-panel {
+        flex-wrap: wrap;
+    }
+    body.seller-sponsorships-page .sponsorship-help-panel {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        padding: 22px;
+    }
+}
+
+@media (max-width: 520px) {
+    body.seller-sponsorships-page .sponsorships-heading h1 {
+        font-size: 39px;
+    }
+    body.seller-sponsorships-page .sponsorships-metrics {
+        gap: 8px;
+    }
+    body.seller-sponsorships-page .sponsorship-row,
+    body.seller-sponsorships-page .invitation-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    body.seller-sponsorships-page .sponsorship-row-title {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    body.seller-sponsorships-page .sponsorship-view-link {
+        margin-left: 54px;
+    }
+    body.seller-sponsorships-page .invitation-row-actions {
+        margin-left: 54px;
+    }
+    body.seller-sponsorships-page .sponsorship-empty-state,
+    body.seller-sponsorships-page .invitation-empty-state {
+        align-items: flex-start;
+    }
+}
