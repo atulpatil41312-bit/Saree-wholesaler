@@ -1,0 +1,565 @@
+/* Seller enquiries workspace */
+body.seller-enquiries-page .enquiries-content {
+    max-width: 1290px;
+}
+
+body.seller-enquiries-page .enquiries-heading {
+    align-items: flex-end;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+body.seller-enquiries-page .enquiries-heading h1 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 4.5vw, 56px);
+    font-weight: 400;
+    letter-spacing: -.045em;
+    line-height: 1;
+    margin: 10px 0;
+}
+
+body.seller-enquiries-page .enquiries-heading-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: flex-end;
+}
+
+body.seller-enquiries-page .enquiries-total {
+    color: var(--seller-muted);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+body.seller-enquiries-page .enquiries-total strong {
+    color: var(--seller-plum);
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-right: 4px;
+}
+
+body.seller-enquiries-page .enquiry-metrics {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 34px;
+}
+
+body.seller-enquiries-page .enquiry-metric {
+    align-items: flex-start;
+    background: var(--seller-surface);
+    border: 1px solid var(--seller-border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 13px;
+    min-height: 108px;
+    padding: 18px;
+}
+
+body.seller-enquiries-page .enquiry-metric-primary {
+    background: var(--seller-plum);
+    border-color: var(--seller-plum);
+}
+
+body.seller-enquiries-page .enquiry-metric-icon {
+    align-items: center;
+    background: #f5ebef;
+    border-radius: 9px;
+    color: var(--seller-plum);
+    display: grid;
+    flex: 0 0 34px;
+    font-size: 16px;
+    height: 34px;
+    place-items: center;
+    width: 34px;
+}
+
+body.seller-enquiries-page .enquiry-metric-primary .enquiry-metric-icon {
+    background: #e4b888;
+    color: var(--seller-plum-dark);
+}
+
+body.seller-enquiries-page .enquiry-metric div > span,
+body.seller-enquiries-page .enquiry-metric small {
+    color: var(--seller-muted);
+    display: block;
+    font-size: 11px;
+}
+
+body.seller-enquiries-page .enquiry-metric-primary div > span,
+body.seller-enquiries-page .enquiry-metric-primary small {
+    color: #e6d6e0;
+}
+
+body.seller-enquiries-page .enquiry-metric strong {
+    color: var(--seller-ink);
+    display: block;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 7px 0 5px;
+}
+
+body.seller-enquiries-page .enquiry-metric-primary strong {
+    color: #fff;
+}
+
+body.seller-enquiries-page .enquiry-metric small {
+    font-size: 10px;
+}
+
+body.seller-enquiries-page .enquiry-empty-panel {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 58px 30px 60px;
+    text-align: center;
+}
+
+body.seller-enquiries-page .enquiry-empty-icon {
+    align-items: center;
+    background: #f5ebef;
+    border: 7px solid #fbf6f8;
+    border-radius: 50%;
+    color: var(--seller-plum);
+    display: grid;
+    font-size: 27px;
+    height: 54px;
+    margin-bottom: 18px;
+    outline: 1px solid #ead9e2;
+    place-items: center;
+    width: 54px;
+}
+
+body.seller-enquiries-page .enquiry-empty-panel h2 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: -.03em;
+    margin: 8px 0 8px;
+}
+
+body.seller-enquiries-page .enquiry-empty-panel > p:not(.seller-overline) {
+    color: var(--seller-muted);
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 530px;
+}
+
+body.seller-enquiries-page .enquiry-empty-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+body.seller-enquiries-page .enquiry-text-link {
+    color: var(--seller-plum);
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+body.seller-enquiries-page .enquiry-text-link:hover {
+    text-decoration: underline;
+}
+
+body.seller-enquiries-page .enquiry-list-panel {
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+body.seller-enquiries-page .enquiry-list-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 23px 25px 19px;
+}
+
+body.seller-enquiries-page .enquiry-list-heading h2 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -.03em;
+    margin: 7px 0 0;
+}
+
+body.seller-enquiries-page .enquiry-list-count {
+    background: #f5ebef;
+    border-radius: 99px;
+    color: var(--seller-plum);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 11px;
+}
+
+body.seller-enquiries-page .enquiry-list {
+    border-top: 1px solid var(--seller-border);
+}
+
+body.seller-enquiries-page .enquiry-row {
+    display: flex;
+    gap: 16px;
+    padding: 23px 25px 25px;
+}
+
+body.seller-enquiries-page .enquiry-row + .enquiry-row {
+    border-top: 1px solid var(--seller-border);
+}
+
+body.seller-enquiries-page .enquiry-avatar {
+    align-items: center;
+    background: #f3e5e9;
+    border-radius: 50%;
+    color: var(--seller-plum);
+    display: grid;
+    flex: 0 0 42px;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    height: 42px;
+    place-items: center;
+    width: 42px;
+}
+
+body.seller-enquiries-page .enquiry-row-main {
+    min-width: 0;
+    width: 100%;
+}
+
+body.seller-enquiries-page .enquiry-row-topline {
+    align-items: flex-start;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+body.seller-enquiries-page .enquiry-row-topline h3 {
+    color: var(--seller-ink);
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    margin: 0;
+}
+
+body.seller-enquiries-page .enquiry-row-topline p {
+    color: var(--seller-muted);
+    font-size: 11px;
+    margin: 5px 0 0;
+}
+
+body.seller-enquiries-page .enquiry-status {
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 11px;
+    white-space: nowrap;
+}
+
+body.seller-enquiries-page .enquiry-status-new {
+    background: #fff4df;
+    color: #96601e;
+}
+
+body.seller-enquiries-page .enquiry-status-contacted {
+    background: #eaf1fb;
+    color: #3d618d;
+}
+
+body.seller-enquiries-page .enquiry-status-closed {
+    background: #eaf6ef;
+    color: #257044;
+}
+
+body.seller-enquiries-page .enquiry-contact {
+    align-items: center;
+    color: #8c818f;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 10px;
+    gap: 0;
+    margin-top: 13px;
+}
+
+body.seller-enquiries-page .enquiry-contact span {
+    overflow-wrap: anywhere;
+}
+
+body.seller-enquiries-page .enquiry-contact span + span::before {
+    color: #c8bec7;
+    content: '·';
+    margin: 0 8px;
+}
+
+body.seller-enquiries-page .enquiry-message {
+    background: #fbf8f6;
+    border-left: 3px solid #e3c4cd;
+    color: #5e5361;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 14px 0 17px;
+    padding: 12px 14px;
+}
+
+body.seller-enquiries-page .enquiry-status-form {
+    align-items: flex-end;
+    display: flex;
+    gap: 10px;
+}
+
+body.seller-enquiries-page .enquiry-status-form label {
+    color: #635966;
+    display: grid;
+    font-size: 10px;
+    font-weight: 700;
+    gap: 6px;
+}
+
+body.seller-enquiries-page .enquiry-status-form select {
+    background: #fff;
+    border: 1px solid #ddd4dc;
+    border-radius: 6px;
+    color: var(--seller-ink);
+    font: inherit;
+    font-size: 11px;
+    min-width: 130px;
+    outline: none;
+    padding: 9px 10px;
+}
+
+body.seller-enquiries-page .enquiry-status-form select:focus {
+    border-color: #a56e8f;
+    box-shadow: 0 0 0 3px rgba(165, 110, 143, .13);
+}
+
+body.seller-enquiries-page .enquiry-save-button {
+    background: var(--seller-plum);
+    border: 0;
+    border-radius: 7px;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 10px 12px;
+    transition: background .2s ease, transform .2s ease;
+}
+
+body.seller-enquiries-page .enquiry-save-button:hover {
+    background: #672a4d;
+    transform: translateY(-1px);
+}
+
+body.seller-enquiries-page .enquiry-pagination {
+    border-top: 1px solid var(--seller-border);
+    padding: 17px 25px;
+}
+
+body.seller-enquiries-page .enquiry-pagination nav {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+body.seller-enquiries-page .enquiry-pagination nav > div:first-child {
+    color: var(--seller-muted);
+    flex: 1;
+    font-size: 10px;
+}
+
+body.seller-enquiries-page .enquiry-pagination nav > div:last-child {
+    display: flex;
+    gap: 4px;
+}
+
+body.seller-enquiries-page .enquiry-pagination a,
+body.seller-enquiries-page .enquiry-pagination span[aria-current="page"] span,
+body.seller-enquiries-page .enquiry-pagination span:not([aria-current]) {
+    align-items: center;
+    border: 1px solid var(--seller-border);
+    border-radius: 6px;
+    color: var(--seller-plum);
+    display: inline-flex;
+    font-size: 11px;
+    justify-content: center;
+    min-height: 28px;
+    min-width: 28px;
+    padding: 0 8px;
+    text-decoration: none;
+}
+
+body.seller-enquiries-page .enquiry-pagination span[aria-current="page"] span {
+    background: var(--seller-plum);
+    border-color: var(--seller-plum);
+    color: #fff;
+}
+
+body.seller-enquiries-page .enquiry-pagination a:hover {
+    background: #f5ebef;
+}
+
+body.seller-enquiries-page .enquiry-help-panel {
+    align-items: center;
+    background: var(--seller-plum-dark);
+    border-radius: 13px;
+    color: #fff;
+    display: grid;
+    gap: 22px;
+    grid-template-columns: 1.1fr 1.4fr auto;
+    margin-top: 20px;
+    padding: 24px 27px;
+}
+
+body.seller-enquiries-page .enquiry-help-panel .seller-overline {
+    color: #d4a16b;
+}
+
+body.seller-enquiries-page .enquiry-help-panel h2 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 7px 0 0;
+}
+
+body.seller-enquiries-page .enquiry-help-panel > p {
+    color: #d6c5d2;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+body.seller-enquiries-page .enquiry-help-panel .enquiry-text-link {
+    color: #fff;
+    white-space: nowrap;
+}
+
+@media (max-width: 950px) {
+    body.seller-enquiries-page .enquiry-help-panel {
+        grid-template-columns: 1fr 1fr;
+    }
+    body.seller-enquiries-page .enquiry-help-panel .enquiry-text-link {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px) {
+    body.seller-enquiries-page .enquiries-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    body.seller-enquiries-page .enquiries-heading-actions {
+        justify-content: flex-start;
+    }
+    body.seller-enquiries-page .enquiry-metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    body.seller-enquiries-page .enquiry-metric {
+        gap: 8px;
+        padding: 13px 11px;
+    }
+    body.seller-enquiries-page .enquiry-metric-icon {
+        flex-basis: 28px;
+        height: 28px;
+        width: 28px;
+    }
+    body.seller-enquiries-page .enquiry-metric strong {
+        font-size: 25px;
+    }
+    body.seller-enquiries-page .enquiry-metric small {
+        line-height: 1.3;
+    }
+    body.seller-enquiries-page .enquiry-list-heading,
+    body.seller-enquiries-page .enquiry-row {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    body.seller-enquiries-page .enquiry-help-panel {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px;
+    }
+}
+
+@media (max-width: 520px) {
+    body.seller-enquiries-page .enquiries-heading h1 {
+        font-size: 39px;
+    }
+    body.seller-enquiries-page .enquiry-metrics {
+        gap: 8px;
+    }
+    body.seller-enquiries-page .enquiry-metric {
+        align-items: flex-start;
+        display: block;
+        min-height: 102px;
+        padding: 12px;
+    }
+    body.seller-enquiries-page .enquiry-metric-icon {
+        margin-bottom: 8px;
+    }
+    body.seller-enquiries-page .enquiry-metric div > span {
+        font-size: 10px;
+    }
+    body.seller-enquiries-page .enquiry-metric strong {
+        font-size: 23px;
+        margin: 4px 0 3px;
+    }
+    body.seller-enquiries-page .enquiry-row {
+        gap: 10px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    body.seller-enquiries-page .enquiry-avatar {
+        flex-basis: 34px;
+        font-size: 16px;
+        height: 34px;
+        width: 34px;
+    }
+    body.seller-enquiries-page .enquiry-row-topline {
+        align-items: flex-start;
+        display: block;
+    }
+    body.seller-enquiries-page .enquiry-status {
+        display: inline-block;
+        margin-top: 9px;
+    }
+    body.seller-enquiries-page .enquiry-contact {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
+    body.seller-enquiries-page .enquiry-contact span + span::before {
+        content: '';
+        margin: 0;
+    }
+    body.seller-enquiries-page .enquiry-status-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    body.seller-enquiries-page .enquiry-status-form select,
+    body.seller-enquiries-page .enquiry-save-button {
+        width: 100%;
+    }
+    body.seller-enquiries-page .enquiry-pagination {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    body.seller-enquiries-page .enquiry-pagination nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

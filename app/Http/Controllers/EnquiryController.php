@@ -59,8 +59,14 @@ class EnquiryController extends Controller
         $shop = $this->dashboardShop($request);
         $this->access->authorize($request->user(), $shop, 'manage_catalogue');
         $enquiries = $shop->enquiries()->with('product')->latest()->paginate(30);
+        $enquiryStats = [
+            'total' => $shop->enquiries()->count(),
+            'new' => $shop->enquiries()->where('status', 'new')->count(),
+            'contacted' => $shop->enquiries()->where('status', 'contacted')->count(),
+            'closed' => $shop->enquiries()->where('status', 'closed')->count(),
+        ];
 
-        return view('seller.enquiries', compact('shop', 'enquiries'));
+        return view('seller.enquiries', compact('shop', 'enquiries', 'enquiryStats'));
     }
 
     public function update(Request $request, Enquiry $enquiry): RedirectResponse
