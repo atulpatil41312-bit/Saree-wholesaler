@@ -158,6 +158,7 @@ Route::middleware('auth')->group(function (): void {
     Route::patch('/dashboard/enquiries/{enquiry}', [EnquiryController::class, 'update'])->name('seller.enquiries.update');
     Route::get('/dashboard/sponsorships', [InvitationController::class, 'index'])->name('seller.sponsorships.index');
     Route::post('/dashboard/sponsorships', [InvitationController::class, 'store'])->name('seller.sponsorships.store');
+    Route::post('/dashboard/sponsorships/retailers', [InvitationController::class, 'storeRetailer'])->name('seller.sponsorships.retailers.store');
     Route::delete('/dashboard/sponsorships/{invitation}', [InvitationController::class, 'revoke'])->name('seller.sponsorships.revoke');
 
     Route::redirect('/seller', '/dashboard')->name('seller.legacy.dashboard');

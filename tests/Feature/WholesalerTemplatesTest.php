@@ -44,6 +44,107 @@ class WholesalerTemplatesTest extends TestCase
             ->assertSeeText('Apply Wholesale Atelier');
     }
 
+    public function test_wholesaler_can_create_a_retailer_account_without_an_invitation(): void
+    {
+        $owner = User::factory()->create(['role' => 'wholesaler']);
+        $shop = Shop::factory()->for($owner)->active()->create([
+            'name' => 'Saanvi Wholesale',
+            'slug' => 'saanvi-wholesale',
+        ]);
+        $pro = Plan::factory()->create([
+            'key' => Plan::Pro,
+            'shop_type' => 'wholesaler',
+        ]);
+        $proVersion = PlanVersion::factory()->for($pro)->create([
+            'limits' => [
+                'category_limit' => 50,
+                'product_limit' => 1000,
+                'product_image_limit' => 6,
+                'sponsored_retailer_limit' => 2,
+            ],
+            'template_keys' => 'all',
+        ]);
+        $shop->subscriptions()->create([
+            'plan_id' => $pro->id,
+            'plan_version_id' => $proVersion->id,
+            'status' => 'active',
+            'source' => 'manual',
+            'billing_interval' => 'manual',
+            'started_at' => now(),
+            'paid_through_at' => now()->addMonth(),
+        ]);
+        $retailerPlan = Plan::factory()->create([
+            'key' => Plan::RetailerBasic,
+            'shop_type' => 'retailer',
+        ]);
+        $retailerVersion = PlanVersion::factory()->for($retailerPlan)->create([
+            'limits' => [
+                'category_limit' => 5,
+                'product_limit' => 20,
+                'product_image_limit' => 2,
+                'sponsored_retailer_limit' => 0,
+            ],
+            'template_keys' => [
+                Shop::DEFAULT_TEMPLATE,
+                Shop::WHOLESALE_ATELIER_TEMPLATE,
+                Shop::ROYAL_DRAPE_TEMPLATE,
+                Shop::SILK_ATELIER_TEMPLATE,
+                Shop::HERITAGE_WEAVES_TEMPLATE,
+            ],
+        ]);
+
+        $this->actingAs($owner)
+            ->get(route('seller.sponsorships.index'))
+            ->assertOk()
+            ->assertSeeText('Create a retailer account')
+            ->assertSee('name="retailer_phone"', false)
+            ->assertSee('name="shop_name"', false)
+            ->assertSee(route('seller.sponsorships.retailers.store'), false);
+
+        $response = $this->actingAs($owner)
+            ->from(route('seller.sponsorships.index'))
+            ->post(route('seller.sponsorships.retailers.store'), [
+                'retailer_name' => 'Nila Shah',
+                'retailer_phone' => '+91 98765 43210',
+                'retailer_email' => 'nila@example.test',
+                'retailer_password' => 'a-secure-password',
+                'retailer_password_confirmation' => 'a-secure-password',
+                'shop_name' => 'Nila Retail Sarees',
+                'slug' => 'nila-retail-sarees',
+                'term_days' => 30,
+                'template' => Shop::ROYAL_DRAPE_TEMPLATE,
+            ]);
+
+        $response->assertRedirect(route('seller.sponsorships.index'))
+            ->assertSessionHas('status', 'Nila Retail Sarees retailer account created. Share the login details securely with the retailer.');
+
+        $retailer = Shop::query()->where('slug', 'nila-retail-sarees')->firstOrFail();
+        $this->assertSame('retailer', $retailer->type);
+        $this->assertSame(Shop::ROYAL_DRAPE_TEMPLATE, $retailer->storefrontTemplate());
+        $this->assertSame('+91 98765 43210', $retailer->phone);
+        $this->assertSame('+91 98765 43210', $retailer->whatsapp);
+        $this->assertSame(5, $retailer->category_limit);
+        $this->assertSame(20, $retailer->product_limit);
+        $this->assertDatabaseHas('users', [
+            'email' => 'nila@example.test',
+            'role' => 'retailer',
+        ]);
+        $this->assertDatabaseHas('sponsorships', [
+            'sponsor_shop_id' => $shop->id,
+            'retailer_shop_id' => $retailer->id,
+            'invitation_id' => null,
+            'status' => 'active',
+        ]);
+        $this->assertDatabaseHas('subscriptions', [
+            'shop_id' => $retailer->id,
+            'plan_id' => $retailerPlan->id,
+            'source' => 'sponsorship',
+            'status' => 'active',
+        ]);
+        $this->assertDatabaseCount('invitations', 0);
+        $this->assertSame($retailerVersion->id, $retailer->subscriptions()->value('plan_version_id'));
+    }
+
     public function test_expired_subscription_shows_locked_design_actions_instead_of_broken_preview_links(): void
     {
         $owner = User::factory()->create(['role' => 'wholesaler']);

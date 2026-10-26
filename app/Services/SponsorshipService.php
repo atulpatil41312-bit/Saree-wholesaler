@@ -10,6 +10,7 @@ use App\Models\Sponsorship;
 use App\Models\User;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -59,6 +60,95 @@ class SponsorshipService
             $this->access->audit($invitedBy, $sponsor, 'sponsorship.invited', $invitation, ['term_days' => $termDays]);
 
             return [$invitation, $token];
+        }, 3);
+    }
+
+    /**
+     * Create a retailer account and its sponsored shop directly from a wholesaler workspace.
+     *
+     * @param  array{name: string, phone: string, email: string, password: string, shop_name: string, slug: string, term_days: int, template: string}  $retailerData
+     */
+    public function createRetailer(Shop $sponsor, User $createdBy, array $retailerData): Shop
+    {
+        $this->assertAllowedTerm((int) $retailerData['term_days']);
+
+        return DB::transaction(function () use ($sponsor, $createdBy, $retailerData): Shop {
+            $sponsor = Shop::query()->lockForUpdate()->findOrFail($sponsor->id);
+            $this->assertProSponsor($sponsor);
+
+            $slotLimit = (int) ($this->access->limits($sponsor)['sponsored_retailer_limit'] ?? 0);
+            if ($this->activeSponsorCount($sponsor) >= $slotLimit) {
+                throw ValidationException::withMessages(['term_days' => 'This sponsor has no retailer slots available.']);
+            }
+
+            if (User::query()->where('email', $retailerData['email'])->exists()) {
+                throw ValidationException::withMessages(['retailer_email' => 'This email already has a WholeMarket account.']);
+            }
+
+            $plan = Plan::query()->where('key', Plan::RetailerBasic)->where('is_active', true)->first();
+            if ($plan === null) {
+                throw ValidationException::withMessages(['template' => 'Retailer setup is not available yet.']);
+            }
+
+            $version = $plan->currentVersion()->first();
+            $limits = $version?->limits ?? config('wholemarket.plans.retailer-basic.limits', []);
+            $templateKeys = $version?->template_keys ?? ($limits['templates'] ?? ['classic']);
+            if ($templateKeys !== 'all' && ! in_array($retailerData['template'], $templateKeys, true)) {
+                throw ValidationException::withMessages(['template' => 'This template is not available for retailer websites.']);
+            }
+
+            $retailerOwner = User::query()->create([
+                'name' => $retailerData['name'],
+                'email' => $retailerData['email'],
+                'password' => Hash::make($retailerData['password']),
+                'role' => 'retailer',
+            ]);
+            $expiresAt = now()->addDays((int) $retailerData['term_days']);
+            $retailer = Shop::query()->create([
+                'user_id' => $retailerOwner->id,
+                'type' => 'retailer',
+                'name' => $retailerData['shop_name'],
+                'slug' => $retailerData['slug'],
+                'template' => $retailerData['template'],
+                'status' => 'active',
+                'approved_at' => now(),
+                'email' => $retailerOwner->email,
+                'phone' => $retailerData['phone'],
+                'whatsapp' => $retailerData['phone'],
+                'category_limit' => (int) ($limits['category_limit'] ?? 5),
+                'product_limit' => (int) ($limits['product_limit'] ?? 20),
+                'product_image_limit' => (int) ($limits['product_image_limit'] ?? 2),
+            ]);
+            $retailer->memberships()->create([
+                'user_id' => $retailerOwner->id,
+                'role' => 'owner',
+                'capabilities' => ['manage_catalogue', 'manage_branding'],
+            ]);
+            $retailer->settings()->create(['template_key' => $retailerData['template']]);
+            $subscription = $retailer->subscriptions()->create([
+                'plan_id' => $plan->id,
+                'plan_version_id' => $version?->id,
+                'status' => 'active',
+                'source' => 'sponsorship',
+                'billing_interval' => 'sponsored',
+                'started_at' => now(),
+                'paid_through_at' => $expiresAt,
+            ]);
+            $sponsorship = Sponsorship::query()->create([
+                'sponsor_shop_id' => $sponsor->id,
+                'retailer_shop_id' => $retailer->id,
+                'invitation_id' => null,
+                'status' => 'active',
+                'starts_at' => now(),
+                'expires_at' => $expiresAt,
+            ]);
+            $this->access->audit($createdBy, $sponsor, 'sponsorship.retailer-created', $retailer, [
+                'retailer_user_id' => $retailerOwner->id,
+                'subscription_id' => $subscription->id,
+                'term_days' => (int) $retailerData['term_days'],
+            ]);
+
+            return $retailer;
         }, 3);
     }
 

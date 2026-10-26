@@ -50,7 +50,7 @@
                     <div>
                         <p class="seller-overline">Pro wholesaler benefit</p>
                         <h1>Retailer sponsorships</h1>
-                        <p class="seller-page-intro">Invite trusted retailers to launch a storefront powered by your catalogue.</p>
+                        <p class="seller-page-intro">Create retailer accounts and launch storefronts powered by your catalogue.</p>
                     </div>
                     <div class="sponsorships-heading-actions"><span class="sponsorships-slot-summary"><strong>{{ $activeCount }}</strong> / {{ $slotLimit }} active slots</span><a class="seller-secondary-button" href="{{ $shop->publicUrl() }}" target="_blank" rel="noopener">View live shop <span aria-hidden="true">↗</span></a></div>
                 </section>
@@ -59,7 +59,7 @@
                 <section class="sponsorships-metrics" aria-label="Sponsorship summary">
                     <article class="sponsorship-metric sponsorship-metric-primary"><span class="sponsorship-metric-icon" aria-hidden="true">♡</span><div><span>Active sponsors</span><strong>{{ $activeCount }}</strong><small>Retailer relationships live</small></div></article>
                     <article class="sponsorship-metric"><span class="sponsorship-metric-icon" aria-hidden="true">＋</span><div><span>Available slots</span><strong>{{ max(0, $slotLimit - $activeCount) }}</strong><small>Included with your plan</small></div></article>
-                    <article class="sponsorship-metric"><span class="sponsorship-metric-icon" aria-hidden="true">↗</span><div><span>Pending invitations</span><strong>{{ $pendingInviteCount }}</strong><small>Waiting for retailer setup</small></div></article>
+                    <article class="sponsorship-metric"><span class="sponsorship-metric-icon" aria-hidden="true">↗</span><div><span>Legacy invitations</span><strong>{{ $pendingInviteCount }}</strong><small>Older invitations awaiting setup</small></div></article>
                 </section>
 
                 @if (session('invitation_link'))
@@ -68,12 +68,21 @@
 
                 @if ($slotLimit > 0)
                     <section class="seller-panel sponsorship-invite-panel" aria-labelledby="invite-retailer-heading">
-                        <div class="sponsorship-panel-heading"><div><p class="seller-panel-kicker">Grow your network</p><h2 id="invite-retailer-heading">Invite a retailer</h2><p>Give a retailer a ready-to-use storefront with your catalogue, branding and wholesale enquiry flow.</p></div><span class="sponsorship-panel-number">01</span></div>
-                        <form method="post" action="{{ route('seller.sponsorships.store') }}" class="sponsorship-invite-form">
+                        <div class="sponsorship-panel-heading"><div><p class="seller-panel-kicker">Grow your network</p><h2 id="invite-retailer-heading">Create a retailer account</h2><p>Create the retailer’s login and storefront directly. Their shop will be active under your sponsored catalogue immediately.</p></div><span class="sponsorship-panel-number">01</span></div>
+                        <form method="post" action="{{ route('seller.sponsorships.retailers.store') }}" class="sponsorship-invite-form sponsorship-create-form" data-retailer-slug-form>
                             @csrf
-                            <label>Retailer email <span>We’ll prepare a secure invitation</span><input name="email" type="email" value="{{ old('email') }}" placeholder="retailer@example.com" required></label>
-                            <label>Sponsored term <span>Choose how long their access lasts</span><select name="term_days">@foreach ($terms as $term)<option value="{{ $term }}" @selected((int) old('term_days', $terms[0] ?? $term) === (int) $term)>{{ $term }} days</option>@endforeach</select></label>
-                            <button class="seller-primary-button" type="submit">Prepare invitation <span aria-hidden="true">→</span></button>
+                            <div class="sponsorship-create-grid">
+                                <label>Retailer name <span>Account owner’s full name</span><input name="retailer_name" value="{{ old('retailer_name') }}" autocomplete="name" required></label>
+                                <label>Phone / WhatsApp number <span>Used for retailer enquiries</span><input name="retailer_phone" value="{{ old('retailer_phone') }}" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" required></label>
+                                <label>Retailer email <span>Login email address</span><input name="retailer_email" type="email" value="{{ old('retailer_email') }}" autocomplete="email" placeholder="retailer@example.com" required></label>
+                                <label>Shop name <span>Public retailer storefront name</span><input name="shop_name" value="{{ old('shop_name') }}" data-shop-name autocomplete="organization" required></label>
+                                <label>Password <span>Share this securely with the retailer</span><input name="retailer_password" type="password" minlength="12" autocomplete="new-password" required></label>
+                                <label>Confirm password <span>Repeat the retailer login password</span><input name="retailer_password_confirmation" type="password" minlength="12" autocomplete="new-password" required></label>
+                                <label class="sponsorship-field-wide">Shop URL <span>Generated from the shop name</span><span class="sponsorship-slug-field"><span>{{ request()->getSchemeAndHttpHost() }}/retailer/</span><input name="slug" value="{{ old('slug') }}" data-shop-slug pattern="[A-Za-z0-9-]+" required></span></label>
+                                <label>Sponsored term <span>How long access lasts</span><select name="term_days">@foreach ($terms as $term)<option value="{{ $term }}" @selected((int) old('term_days', $terms[0] ?? $term) === (int) $term)>{{ $term }} days</option>@endforeach</select></label>
+                                <label>Initial design <span>Retailer can change it later</span><select name="template">@foreach(\App\Models\Shop::templatesForType('retailer') as $key => $name)<option value="{{ $key }}" @selected(old('template', 'classic') === $key)>{{ $name }}</option>@endforeach</select></label>
+                            </div>
+                            <button class="seller-primary-button" type="submit">Create retailer shop <span aria-hidden="true">→</span></button>
                         </form>
                     </section>
                 @else
@@ -85,16 +94,16 @@
                     @forelse ($sponsorships as $sponsorship)
                         <article class="sponsorship-row"><span class="sponsorship-avatar" aria-hidden="true">{{ Str::upper(Str::substr($sponsorship->retailerShop?->name ?? 'R', 0, 1)) }}</span><div><div class="sponsorship-row-title"><h3>{{ $sponsorship->retailerShop?->name ?? 'Retailer shop' }}</h3><span class="sponsorship-status sponsorship-status-{{ $sponsorship->status }}">{{ Str::headline($sponsorship->status) }}</span></div><p>Access ends {{ $sponsorship->expires_at->format('d M Y') }} @if ($sponsorship->grace_until)<span>· Grace ends {{ $sponsorship->grace_until->format('d M Y') }}</span>@endif</p></div>@if ($sponsorship->retailerShop)<a class="sponsorship-view-link" href="{{ $sponsorship->retailerShop->publicUrl() }}" target="_blank" rel="noopener">View retailer shop <span aria-hidden="true">↗</span></a>@endif</article>
                     @empty
-                        <div class="sponsorship-empty-state"><span class="sponsorship-empty-icon" aria-hidden="true">♡</span><div><strong>No retailer websites are currently sponsored.</strong><p>Invite a trusted retailer above to extend your collection into a new storefront.</p></div></div>
+                        <div class="sponsorship-empty-state"><span class="sponsorship-empty-icon" aria-hidden="true">♡</span><div><strong>No retailer websites are currently sponsored.</strong><p>Create a retailer account above to extend your collection into a new storefront.</p></div></div>
                     @endforelse
                 </section>
 
                 <section class="seller-panel invitation-history-panel" aria-labelledby="invitation-history-heading">
-                    <div class="sponsorship-list-heading"><div><p class="seller-panel-kicker">Keep track of your outreach</p><h2 id="invitation-history-heading">Invitation history</h2><p>Review pending, accepted and revoked invitations in one place.</p></div><span class="sponsorship-list-count">{{ $invites->count() }} total</span></div>
+                    <div class="sponsorship-list-heading"><div><p class="seller-panel-kicker">Legacy records</p><h2 id="invitation-history-heading">Invitation history</h2><p>Older invitation records remain available for reference. New retailer shops are created directly above.</p></div><span class="sponsorship-list-count">{{ $invites->count() }} total</span></div>
                     @forelse ($invites as $invite)
                         <article class="invitation-row"><div class="invitation-recipient"><span class="invitation-avatar" aria-hidden="true">{{ Str::upper(Str::substr($invite->email, 0, 1)) }}</span><div><h3>{{ $invite->email }}</h3><p>{{ $invite->term_days }} day sponsorship · expires {{ $invite->expires_at->format('d M Y') }}</p></div></div><div class="invitation-row-actions"><span class="invitation-status invitation-status-{{ $invite->status }}">{{ Str::headline($invite->status) }}</span>@if ($invite->status === 'pending')<form method="post" action="{{ route('seller.sponsorships.revoke', $invite) }}">@csrf @method('delete')<button class="invitation-revoke-button" type="submit">Revoke invitation</button></form>@endif</div></article>
                     @empty
-                        <div class="invitation-empty-state"><span class="invitation-empty-icon" aria-hidden="true">↗</span><strong>No invitations sent.</strong><p>Your invitation history will appear here after you invite your first retailer.</p></div>
+                        <div class="invitation-empty-state"><span class="invitation-empty-icon" aria-hidden="true">↗</span><strong>No legacy invitations.</strong><p>New retailer shops are created directly from the form above.</p></div>
                     @endforelse
                 </section>
 
@@ -103,3 +112,34 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.querySelectorAll('[data-retailer-slug-form]').forEach((form) => {
+            const name = form.querySelector('[data-shop-name]');
+            const slug = form.querySelector('[data-shop-slug]');
+
+            if (!name || !slug) {
+                return;
+            }
+
+            let customSlug = slug.value.trim() !== '';
+            const slugify = (value) => value.toLowerCase()
+                .normalize('NFKD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+
+            name.addEventListener('input', () => {
+                if (!customSlug) {
+                    slug.value = slugify(name.value);
+                }
+            });
+
+            slug.addEventListener('input', () => {
+                slug.value = slugify(slug.value);
+                customSlug = slug.value !== slugify(name.value);
+            });
+        });
+    </script>
+@endpush

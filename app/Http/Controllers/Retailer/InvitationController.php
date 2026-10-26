@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Retailer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AcceptInvitationRequest;
 use App\Http\Requests\StoreInvitationRequest;
+use App\Http\Requests\StoreRetailerRequest;
 use App\Models\Invitation;
 use App\Models\NotificationDelivery;
 use App\Models\Shop;
@@ -78,6 +79,25 @@ class InvitationController extends Controller
             'invitation_link' => $link,
             'invitation_id' => $invitation->id,
         ]);
+    }
+
+    public function storeRetailer(StoreRetailerRequest $request): RedirectResponse
+    {
+        $shop = $this->dashboardShop($request);
+        $this->access->authorize($request->user(), $shop, 'manage_billing');
+
+        $retailer = $this->sponsorships->createRetailer($shop, $request->user(), [
+            'name' => $request->string('retailer_name')->toString(),
+            'phone' => $request->string('retailer_phone')->toString(),
+            'email' => $request->string('retailer_email')->toString(),
+            'password' => $request->string('retailer_password')->toString(),
+            'shop_name' => $request->string('shop_name')->toString(),
+            'slug' => $request->string('slug')->toString(),
+            'term_days' => $request->integer('term_days'),
+            'template' => $request->string('template')->toString(),
+        ]);
+
+        return back()->with('status', "{$retailer->name} retailer account created. Share the login details securely with the retailer.");
     }
 
     public function revoke(Request $request, Invitation $invitation): RedirectResponse

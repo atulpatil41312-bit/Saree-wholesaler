@@ -249,6 +249,51 @@ body.seller-sponsorships-page .sponsorship-invite-form .seller-primary-button {
     white-space: nowrap;
 }
 
+body.seller-sponsorships-page .sponsorship-create-form {
+    display: block;
+}
+
+body.seller-sponsorships-page .sponsorship-create-grid {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.seller-sponsorships-page .sponsorship-field-wide {
+    grid-column: 1 / -1;
+}
+
+body.seller-sponsorships-page .sponsorship-create-form > .seller-primary-button {
+    margin-top: 16px;
+}
+
+body.seller-sponsorships-page .sponsorship-slug-field {
+    align-items: center;
+    border: 1px solid #ddd4dc;
+    border-radius: 7px;
+    display: flex;
+    overflow: hidden;
+}
+
+body.seller-sponsorships-page .sponsorship-slug-field:focus-within {
+    border-color: #a56e8f;
+    box-shadow: 0 0 0 3px rgba(165, 110, 143, .13);
+}
+
+body.seller-sponsorships-page .sponsorship-slug-field > span {
+    color: #9a8f9a;
+    flex: 0 0 auto;
+    font-size: 10px;
+    margin-left: 0;
+    padding-left: 11px;
+}
+
+body.seller-sponsorships-page .sponsorship-slug-field input {
+    border: 0;
+    border-radius: 0;
+    min-width: 0;
+}
+
 body.seller-sponsorships-page .sponsorship-upgrade-panel {
     align-items: flex-start;
     background: linear-gradient(115deg, #342034, #54233f);
@@ -595,6 +640,12 @@ body.seller-sponsorships-page .sponsorship-text-link {
         grid-template-columns: 1fr;
         margin-left: 18px;
         margin-right: 18px;
+    }
+    body.seller-sponsorships-page .sponsorship-create-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    body.seller-sponsorships-page .sponsorship-field-wide {
+        grid-column: auto;
     }
     body.seller-sponsorships-page .sponsorship-invite-form .seller-primary-button {
         grid-column: auto;
