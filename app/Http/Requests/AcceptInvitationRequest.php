@@ -36,7 +36,7 @@ class AcceptInvitationRequest extends FormRequest
                 Rule::notIn(['admin', 'api', 'dashboard', 'login', 'logout', 'retailer', 'seller', 'shops', 'wholesaler']),
                 Rule::unique('shops', 'slug')->where('type', 'retailer'),
             ],
-            'template' => ['required', 'string', Rule::in(array_keys(Shop::templates()))],
+            'template' => ['required', 'string', Rule::in(array_keys(Shop::templatesForType('retailer')))],
         ];
     }
 }

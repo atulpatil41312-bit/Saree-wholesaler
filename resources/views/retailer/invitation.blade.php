@@ -18,7 +18,7 @@
                     @endguest
                     <label>Retailer shop name<input name="shop_name" value="{{ old('shop_name') }}" required data-shop-name></label>
                     <label>Retailer URL<span>{{ request()->getSchemeAndHttpHost() }}/retailer/</span><input name="slug" value="{{ old('slug') }}" required data-shop-slug></label>
-                    <label>Initial design<select name="template">@foreach(\App\Models\Shop::templates() as $key => $name)<option value="{{ $key }}" @selected(old('template', 'classic') === $key)>{{ $name }}</option>@endforeach</select></label>
+                    <label>Initial design<select name="template">@foreach(\App\Models\Shop::templatesForType('retailer') as $key => $name)<option value="{{ $key }}" @selected(old('template', 'classic') === $key)>{{ $name }}</option>@endforeach</select></label>
                     <button class="primary">Create sponsored retailer site</button>
                 </form>
                 @auth

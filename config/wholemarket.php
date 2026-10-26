@@ -55,7 +55,7 @@ return [
             'name' => 'Retailer Basic',
             'shop_type' => 'retailer',
             'limits' => [
-                'templates' => ['classic', 'wholesaler-templates'],
+                'templates' => ['classic', 'wholesaler-templates', 'royal-drape', 'silk-atelier', 'heritage-weaves'],
                 'product_limit' => 20,
                 'category_limit' => 5,
                 'product_image_limit' => 2,

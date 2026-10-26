@@ -75,13 +75,21 @@ class ShopAccessService
      */
     public function allowedTemplates(Shop $shop, ?CarbonInterface $at = null): array
     {
-        $templates = $this->limits($shop, $at)['template_keys'] ?? array_keys(Shop::templates());
+        $templates = $this->limits($shop, $at)['template_keys'] ?? array_keys(Shop::templatesForType($shop->type));
 
-        return $templates === 'all' ? array_keys(Shop::templates()) : $templates;
+        $templates = $templates === 'all'
+            ? array_keys(Shop::templatesForType($shop->type))
+            : array_values(array_intersect($templates, array_keys(Shop::templatesForType($shop->type))));
+
+        return $templates;
     }
 
     public function canUseTemplate(Shop $shop, string $template, ?CarbonInterface $at = null): bool
     {
+        if ($shop->subscriptions()->exists() && ! $this->isEntitled($shop, $at)) {
+            return false;
+        }
+
         return in_array($template, $this->allowedTemplates($shop, $at), true);
     }
 

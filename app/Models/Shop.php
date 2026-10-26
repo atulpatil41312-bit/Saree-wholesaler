@@ -29,6 +29,12 @@ class Shop extends Model
 
     public const WHOLESALE_ATELIER_TEMPLATE = 'wholesaler-templates';
 
+    public const ROYAL_DRAPE_TEMPLATE = 'royal-drape';
+
+    public const SILK_ATELIER_TEMPLATE = 'silk-atelier';
+
+    public const HERITAGE_WEAVES_TEMPLATE = 'heritage-weaves';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -37,6 +43,9 @@ class Shop extends Model
         self::ROSE_ATELIER_TEMPLATE => 'Rose Atelier',
         self::INDIGO_EDIT_TEMPLATE => 'Indigo Edit',
         self::WHOLESALE_ATELIER_TEMPLATE => 'Wholesale Atelier',
+        self::ROYAL_DRAPE_TEMPLATE => 'Royal Drape',
+        self::SILK_ATELIER_TEMPLATE => 'Silk Atelier',
+        self::HERITAGE_WEAVES_TEMPLATE => 'Heritage Weaves',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -91,9 +100,36 @@ class Shop extends Model
             'description' => 'A warm, wholesale-first catalogue with practical filters and direct buyer enquiries.',
             'badge' => 'NEW WHOLESALE',
             'asset_path' => 'templates/wholesaler-templates',
-            'hero_image' => 'placeholder-hero.svg',
+            'hero_image' => 'models/hero.jpg',
             'hero_heading' => 'Made for',
             'hero_emphasis' => 'serious sourcing.',
+        ],
+        self::ROYAL_DRAPE_TEMPLATE => [
+            'label' => 'Royal Drape',
+            'description' => 'A ceremonial burgundy salon with an arched textile hero and framed collection cards.',
+            'badge' => 'ROYAL DRAPE',
+            'asset_path' => 'templates/retailer-pack',
+            'hero_image' => 'models/hero.jpg',
+            'hero_heading' => 'A collection with',
+            'hero_emphasis' => 'presence.',
+        ],
+        self::SILK_ATELIER_TEMPLATE => [
+            'label' => 'Silk Atelier',
+            'description' => 'A minimal editorial studio with an asymmetric split hero and spacious collection cards.',
+            'badge' => 'SILK ATELIER',
+            'asset_path' => 'templates/retailer-pack',
+            'hero_image' => 'models/look-1.jpg',
+            'hero_heading' => 'Quietly made for',
+            'hero_emphasis' => 'everyday luxury.',
+        ],
+        self::HERITAGE_WEAVES_TEMPLATE => [
+            'label' => 'Heritage Weaves',
+            'description' => 'A warm craft journal with a patterned panorama and circular collection tiles.',
+            'badge' => 'HERITAGE WEAVES',
+            'asset_path' => 'templates/retailer-pack',
+            'hero_image' => 'models/look-2.jpg',
+            'hero_heading' => 'Woven with',
+            'hero_emphasis' => 'a story.',
         ],
     ];
 
@@ -128,6 +164,33 @@ class Shop extends Model
         return array_key_exists($template, self::TEMPLATES);
     }
 
+    /** @return array<string, string> */
+    public static function templatesForType(string $shopType): array
+    {
+        $keys = match ($shopType) {
+            'retailer' => [
+                self::DEFAULT_TEMPLATE,
+                self::WHOLESALE_ATELIER_TEMPLATE,
+                self::ROYAL_DRAPE_TEMPLATE,
+                self::SILK_ATELIER_TEMPLATE,
+                self::HERITAGE_WEAVES_TEMPLATE,
+            ],
+            'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
+                self::ROYAL_DRAPE_TEMPLATE,
+                self::SILK_ATELIER_TEMPLATE,
+                self::HERITAGE_WEAVES_TEMPLATE,
+            ])),
+            default => array_keys(self::TEMPLATES),
+        };
+
+        return array_intersect_key(self::TEMPLATES, array_flip($keys));
+    }
+
+    public static function supportsTemplateForType(string $template, string $shopType): bool
+    {
+        return array_key_exists($template, self::templatesForType($shopType));
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
@@ -139,6 +202,7 @@ class Shop extends Model
             self::VASTRA_EMERALD_TEMPLATE => 'shop.vastra-emerald',
             self::ROYAL_NOIR_TEMPLATE, self::ROSE_ATELIER_TEMPLATE, self::INDIGO_EDIT_TEMPLATE => 'shop.saree-template-pack',
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates',
+            self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack',
             default => 'shop.show',
         };
     }
@@ -149,6 +213,7 @@ class Shop extends Model
             self::VASTRA_EMERALD_TEMPLATE => 'shop.vastra-emerald-product',
             self::ROYAL_NOIR_TEMPLATE, self::ROSE_ATELIER_TEMPLATE, self::INDIGO_EDIT_TEMPLATE => 'shop.saree-template-pack-product',
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates-product',
+            self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack-product',
             default => 'shop.product',
         };
     }
@@ -316,6 +381,6 @@ class Shop extends Model
 
         $template ??= $this->template;
 
-        return self::supportsTemplate($template) ? $template : self::DEFAULT_TEMPLATE;
+        return self::supportsTemplateForType($template, $this->type) ? $template : self::DEFAULT_TEMPLATE;
     }
 }

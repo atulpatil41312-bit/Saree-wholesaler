@@ -53,7 +53,7 @@ class ShopDashboardController extends Controller
         $this->access->authorize($request->user(), $shop, 'manage_branding');
         $allowedTemplates = $this->access->allowedTemplates($shop);
         $templates = array_filter(
-            Shop::templates(),
+            Shop::templatesForType($shop->type),
             fn (string $key): bool => in_array($key, $allowedTemplates, true),
             ARRAY_FILTER_USE_KEY,
         );
@@ -72,7 +72,7 @@ class ShopDashboardController extends Controller
     {
         $shop = $this->dashboardShop($request);
         $this->access->authorize($request->user(), $shop, 'manage_branding');
-        abort_unless(Shop::supportsTemplate($template), 404);
+        abort_unless(Shop::supportsTemplateForType($template, $shop->type), 404);
         abort_unless($this->access->canUseTemplate($shop, $template), 403);
 
         return view(Shop::storefrontViewFor($template), [
@@ -89,7 +89,7 @@ class ShopDashboardController extends Controller
         $shop = $this->dashboardShop($request);
         $this->access->authorize($request->user(), $shop, 'manage_branding');
         $data = $request->validate([
-            'template' => ['required', 'string', Rule::in(array_keys(Shop::templates()))],
+            'template' => ['required', 'string', Rule::in(array_keys(Shop::templatesForType($shop->type)))],
         ]);
 
         if (! $this->access->canUseTemplate($shop, $data['template'])) {

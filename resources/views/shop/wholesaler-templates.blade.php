@@ -25,9 +25,10 @@
         $showContact = $visibility['contact'] ?? true;
         $showPrices = $settings?->show_prices ?? true;
         $assetBase = asset('templates/wholesaler-templates');
+        $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/placeholder-hero.svg';
+        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/models/hero.jpg';
         $heroTitle = ($sections['hero_title'] ?? null) ?: $shop->name;
         $heroSubtitle = ($sections['hero_subtitle'] ?? null) ?: ($shop->description ?: 'A focused wholesale saree catalogue for retailers who value clear details and direct sourcing.');
         $heroCtaLabel = ($sections['hero_cta_label'] ?? null) ?: 'Explore catalogue';
@@ -140,7 +141,7 @@
                                         : $shop->publicUrl(['category' => $category->id]).'#catalogue';
                                 @endphp
                                 <a class="wta-collection-card" href="{{ $categoryUrl }}">
-                                    <img src="{{ $assetBase.'/placeholder-product.svg' }}" alt="" width="640" height="760" loading="lazy">
+                                    <img src="{{ $assetBase.'/'.$categoryImages[$loop->index] }}" alt="{{ $category->name }} collection" width="640" height="760" loading="lazy">
                                     <span>{{ $category->name }}</span>
                                     <small>Explore collection <b aria-hidden="true">→</b></small>
                                 </a>
@@ -235,7 +236,7 @@
                 <div class="wta-product-grid">
                     @forelse ($products as $product)
                         @php
-                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/placeholder-product.svg';
+                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/models/look-2.jpg';
                             $productUrl = $shop->productUrl($product);
                             $productWhatsappUrl = $hasWhatsapp
                                 ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Product link: '.$productUrl.'. Shop link: '.$shopUrl)

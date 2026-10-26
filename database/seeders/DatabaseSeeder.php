@@ -96,7 +96,11 @@ class DatabaseSeeder extends Seeder
                 ['key' => $position],
                 [
                     'name' => $name,
-                    'shop_type' => $position === Shop::WHOLESALE_ATELIER_TEMPLATE ? null : 'wholesaler',
+                    'shop_type' => in_array($position, [
+                        Shop::ROYAL_DRAPE_TEMPLATE,
+                        Shop::SILK_ATELIER_TEMPLATE,
+                        Shop::HERITAGE_WEAVES_TEMPLATE,
+                    ], true) ? 'retailer' : ($position === Shop::WHOLESALE_ATELIER_TEMPLATE ? null : 'wholesaler'),
                     'is_active' => true,
                     'sort_order' => array_search($position, array_keys(Shop::templates()), true),
                     'configuration' => ['source' => 'built-in'],
@@ -126,7 +130,7 @@ class DatabaseSeeder extends Seeder
             );
             $limits = $definition['limits'];
             $templateKeys = $limits['templates'] === 'all'
-                ? array_keys(Shop::templates())
+                ? array_keys(Shop::templatesForType($definition['shop_type']))
                 : $limits['templates'];
             unset($limits['templates']);
 
