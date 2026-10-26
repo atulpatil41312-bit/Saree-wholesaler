@@ -320,6 +320,9 @@ class WholesalerTemplatesTest extends TestCase
         $this->actingAs($owner)->put(route('seller.profile.update'), [
             'name' => $shop->name,
             'slug' => $shop->slug,
+            'whatsapp' => '+91 (98765) 43210',
+            'instagram_url' => 'https://instagram.com/restricted-demo',
+            'facebook_url' => 'https://facebook.com/restricted-demo',
             'logo' => UploadedFile::fake()->image('logo.png', 240, 240),
             'banner' => UploadedFile::fake()->image('banner.jpg', 1600, 800),
         ])->assertRedirect(route('seller.profile.edit'));
@@ -327,6 +330,9 @@ class WholesalerTemplatesTest extends TestCase
         $shop->refresh();
         $this->assertNotNull($shop->logo_path);
         $this->assertNotNull($shop->banner_path);
+        $this->assertSame('+91 (98765) 43210', $shop->whatsapp);
+        $this->assertSame('https://instagram.com/restricted-demo', $shop->instagram_url);
+        $this->assertSame('https://facebook.com/restricted-demo', $shop->facebook_url);
         Storage::disk('public')->assertExists($shop->logo_path);
         Storage::disk('public')->assertExists($shop->banner_path);
     }
