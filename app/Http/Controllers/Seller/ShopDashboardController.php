@@ -58,6 +58,9 @@ class ShopDashboardController extends Controller
             ARRAY_FILTER_USE_KEY,
         );
         $shop->loadMissing('settings');
+        $templateAvailability = collect($templates)
+            ->mapWithKeys(fn (string $label, string $key): array => [$key => $this->access->canUseTemplate($shop, $key)])
+            ->all();
 
         return view('seller.design', [
             'shop' => $shop,
@@ -65,6 +68,8 @@ class ShopDashboardController extends Controller
             'templateDetails' => Shop::templateDetails(),
             'designSettings' => $shop->settings,
             'wholesaleAtelierAvailable' => array_key_exists(Shop::WHOLESALE_ATELIER_TEMPLATE, $templates),
+            'templateAvailability' => $templateAvailability,
+            'designAccessActive' => $this->access->isEntitled($shop),
         ]);
     }
 

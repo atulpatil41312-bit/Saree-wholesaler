@@ -63,6 +63,14 @@
                     <div><strong>Your catalogue stays exactly the same.</strong><p>Changing the design only updates the public presentation. Your shop URL, categories, products, images and catalogue limits are safe.</p></div>
                 </div>
 
+                @if (! $designAccessActive)
+                    <div class="design-access-callout" role="alert">
+                        <span class="design-access-icon" aria-hidden="true">!</span>
+                        <div><strong>Design access is paused</strong><p>Your current subscription has expired, is still pending, or this shop is not active. Renew or activate a plan to preview and apply storefront designs.</p></div>
+                        <a class="seller-secondary-button" href="{{ route('seller.dashboard') }}">View plan status <span aria-hidden="true">→</span></a>
+                    </div>
+                @endif
+
                 <section class="design-section" aria-labelledby="template-options-heading">
                     <div class="design-section-heading">
                         <div><p class="seller-overline">Choose a direction</p><h2 id="template-options-heading">Template options</h2></div>
@@ -73,26 +81,33 @@
                         @foreach ($templates as $template => $label)
                             @php($details = $templateDetails[$template])
                             @php($isActive = $template === $shop->storefrontTemplate())
-                            <article class="design-template-card {{ $isActive ? 'is-active' : '' }}">
+                            @php($isAvailable = $templateAvailability[$template] ?? false)
+                            <article class="design-template-card {{ $isActive ? 'is-active' : '' }} {{ $isAvailable ? '' : 'is-locked' }}">
                                 <div class="design-template-media">
                                     <img src="{{ asset($details['asset_path'].'/'.$details['hero_image']) }}" alt="{{ $label }} storefront preview" loading="lazy">
                                     <span class="design-template-badge">{{ $details['badge'] }}</span>
-                                    <span class="design-template-state {{ $isActive ? 'is-current' : '' }}"><span aria-hidden="true">{{ $isActive ? '✓' : '○' }}</span>{{ $isActive ? 'Active now' : 'Available' }}</span>
+                                    <span class="design-template-state {{ $isActive ? 'is-current' : '' }} {{ $isAvailable ? '' : 'is-locked' }}"><span aria-hidden="true">{{ $isActive ? '✓' : ($isAvailable ? '○' : '⚿') }}</span>{{ $isActive ? 'Active now' : ($isAvailable ? 'Available' : 'Renew to unlock') }}</span>
                                 </div>
                                 <div class="design-template-body">
                                     <div class="design-template-title-row"><h3>{{ $label }}</h3>@if ($isActive)<span class="design-check" aria-label="Currently selected">✓</span>@endif</div>
                                     <p>{{ $details['description'] }}</p>
                                     <div class="design-template-actions">
-                                        <a class="design-preview-link" href="{{ route('seller.design.preview', $template) }}">Preview design <span aria-hidden="true">↗</span></a>
+                                        @if ($isAvailable)
+                                            <a class="design-preview-link" href="{{ route('seller.design.preview', $template) }}">Preview design <span aria-hidden="true">↗</span></a>
+                                        @else
+                                            <span class="design-locked-label"><span aria-hidden="true">⚿</span> Preview locked</span>
+                                        @endif
                                         @if ($isActive)
                                             <span class="design-applied-label"><span aria-hidden="true">✓</span> Currently applied</span>
-                                        @else
+                                        @elseif ($isAvailable)
                                             <form method="post" action="{{ route('seller.design.update') }}">
                                                 @csrf
                                                 @method('put')
                                                 <input type="hidden" name="template" value="{{ $template }}">
                                                 <button class="design-apply-button" type="submit">Apply {{ $label }} <span aria-hidden="true">→</span></button>
                                             </form>
+                                        @else
+                                            <span class="design-locked-label">Renew plan to apply</span>
                                         @endif
                                     </div>
                                 </div>

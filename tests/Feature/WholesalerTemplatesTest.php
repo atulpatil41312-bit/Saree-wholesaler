@@ -44,6 +44,36 @@ class WholesalerTemplatesTest extends TestCase
             ->assertSeeText('Apply Wholesale Atelier');
     }
 
+    public function test_expired_subscription_shows_locked_design_actions_instead_of_broken_preview_links(): void
+    {
+        $owner = User::factory()->create(['role' => 'wholesaler']);
+        $shop = Shop::factory()->for($owner)->active()->create([
+            'name' => 'Renewal Sarees',
+            'slug' => 'renewal-sarees',
+        ]);
+        $plan = Plan::factory()->create(['key' => 'expired-design-plan']);
+        $version = PlanVersion::factory()->for($plan)->create([
+            'template_keys' => [Shop::DEFAULT_TEMPLATE, Shop::ROYAL_NOIR_TEMPLATE],
+        ]);
+        $shop->subscriptions()->create([
+            'plan_id' => $plan->id,
+            'plan_version_id' => $version->id,
+            'status' => 'active',
+            'source' => 'manual',
+            'billing_interval' => 'manual',
+            'started_at' => now()->subMonth(),
+            'paid_through_at' => now()->subDay(),
+        ]);
+
+        $this->actingAs($owner)
+            ->get(route('seller.design'))
+            ->assertOk()
+            ->assertSeeText('Design access is paused')
+            ->assertSeeText('Preview locked')
+            ->assertSeeText('Renew plan to apply')
+            ->assertDontSee(route('seller.design.preview', Shop::ROYAL_NOIR_TEMPLATE), false);
+    }
+
     public function test_wholesale_atelier_preserves_catalogue_and_uses_shop_data(): void
     {
         $owner = User::factory()->create(['role' => 'wholesaler']);

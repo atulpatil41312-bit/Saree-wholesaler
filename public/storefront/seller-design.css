@@ -86,6 +86,73 @@ body.seller-design-page .design-info-callout p {
     margin: 0;
 }
 
+body.seller-design-page .design-access-callout {
+    align-items: center;
+    background: #fff0f0;
+    border: 1px solid #f1cbcf;
+    border-radius: 12px;
+    color: #982f3a;
+    display: flex;
+    gap: 13px;
+    margin: -22px 0 39px;
+    padding: 16px 18px;
+}
+
+body.seller-design-page .design-access-icon {
+    align-items: center;
+    background: #f4cdd1;
+    border-radius: 50%;
+    color: #982f3a;
+    display: grid;
+    flex: 0 0 22px;
+    font-size: 12px;
+    font-weight: 800;
+    height: 22px;
+    place-items: center;
+    width: 22px;
+}
+
+body.seller-design-page .design-access-callout > div {
+    flex: 1;
+}
+
+body.seller-design-page .design-access-callout strong {
+    color: #7f2631;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+body.seller-design-page .design-access-callout p {
+    color: #9b4a52;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+body.seller-design-page .design-template-card.is-locked {
+    border-color: #e7dfe4;
+}
+
+body.seller-design-page .design-template-card.is-locked .design-template-media img {
+    filter: saturate(.55);
+    opacity: .72;
+}
+
+body.seller-design-page .design-template-state.is-locked {
+    background: rgba(58, 37, 48, .85);
+    color: #f8e8ed;
+}
+
+body.seller-design-page .design-locked-label {
+    align-items: center;
+    color: #9a8793;
+    display: inline-flex;
+    font-size: 10px;
+    font-weight: 700;
+    gap: 5px;
+}
+
 body.seller-design-page .design-section {
     margin-bottom: 44px;
 }
@@ -606,6 +673,13 @@ body.seller-design-page .design-settings-footer a:hover {
     }
     body.seller-design-page .design-settings-footer .seller-primary-button {
         width: 100%;
+    }
+    body.seller-design-page .design-access-callout {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    body.seller-design-page .design-access-callout .seller-secondary-button {
+        margin-left: 35px;
     }
 }
 
