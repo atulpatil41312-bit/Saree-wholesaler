@@ -79,9 +79,5 @@
         </main>
 
         <footer class="wta-footer"><a class="wta-brand" href="{{ $shopUrl }}"><span class="wta-monogram" aria-hidden="true">{{ Str::upper(Str::substr($shop->name, 0, 1)) }}</span><span><strong>{{ $shop->name }}</strong><small>WHOLESALE ATELIER</small></span></a><p>Independent catalogue on <a href="{{ route('market.index') }}">WholeMarket</a>.</p></footer>
-
-        @if ($whatsappUrl)
-            <a class="wta-whatsapp-float" href="{{ $whatsappUrl }}" target="_blank" rel="noopener" aria-label="Enquire with {{ $shop->name }} on WhatsApp"><span aria-hidden="true">◔</span><span>WhatsApp</span></a>
-        @endif
     </div>
 @endsection

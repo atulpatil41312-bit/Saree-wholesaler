@@ -48,6 +48,10 @@ class RetailerTemplatePackTest extends TestCase
     {
         foreach ([Shop::ROYAL_DRAPE_TEMPLATE, Shop::SILK_ATELIER_TEMPLATE, Shop::HERITAGE_WEAVES_TEMPLATE] as $template) {
             [$shop] = $this->makeRetailer($template, 'Retailer '.$template, $template);
+            $shop->update([
+                'instagram_url' => 'https://instagram.com/wholemarket-demo',
+                'facebook_url' => 'https://facebook.com/wholemarket-demo',
+            ]);
             $category = $shop->categories()->create(['name' => 'Wedding Edit', 'slug' => 'wedding-edit']);
             $product = $shop->products()->create([
                 'category_id' => $category->id,
@@ -68,12 +72,17 @@ class RetailerTemplatePackTest extends TestCase
                 ->assertSeeText($category->name)
                 ->assertSeeText($product->name)
                 ->assertSee('https://wa.me/919876543210', false)
+                ->assertSee('wm-whatsapp-float', false)
+                ->assertSee('wm-contact-icon-whatsapp', false)
+                ->assertSee('wm-contact-icon-instagram', false)
+                ->assertSee('wm-contact-icon-facebook', false)
                 ->assertSee('/templates/retailer-pack/models/look-3.jpg', false);
 
             $this->get(route('retailer.shops.products.show', [$shop, $product]))
                 ->assertOk()
                 ->assertSeeText($product->name)
-                ->assertSee('https://wa.me/919876543210', false);
+                ->assertSee('https://wa.me/919876543210', false)
+                ->assertSee('wm-contact-icon-whatsapp', false);
         }
     }
 
@@ -119,6 +128,8 @@ class RetailerTemplatePackTest extends TestCase
         $this->get(route('retailer.shops.show', $shop))
             ->assertOk()
             ->assertDontSee('wa.me/', false)
+            ->assertDontSee('wm-whatsapp-float', false)
+            ->assertDontSee('wm-contact-icon', false)
             ->assertDontSeeText('WhatsApp the retailer')
             ->assertDontSeeText('Email the retailer')
             ->assertDontSeeText('Call the retailer');

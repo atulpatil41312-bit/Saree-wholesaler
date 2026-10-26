@@ -1,9 +1,10 @@
-const STATIC_CACHE = 'wholemarket-static-v2';
+const STATIC_CACHE = 'wholemarket-static-v3';
 const OFFLINE_PAGE = '/offline.html';
 const STATIC_ASSETS = [
     OFFLINE_PAGE,
     '/manifest.webmanifest',
     '/storefront/style.css',
+    '/storefront/contact-icons.css',
     '/storefront/icon.svg',
     '/storefront/icon-192.png',
     '/storefront/icon-512.png',

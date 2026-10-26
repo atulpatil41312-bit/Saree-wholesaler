@@ -123,6 +123,7 @@ class WholeMarketPlatformTest extends TestCase
         $this->assertStringContainsString('(admin|api|billing|dashboard', $worker);
         $this->assertStringContainsString('isProtectedOrMutablePath(url.pathname)', $worker);
         $this->assertStringContainsString('STATIC_CACHE', $worker);
+        $this->assertStringContainsString('/storefront/contact-icons.css', $worker);
         $this->assertStringContainsString('isStaticAsset(url.pathname)', $worker);
     }
 

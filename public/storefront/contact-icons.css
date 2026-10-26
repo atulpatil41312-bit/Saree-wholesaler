@@ -1,0 +1,118 @@
+.wm-contact-icons {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0 0;
+}
+
+.wm-contact-icon {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    display: inline-flex;
+    font: 600 11px/1.2 Arial, sans-serif;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 14px;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wm-contact-icon:hover {
+    box-shadow: 0 5px 16px rgba(27, 18, 21, .13);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.wm-contact-icon svg,
+.wm-whatsapp-float svg {
+    fill: currentColor;
+    flex: 0 0 auto;
+    height: 20px;
+    width: 20px;
+}
+
+.wm-contact-icon-instagram svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+}
+
+.wm-contact-icon-instagram svg .wm-icon-fill {
+    fill: currentColor;
+    stroke: none;
+}
+
+.wm-contact-icon-whatsapp {
+    background: #e7f8ed;
+    border-color: #b8e8c8;
+    color: #116b3d;
+}
+
+.wm-contact-icon-instagram {
+    background: #fff0f7;
+    border-color: #efc6db;
+    color: #ae3f75;
+}
+
+.wm-contact-icon-facebook {
+    background: #edf3ff;
+    border-color: #c4d5fb;
+    color: #2459b6;
+}
+
+.wm-contact-icon-email {
+    background: #f8f0f5;
+    border-color: #e8d2df;
+    color: #7b293e;
+}
+
+.wm-whatsapp-float {
+    align-items: center;
+    background: #128c50;
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 999px;
+    bottom: 24px;
+    box-shadow: 0 8px 24px rgba(7, 94, 84, .24);
+    color: #fff;
+    display: inline-flex;
+    font: 700 12px/1 Arial, sans-serif;
+    gap: 8px;
+    min-height: 52px;
+    padding: 0 17px;
+    position: fixed;
+    right: 24px;
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+    z-index: 20;
+}
+
+.wm-whatsapp-float:hover {
+    background: #086e3b;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .wm-contact-icons {
+        gap: 8px;
+    }
+
+    .wm-contact-icon {
+        min-height: 40px;
+        padding: 0 11px;
+    }
+
+    .wm-whatsapp-float {
+        bottom: calc(78px + env(safe-area-inset-bottom));
+        height: 54px;
+        padding: 0;
+        right: 16px;
+        width: 54px;
+    }
+
+    .wm-whatsapp-float span {
+        display: none;
+    }
+}

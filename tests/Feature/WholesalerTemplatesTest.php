@@ -233,6 +233,7 @@ class WholesalerTemplatesTest extends TestCase
             ->assertSeeText($product->name)
             ->assertSeeText('Price on request')
             ->assertSee('https://wa.me/919876543210', false)
+            ->assertSee('wm-whatsapp-float', false)
             ->assertSee('/templates/wholesaler-templates/models/look-2.jpg', false);
 
         $this->get(route('shops.products.show', [$shop, $product]))

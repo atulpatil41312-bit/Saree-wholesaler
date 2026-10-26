@@ -249,12 +249,18 @@ class AuthenticationAndStorefrontTest extends TestCase
         $shop = Shop::factory()->active()->create([
             'template' => Shop::ROSE_ATELIER_TEMPLATE,
             'whatsapp' => '+91 (98765) 43210',
+            'instagram_url' => 'https://instagram.com/wholemarket-demo',
+            'facebook_url' => 'https://facebook.com/wholemarket-demo',
         ]);
 
         $response = $this->get(route('shops.show', $shop));
 
         $response->assertOk();
-        $response->assertSee('https://wa.me/919876543210', false);
+        $response->assertSee('https://wa.me/919876543210', false)
+            ->assertSee('wm-whatsapp-float', false)
+            ->assertSee('wm-contact-icon-whatsapp', false)
+            ->assertSee('wm-contact-icon-instagram', false)
+            ->assertSee('wm-contact-icon-facebook', false);
     }
 
     public function test_template_catalogue_paginates_large_collections(): void

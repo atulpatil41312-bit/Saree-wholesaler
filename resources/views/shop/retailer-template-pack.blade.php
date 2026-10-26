@@ -116,12 +116,11 @@
 
             <section id="contact" class="contact wrap" aria-labelledby="contact-heading">
                 <div><p class="eyebrow">LET’S TALK</p><h2 id="contact-heading">A collection begins with a conversation.</h2><p>Ask about quantities, colours and current availability from {{ $shop->name }}.</p>@if ($whatsappUrl)<a class="button" href="{{ $whatsappUrl }}">WhatsApp the retailer ↗</a>@elseif ($shopEmail)<a class="button" href="mailto:{{ $shopEmail }}">Email the retailer ↗</a>@elseif ($phoneUrl)<a class="button" href="{{ $phoneUrl }}">Call the retailer ↗</a>@endif</div>
-                <div class="panel"><h3>{{ $shop->name }}</h3>@if ($shop->address)<p>{{ $shop->address }}</p>@endif @if ($shop->shop_number)<p>{{ $shop->shop_number }}</p>@endif @if ($shop->opening_hours)<p><strong>Opening hours</strong><br>{{ $shop->opening_hours }}</p>@endif @if ($whatsappUrl || $instagramUrl || $facebookUrl || $shopEmail)<nav aria-label="Contact links">@if ($whatsappUrl)<a href="{{ $whatsappUrl }}">WhatsApp</a>@endif @if ($instagramUrl)<a href="{{ $instagramUrl }}" rel="noopener noreferrer">Instagram</a>@endif @if ($facebookUrl)<a href="{{ $facebookUrl }}" rel="noopener noreferrer">Facebook</a>@endif @if ($shopEmail)<a href="mailto:{{ $shopEmail }}">Email</a>@endif</nav>@endif</div>
+                <div class="panel"><h3>{{ $shop->name }}</h3>@if ($shop->address)<p>{{ $shop->address }}</p>@endif @if ($shop->shop_number)<p>{{ $shop->shop_number }}</p>@endif @if ($shop->opening_hours)<p><strong>Opening hours</strong><br>{{ $shop->opening_hours }}</p>@endif @if ($whatsappUrl || $instagramUrl || $facebookUrl || $shopEmail)<div aria-label="Contact links">@include('shop.partials.contact-icons', ['shop' => $shop])</div>@endif</div>
             </section>
         </main>
 
         <footer><span>{{ $shop->name }} · {{ $templateDetails['label'] }}</span><nav aria-label="Footer"><a href="#collection">Collection</a><a href="#contact">Contact</a><a href="{{ route('market.index') }}">WholeMarket</a></nav></footer>
-        @if ($hasWhatsapp)<a class="floating" href="{{ $whatsappUrl }}">WhatsApp enquiry ↗</a>@endif
       </div>
     </div>
 @endsection

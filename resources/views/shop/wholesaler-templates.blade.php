@@ -186,15 +186,8 @@
                                     <a class="wta-text-link" href="{{ $phoneUrl }}">Call {{ $shop->phone }} <span aria-hidden="true">→</span></a>
                                 @endif
                             </div>
-                            @if ($instagramUrl || $facebookUrl)
-                                <div class="wta-social-links" aria-label="Social links">
-                                    @if ($instagramUrl)
-                                        <a href="{{ $instagramUrl }}" target="_blank" rel="noopener"><span aria-hidden="true">◎</span> Instagram</a>
-                                    @endif
-                                    @if ($facebookUrl)
-                                        <a href="{{ $facebookUrl }}" target="_blank" rel="noopener"><span aria-hidden="true">f</span> Facebook</a>
-                                    @endif
-                                </div>
+                            @if ($whatsappUrl || $instagramUrl || $facebookUrl || $shopEmail)
+                                <div class="wta-social-links" aria-label="Social links">@include('shop.partials.contact-icons', ['shop' => $shop])</div>
                             @endif
                         </div>
                         <form class="wta-enquiry-form" method="post" action="{{ route('enquiries.store', ['type' => $shop->type, 'shop' => $shop]) }}">
@@ -293,10 +286,5 @@
             <p>Independent catalogue on <a href="{{ route('market.index') }}">WholeMarket</a>.</p>
         </footer>
 
-        @if ($whatsappUrl)
-            <a class="wta-whatsapp-float" href="{{ $whatsappUrl }}" target="_blank" rel="noopener" aria-label="Enquire with {{ $shop->name }} on WhatsApp">
-                <span aria-hidden="true">◔</span><span>WhatsApp</span>
-            </a>
-        @endif
     </div>
 @endsection

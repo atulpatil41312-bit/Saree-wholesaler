@@ -142,20 +142,7 @@
                     @endif
                     @if ($hasWhatsapp || $instagramUrl || $facebookUrl || $shopEmail)
                         <dt>Connect with us</dt>
-                        <dd class="ve-socials">
-                            @if ($whatsappUrl)
-                                <a href="{{ $whatsappUrl }}">WhatsApp</a>
-                            @endif
-                            @if ($instagramUrl)
-                                <a href="{{ $instagramUrl }}" rel="noopener noreferrer">Instagram</a>
-                            @endif
-                            @if ($facebookUrl)
-                                <a href="{{ $facebookUrl }}" rel="noopener noreferrer">Facebook</a>
-                            @endif
-                            @if ($shopEmail)
-                                <a href="mailto:{{ $shopEmail }}">Email</a>
-                            @endif
-                        </dd>
+                        <dd class="ve-socials">@include('shop.partials.contact-icons', ['shop' => $shop])</dd>
                     @endif
                 </dl>
             </div>

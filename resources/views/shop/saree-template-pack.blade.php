@@ -153,7 +153,7 @@
                     <dl>
                         @if ($shop->shop_number || $shop->address)<dt>Shop & market address</dt><dd>{{ $shop->shop_number }}{{ $shop->shop_number && $shop->address ? ', ' : '' }}{{ $shop->address }}</dd>@endif
                         @if ($shop->opening_hours)<dt>Business hours</dt><dd>{{ $shop->opening_hours }}</dd>@endif
-                        @if ($whatsappUrl || $instagramUrl || $facebookUrl || $shopEmail)<dt>Connect with us</dt><dd class="stp-socials">@if ($whatsappUrl)<a href="{{ $whatsappUrl }}">WhatsApp</a>@endif @if ($instagramUrl)<a href="{{ $instagramUrl }}" rel="noopener noreferrer">Instagram</a>@endif @if ($facebookUrl)<a href="{{ $facebookUrl }}" rel="noopener noreferrer">Facebook</a>@endif @if ($shopEmail)<a href="mailto:{{ $shopEmail }}">Email</a>@endif</dd>@endif
+                        @if ($whatsappUrl || $instagramUrl || $facebookUrl || $shopEmail)<dt>Connect with us</dt><dd class="stp-socials">@include('shop.partials.contact-icons', ['shop' => $shop])</dd>@endif
                     </dl>
                 </div>
             </section>
