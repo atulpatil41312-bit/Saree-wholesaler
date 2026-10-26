@@ -1,57 +1,81 @@
 @extends('layouts.storefront')
 
-@section('content')
-    <main>
-        <section class="contact">
-            <div>
-                <div class="eyebrow">JOIN WHOLEMARKET</div>
-                <h2>Apply to sell</h2>
-                <p>Submit your details to create a seller account and a pending wholesale shop. An admin will review and activate it before it is shown in the market.</p>
+@section('body_class', 'auth-page')
 
-                <form method="post" action="{{ route('seller.signup.store') }}" data-shop-slug-form>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('storefront/auth.css') }}?v={{ filemtime(public_path('storefront/auth.css')) }}">
+@endpush
+
+@section('content')
+    <main class="auth-shell">
+        <aside class="auth-visual">
+            <a class="auth-brand" href="{{ route('market.index') }}">
+                <span class="auth-mark">W</span>
+                <span><strong>WholeMarket</strong><small>Wholesale made simple</small></span>
+            </a>
+            <div class="auth-visual-copy">
+                <p class="auth-overline">Join the seller network</p>
+                <h1>Turn your collection into a destination.</h1>
+                <p>Apply once and get a polished public shop, catalogue tools, and a direct line to serious retail buyers.</p>
+                <ul class="auth-benefits">
+                    <li>Shop URL generated from your business name</li>
+                    <li>Organise products by category</li>
+                    <li>Admin review keeps the marketplace trusted</li>
+                </ul>
+            </div>
+            <img class="auth-visual-image" src="{{ asset('storefront/saree1.jpg') }}" alt="Saree collection preview">
+        </aside>
+
+        <section class="auth-card" aria-labelledby="signup-title">
+            <div class="auth-card-header">
+                <p class="auth-overline">Seller application</p>
+                <h2 id="signup-title">Create your shop</h2>
+                <p class="auth-card-intro">Share a few details and we’ll reserve your public shop address. An admin reviews every application before it goes live.</p>
+            </div>
+
+            <form class="auth-form" method="post" action="{{ route('seller.signup.store') }}" data-shop-slug-form>
                     @csrf
 
                     <label>
                         Your name
-                        <input name="seller_name" type="text" value="{{ old('seller_name') }}" required autocomplete="name">
+                        <input name="seller_name" type="text" value="{{ old('seller_name') }}" required autocomplete="name" autofocus>
                     </label>
-                    @error('seller_name')<p>{{ $message }}</p>@enderror
+                    @error('seller_name')<p class="auth-error">{{ $message }}</p>@enderror
 
                     <label>
                         Email address
                         <input name="seller_email" type="email" value="{{ old('seller_email') }}" required autocomplete="email">
                     </label>
-                    @error('seller_email')<p>{{ $message }}</p>@enderror
+                    @error('seller_email')<p class="auth-error">{{ $message }}</p>@enderror
 
                     <label>
                         Shop name
                         <input name="name" type="text" value="{{ old('name') }}" required data-shop-name>
                     </label>
-                    @error('name')<p>{{ $message }}</p>@enderror
+                    @error('name')<p class="auth-error">{{ $message }}</p>@enderror
 
                     <label>
                         Shop URL
-                        <span>{{ request()->getSchemeAndHttpHost() }}/wholesaler/</span><input name="slug" type="text" value="{{ old('slug') }}" pattern="[A-Za-z0-9-]+" required data-shop-slug>
+                        <span class="auth-slug-field"><span>{{ request()->getSchemeAndHttpHost() }}/wholesaler/</span><input name="slug" type="text" value="{{ old('slug') }}" pattern="[A-Za-z0-9-]+" required data-shop-slug></span>
                     </label>
-                    <p>Generated from your shop name. You can edit it; use letters, numbers, and hyphens only.</p>
-                    @error('slug')<p>{{ $message }}</p>@enderror
+                    <p class="auth-form-note">Generated from your shop name. You can edit it; use letters, numbers, and hyphens only.</p>
+                    @error('slug')<p class="auth-error">{{ $message }}</p>@enderror
 
                     <label>
                         Password
                         <input name="seller_password" type="password" required autocomplete="new-password">
                     </label>
-                    @error('seller_password')<p>{{ $message }}</p>@enderror
+                    @error('seller_password')<p class="auth-error">{{ $message }}</p>@enderror
 
                     <label>
                         Confirm password
                         <input name="seller_password_confirmation" type="password" required autocomplete="new-password">
                     </label>
 
-                    <button class="primary">Submit application</button>
+                    <button class="auth-primary" type="submit">Submit application <span aria-hidden="true">→</span></button>
                 </form>
 
-                <p>Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
-            </div>
+            <div class="auth-footer"><span>Already have an account?</span><a href="{{ route('login') }}">Sign in</a></div>
         </section>
     </main>
 @endsection
