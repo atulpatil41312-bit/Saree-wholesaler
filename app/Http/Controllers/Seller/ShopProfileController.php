@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use App\Models\ShopRedirect;
 use App\Models\User;
+use App\Services\ImageOptimizationService;
 use App\Services\ShopAccessService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ use Illuminate\View\View;
 
 class ShopProfileController extends Controller
 {
-    public function __construct(private ShopAccessService $access) {}
+    public function __construct(private ShopAccessService $access, private ImageOptimizationService $images) {}
 
     public function edit(Request $request): View
     {
@@ -64,7 +65,10 @@ class ShopProfileController extends Controller
 
         $logo = $request->file('logo');
         $banner = $request->file('banner');
-        $uploadBytes = (int) ($logo?->getSize() ?? 0) + (int) ($banner?->getSize() ?? 0);
+        $optimizedLogo = $logo === null ? null : $this->images->optimize($logo, 1200, 1200);
+        $optimizedBanner = $banner === null ? null : $this->images->optimize($banner, 2400, 1600);
+        $uploadBytes = ($optimizedLogo === null ? 0 : strlen($optimizedLogo['contents']))
+            + ($optimizedBanner === null ? 0 : strlen($optimizedBanner['contents']));
         $replacedBytes = ($logo === null ? 0 : $this->storageSize($shop->logo_path))
             + ($banner === null ? 0 : $this->storageSize($shop->banner_path));
         $expectedStorage = max(0, (int) $shop->storage_used_bytes - $replacedBytes) + $uploadBytes;
@@ -79,12 +83,12 @@ class ShopProfileController extends Controller
         $oldLogoPath = $shop->logo_path;
         $oldBannerPath = $shop->banner_path;
 
-        if ($logo !== null) {
-            $data['logo_path'] = $logo->store("shops/{$shop->id}/branding", 'public');
+        if ($optimizedLogo !== null) {
+            $data['logo_path'] = $this->images->store($optimizedLogo, "shops/{$shop->id}/branding");
         }
 
-        if ($banner !== null) {
-            $data['banner_path'] = $banner->store("shops/{$shop->id}/branding", 'public');
+        if ($optimizedBanner !== null) {
+            $data['banner_path'] = $this->images->store($optimizedBanner, "shops/{$shop->id}/branding");
         }
 
         $data['storage_used_bytes'] = $expectedStorage;
