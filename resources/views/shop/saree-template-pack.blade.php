@@ -19,7 +19,7 @@
         $facebookUrl = filter_var($shop->facebook_url, FILTER_VALIDATE_URL) && in_array(parse_url($shop->facebook_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->facebook_url : null;
         $shopEmail = filter_var($shop->email, FILTER_VALIDATE_EMAIL) ? $shop->email : null;
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/'.$templateDetails['hero_image'];
+        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');
         $categoryImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg'];
         $productFallbackImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg', 'saree.jpg'];
     @endphp

@@ -84,7 +84,7 @@
                             @php($isAvailable = $templateAvailability[$template] ?? false)
                             <article class="design-template-card {{ $isActive ? 'is-active' : '' }} {{ $isAvailable ? '' : 'is-locked' }}">
                                 <div class="design-template-media">
-                                    <img src="{{ asset($details['asset_path'].'/'.$details['hero_image']) }}" alt="{{ $label }} storefront preview" loading="lazy">
+                                    <img src="{{ asset('templates/shared/ivory-party.webp') }}" alt="{{ $label }} storefront preview" loading="lazy">
                                     <span class="design-template-badge">{{ $details['badge'] }}</span>
                                     <span class="design-template-state {{ $isActive ? 'is-current' : '' }} {{ $isAvailable ? '' : 'is-locked' }}"><span aria-hidden="true">{{ $isActive ? '✓' : ($isAvailable ? '○' : '⚿') }}</span>{{ $isActive ? 'Active now' : ($isAvailable ? 'Available' : 'Renew to unlock') }}</span>
                                 </div>

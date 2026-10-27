@@ -50,7 +50,7 @@
             </div>
             <div class="ve-hero-image">
                 <span class="ve-editorial-number">01 — THE EMERALD EDIT</span>
-                <img src="{{ $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/vastra-emerald/saree.jpg') }}" alt="{{ $shop->name }} collection">
+                <img src="{{ $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp') }}" alt="{{ $shop->name }} collection">
                 <div class="ve-image-label">THE {{ Str::upper($shop->name) }} EDIT <span>For your next best collection.</span></div>
             </div>
         </section>

@@ -16,7 +16,7 @@
         $assetBase = asset('templates/wholesaler-templates');
         $shopUrl = $shop->publicUrl();
         $productUrl = $shop->productUrl($product);
-        $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/models/look-3.jpg';
+        $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : asset('templates/shared/ivory-party.webp');
         $whatsappNumber = preg_replace('/\D/', '', (string) $shop->whatsapp);
         $hasWhatsapp = preg_match('/^\d{8,15}$/', $whatsappNumber) === 1;
         $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Product link: '.$productUrl.'. Shop link: '.$shopUrl) : null;

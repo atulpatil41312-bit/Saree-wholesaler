@@ -29,7 +29,7 @@
         $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/models/hero.jpg';
+        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');
         $heroTitle = ($sections['hero_title'] ?? null) ?: $shop->name;
         $heroSubtitle = ($sections['hero_subtitle'] ?? null) ?: ($shop->description ?: 'A focused wholesale saree catalogue for retailers who value clear details and direct sourcing.');
         $heroCtaLabel = ($sections['hero_cta_label'] ?? null) ?: 'Explore catalogue';

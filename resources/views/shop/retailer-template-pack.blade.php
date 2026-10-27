@@ -9,7 +9,7 @@
 @section('content')
     @php
         $assetBase = asset('templates/retailer-pack');
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/'.$templateDetails['hero_image'];
+        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');
         $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
         $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
