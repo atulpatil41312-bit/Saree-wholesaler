@@ -87,6 +87,8 @@ class DatabaseSeeder extends Seeder
                 ],
             );
         }
+
+        $this->call(DemoCatalogueSeeder::class);
     }
 
     private function seedTemplates(): void

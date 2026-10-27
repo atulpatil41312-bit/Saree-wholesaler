@@ -94,6 +94,51 @@
     transform: translateY(-2px);
 }
 
+.wm-product-actions {
+    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.wm-product-actions a {
+    align-items: center;
+    border: 1px solid currentColor;
+    display: inline-flex;
+    font: 600 10px/1.2 Arial, sans-serif;
+    gap: 7px;
+    justify-content: space-between;
+    min-height: 38px;
+    padding: 9px 11px;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.wm-product-actions a:hover {
+    box-shadow: 0 5px 14px rgba(27, 18, 21, .1);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.wm-product-action-primary {
+    background: #5b203d;
+    color: #fff;
+}
+
+.wm-product-action-secondary {
+    background: #e7f8ed;
+    border-color: #b8e8c8 !important;
+    color: #116b3d;
+}
+
+@media (max-width: 600px) {
+    .wm-product-actions a {
+        flex: 1 1 140px;
+        justify-content: center;
+    }
+}
+
 @media (max-width: 600px) {
     .wm-contact-icons {
         gap: 8px;

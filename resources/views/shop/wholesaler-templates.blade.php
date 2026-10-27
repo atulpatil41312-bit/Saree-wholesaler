@@ -26,6 +26,7 @@
         $showPrices = $settings?->show_prices ?? true;
         $assetBase = asset('templates/wholesaler-templates');
         $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
+        $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/models/hero.jpg';
@@ -229,7 +230,7 @@
                 <div class="wta-product-grid">
                     @forelse ($products as $product)
                         @php
-                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/models/look-2.jpg';
+                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/'.$productFallbackImages[$loop->index % count($productFallbackImages)];
                             $productUrl = $shop->productUrl($product);
                             $productWhatsappUrl = $hasWhatsapp
                                 ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Product link: '.$productUrl.'. Shop link: '.$shopUrl)

@@ -21,6 +21,7 @@
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/'.$templateDetails['hero_image'];
         $categoryImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg'];
+        $productFallbackImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg', 'saree.jpg'];
     @endphp
 
     @if (! empty($previewingTemplate))
@@ -114,7 +115,7 @@
                             @forelse ($products as $product)
                                 <article class="stp-product">
                                     <div class="stp-product-photo">
-                                        <a href="{{ $product->publicUrl() }}"><img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/saree1.jpg' }}" alt="{{ $product->name }}"></a>
+                                        <a href="{{ $product->publicUrl() }}"><img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/'.$productFallbackImages[$loop->index % count($productFallbackImages)] }}" alt="{{ $product->name }}" loading="lazy"></a>
                                         <button class="stp-heart" type="button" data-product-id="{{ $product->id }}" aria-label="Save {{ $product->name }}" aria-pressed="false">♡</button>
                                         @if ($product->category)<span class="stp-badge">{{ $product->category->name }}</span>@endif
                                     </div>
@@ -123,7 +124,7 @@
                                     <div class="stp-price">{{ $product->wholesale_price !== null ? '₹'.number_format($product->wholesale_price, 2) : 'Contact for price' }}</div>
                                     <p class="stp-meta">{{ $product->colour ?: 'Colour on enquiry' }} · {{ $product->fabric?->name ?: 'Fabric on enquiry' }}</p>
                                     <div class="stp-minimum">Minimum order: {{ $product->minimum_order_quantity }} pieces</div>
-                                    <a class="stp-details" href="{{ $product->publicUrl() }}">View saree <span>↗</span></a>
+                                    @include('shop.partials.product-actions', ['shop' => $shop, 'product' => $product])
                                 </article>
                             @empty
                                 <div class="stp-empty">No sarees match these filters. <a href="{{ $collectionUrl }}#collection">View the full collection</a></div>

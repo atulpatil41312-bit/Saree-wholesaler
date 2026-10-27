@@ -9,9 +9,9 @@
 @section('content')
     @php
         $assetBase = asset('templates/retailer-pack');
-        $fallbackImage = $assetBase.'/models/look-3.jpg';
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $assetBase.'/'.$templateDetails['hero_image'];
         $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
+        $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
         $shopUrl = $shop->publicUrl();
@@ -93,7 +93,7 @@
                 <div class="grid">
                     @forelse ($products as $product)
                         @php
-                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $fallbackImage;
+                            $productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $assetBase.'/'.$productFallbackImages[$loop->index % count($productFallbackImages)];
                             $price = $showPrices && $product->priceInRupees() !== null ? '₹'.number_format($product->priceInRupees(), 2) : 'Price on enquiry';
                         @endphp
                         <article class="card">
@@ -103,7 +103,7 @@
                             <p>{{ $product->fabric?->name ?: 'Fabric on enquiry' }} / {{ $product->colour ?: 'Colour on enquiry' }}</p>
                             <p class="price">{{ $price }}</p>
                             <p class="muted">{{ Str::headline($product->availability) }} · Minimum {{ $product->minimum_order_quantity }} pieces</p>
-                            <a class="button" href="{{ $product->publicUrl() }}">View details →</a>
+                            @include('shop.partials.product-actions', ['shop' => $shop, 'product' => $product])
                         </article>
                     @empty
                         <p class="empty">No products match these filters. <a href="{{ $collectionUrl }}#collection">View the full collection</a>.</p>
