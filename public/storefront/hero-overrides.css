@@ -1,0 +1,10 @@
+/* Keep the supplied portrait hero artwork fully visible at every breakpoint. */
+.hero-image > img,
+body.saree-template-pack .stp-hero-visual > img,
+body.wholesaler-templates .wta-hero-art > img,
+body.retailer-template-pack .wm .hero > img,
+body.vastra-emerald .ve-hero-image > img {
+    object-fit: contain;
+    object-position: center;
+    background: #2b170f;
+}
