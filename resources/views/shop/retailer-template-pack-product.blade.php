@@ -37,7 +37,7 @@
                 <div><p class="eyebrow">{{ $product->category?->name ?: 'SAREE COLLECTION' }} · {{ $product->code }}</p><h1>{{ $product->name }}</h1><p class="price">{{ $showPrices && $product->priceInRupees() !== null ? '₹'.number_format($product->priceInRupees(), 2).' per piece' : 'Price on enquiry' }}</p><p>{{ $product->description ?: 'Ask the retailer for fabric, colour and availability details.' }}</p><dl><dt>Fabric</dt><dd>{{ $product->fabric?->name ?: 'Contact for details' }}</dd><dt>Colour</dt><dd>{{ $product->colour ?: 'Contact for details' }}</dd><dt>Minimum order</dt><dd>{{ $product->minimum_order_quantity }} pieces</dd><dt>Availability</dt><dd>{{ Str::headline($product->availability) }}</dd></dl>@if ($whatsappUrl)<a class="button" href="{{ $whatsappUrl }}">Enquire on WhatsApp ↗</a>@elseif ($shopEmail)<a class="button" href="mailto:{{ $shopEmail }}?subject={{ urlencode('Enquiry: '.$product->code) }}">Email enquiry ↗</a>@endif @include('shop.partials.contact-icons', ['shop' => $shop])</div>
             </section>
         </main>
-        <footer><span>{{ $shop->name }} · {{ $templateDetails['label'] }}</span><nav aria-label="Footer"><a href="{{ $shop->publicUrl() }}#contact">Contact</a><a href="{{ route('market.index') }}">WholeMarket</a></nav></footer>
+        @include('shop.partials.storefront-footer', ['shop' => $shop])
       </div>
     </div>
 @endsection

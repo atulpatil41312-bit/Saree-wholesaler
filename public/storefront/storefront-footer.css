@@ -1,0 +1,210 @@
+.wm-site-footer {
+    --wm-footer-bg: #50575f;
+    --wm-footer-ink: #fff;
+    --wm-footer-muted: rgba(255, 255, 255, .76);
+    --wm-footer-line: rgba(255, 255, 255, .18);
+    background: var(--wm-footer-bg);
+    color: var(--wm-footer-ink);
+    margin-top: 0;
+    padding: 64px clamp(24px, 7vw, 132px) 28px;
+    text-align: left;
+}
+
+/* Some retailer templates style every footer element globally; keep this shared
+   footer's layout independent of those template-specific rules. */
+body .wm-site-footer {
+    display: block;
+}
+
+.wm-site-footer,
+.wm-site-footer * {
+    box-sizing: border-box;
+}
+
+.wm-site-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wm-site-footer a:hover {
+    color: #f6dca6;
+    text-decoration: none;
+}
+
+.wm-site-footer__inner {
+    display: grid;
+    gap: 48px;
+    grid-template-columns: minmax(220px, 1.35fr) repeat(2, minmax(150px, .8fr)) minmax(220px, 1.2fr);
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.wm-site-footer__brand {
+    align-items: center;
+    display: inline-flex;
+    font: 600 24px/1.1 Georgia, serif;
+    gap: 13px;
+    letter-spacing: .02em;
+}
+
+.wm-site-footer__brand img,
+.wm-site-footer__mark {
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 50%;
+    display: inline-flex;
+    flex: 0 0 54px;
+    height: 54px;
+    justify-content: center;
+    object-fit: cover;
+    width: 54px;
+}
+
+.wm-site-footer__mark {
+    font: 28px/1 Georgia, serif;
+}
+
+.wm-site-footer__brand small {
+    color: var(--wm-footer-muted);
+    display: block;
+    font: 600 9px/1.4 Arial, sans-serif;
+    letter-spacing: .2em;
+    margin-top: 7px;
+    text-transform: uppercase;
+}
+
+body .wm-site-footer .wm-site-footer__tagline {
+    color: var(--wm-footer-muted);
+    font: 14px/1.75 Arial, sans-serif;
+    margin: 24px 0 18px;
+    max-width: 280px;
+}
+
+.wm-site-footer__market-link {
+    color: #f6dca6 !important;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.wm-site-footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.wm-site-footer__column h2 {
+    color: var(--wm-footer-ink);
+    font: 600 17px/1.2 Arial, sans-serif;
+    letter-spacing: .01em;
+    margin: 0 0 12px;
+}
+
+body .wm-site-footer .wm-site-footer__column > a,
+body .wm-site-footer .wm-site-footer__column > p {
+    color: var(--wm-footer-muted);
+    font: 13px/1.55 Arial, sans-serif;
+    margin: 0;
+}
+
+.wm-site-footer__column > p strong {
+    color: var(--wm-footer-ink);
+    font-weight: 600;
+}
+
+.wm-site-footer__contact .wm-site-footer__socials {
+    margin: 0 0 5px;
+}
+
+.wm-site-footer__socials .wm-contact-icons {
+    gap: 9px;
+    margin: 0;
+}
+
+.wm-site-footer__socials .wm-contact-icon {
+    align-items: center;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 50%;
+    color: var(--wm-footer-ink);
+    display: inline-flex;
+    height: 38px;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0;
+    width: 38px;
+}
+
+.wm-site-footer__socials .wm-contact-icon:hover {
+    background: rgba(255, 255, 255, .25);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.wm-site-footer__socials .wm-contact-icon span {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.wm-site-footer__socials .wm-contact-icon svg {
+    height: 19px;
+    width: 19px;
+}
+
+.wm-site-footer__bottom {
+    border-top: 1px solid var(--wm-footer-line);
+    color: var(--wm-footer-muted);
+    display: flex;
+    font: 11px/1.5 Arial, sans-serif;
+    gap: 18px;
+    justify-content: space-between;
+    margin: 52px auto 0;
+    max-width: 1440px;
+    padding-top: 20px;
+}
+
+@media (max-width: 960px) {
+    .wm-site-footer__inner {
+        gap: 34px 26px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wm-site-footer__brand-column {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .wm-site-footer {
+        padding: 45px 22px 24px;
+    }
+
+    .wm-site-footer__inner {
+        gap: 34px 22px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .wm-site-footer__brand-column {
+        grid-column: 1 / -1;
+    }
+
+    .wm-site-footer__column h2 {
+        font-size: 15px;
+    }
+
+    .wm-site-footer__column > a,
+    .wm-site-footer__column > p {
+        font-size: 12px;
+    }
+
+    .wm-site-footer__bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+        margin-top: 38px;
+    }
+}

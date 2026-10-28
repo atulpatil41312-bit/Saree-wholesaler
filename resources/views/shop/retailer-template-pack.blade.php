@@ -120,7 +120,7 @@
             </section>
         </main>
 
-        <footer><span>{{ $shop->name }} · {{ $templateDetails['label'] }}</span><nav aria-label="Footer"><a href="#collection">Collection</a><a href="#contact">Contact</a><a href="{{ route('market.index') }}">WholeMarket</a></nav></footer>
+        @include('shop.partials.storefront-footer', ['shop' => $shop])
       </div>
     </div>
 @endsection

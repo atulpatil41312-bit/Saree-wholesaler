@@ -150,7 +150,7 @@
         </section>
     </main>
 
-    <footer class="ve-footer"><a class="ve-brand" href="{{ $shopUrl }}"><span class="ve-emblem">V</span><span>{{ Str::upper($shop->name) }}<small>VASTRA EMERALD</small></span></a><p>Beautiful collections. Meaningful connections.</p><small>Wholesale catalogue by {{ $shop->name }}</small></footer>
+    @include('shop.partials.storefront-footer', ['shop' => $shop])
 
     <script>
         const favouriteKey = 'wholemarket:{{ $shop->id }}:vastra-emerald:favourites';

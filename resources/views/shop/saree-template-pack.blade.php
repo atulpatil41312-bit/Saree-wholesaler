@@ -160,7 +160,7 @@
             </section>
         </main>
 
-        <footer class="stp-footer"><a class="stp-footer-brand" href="{{ $shopUrl }}">{{ $shop->name }}</a><p>Curated for stores. Chosen with care.</p><small>{{ $templateDetails['label'] }} · Wholesale catalogue by {{ $shop->name }}</small></footer>
+        @include('shop.partials.storefront-footer', ['shop' => $shop])
         <nav class="stp-mobile-nav" aria-label="Mobile shortcuts"><a href="{{ $shopUrl }}">⌂<span>Home</span></a><a href="#collection">▦<span>Collection</span></a><a href="#contact">✉<span>Contact</span></a></nav>
     </div>
 
