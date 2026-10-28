@@ -9,7 +9,8 @@
 @section('content')
     @php
         $assetBase = asset($templateDetails['asset_path']);
-        $fallbackImage = asset('templates/shared/ivory-party.webp');
+        $productFallbackImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg', 'saree.jpg'];
+        $fallbackImage = asset($assetBase.'/'.$productFallbackImages[((int) $product->id - 1) % count($productFallbackImages)]);
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
         $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Minimum order: '.$product->minimum_order_quantity.' pieces. Product link: '.$product->publicUrl().'. Shop link: '.$shop->publicUrl()) : null;

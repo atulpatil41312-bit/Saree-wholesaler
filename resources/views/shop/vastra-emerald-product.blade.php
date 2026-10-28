@@ -9,6 +9,8 @@
 
 @section('content')
     @php
+        $productFallbackImages = ['saree.jpg', 'saree0.jpg', 'saree1.jpg', 'saree2.jpg'];
+        $fallbackImage = asset('templates/vastra-emerald/'.$productFallbackImages[((int) $product->id - 1) % count($productFallbackImages)]);
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
         $whatsappUrl = $hasWhatsapp ? 'https://wa.me/'.$whatsappNumber.'?text='.urlencode('Hello, I am interested in '.$product->name.'. Product code: '.$product->code.'. Minimum order: '.$product->minimum_order_quantity.' pieces. Product link: '.$product->publicUrl().'. Shop link: '.$shop->publicUrl()) : null;
@@ -23,7 +25,7 @@
 
     <main class="ve-main">
         <section class="ve-product-detail">
-            <img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : asset('templates/shared/ivory-party.webp') }}" alt="{{ $product->name }}">
+            <img src="{{ $product->images->first() ? Storage::url($product->images->first()->path) : $fallbackImage }}" alt="{{ $product->name }}">
             <div><div class="ve-eyebrow">{{ Str::upper($product->category?->name ?: 'SAREE COLLECTION') }} · {{ $product->code }}</div><h1>{{ $product->name }}</h1><div class="ve-price">{{ $product->wholesale_price ? '₹'.number_format($product->wholesale_price, 2).' per piece' : 'Contact for price' }}</div><p>{{ $product->description ?: 'A considered saree for a distinctive wholesale collection.' }}</p><dl><dt>Fabric</dt><dd>{{ $product->fabric?->name ?: 'Contact for details' }}</dd><dt>Colour</dt><dd>{{ $product->colour ?: 'Contact for details' }}</dd><dt>Minimum order</dt><dd>{{ $product->minimum_order_quantity }} pieces</dd><dt>Availability</dt><dd>{{ Str::headline($product->availability) }}</dd></dl>@if ($whatsappUrl)<a class="ve-primary" href="{{ $whatsappUrl }}">Enquire on WhatsApp ↗</a>@elseif ($shopEmail)<a class="ve-primary" href="mailto:{{ $shopEmail }}?subject={{ urlencode('Enquiry: '.$product->code) }}">Email enquiry ↗</a>@endif @include('shop.partials.contact-icons', ['shop' => $shop])</div>
         </section>
     </main>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Fabric;
+use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Shop;
 use App\Models\ShopRedirect;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -12,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class StorefrontController extends Controller
@@ -115,6 +118,7 @@ class StorefrontController extends Controller
             return $this->unavailable();
         }
 
+        $this->keepAvailableImages($product);
         $product->setRelation('shop', $shop);
         $template = $shop->storefrontTemplate();
 
@@ -201,8 +205,11 @@ class StorefrontController extends Controller
             default => $products->latest(),
         };
 
+        $paginatedProducts = $products->paginate(12)->withQueryString();
+        $paginatedProducts->getCollection()->each(fn (Product $product): Product => $this->keepAvailableImages($product));
+
         return [
-            'products' => $products->paginate(12)->withQueryString(),
+            'products' => $paginatedProducts,
             'categories' => $shop->categories()->orderBy('sort_order')->get(),
             'fabrics' => Fabric::query()->orderBy('name')->get(),
             'colours' => $shop->products()
@@ -212,6 +219,15 @@ class StorefrontController extends Controller
                 ->orderBy('colour')
                 ->pluck('colour'),
         ];
+    }
+
+    private function keepAvailableImages(Product $product): Product
+    {
+        $product->setRelation('images', $product->images->filter(
+            fn (ProductImage $image): bool => Storage::disk('public')->exists($image->path),
+        )->values());
+
+        return $product;
     }
 
     private function priceInPaise(mixed $value): ?int
