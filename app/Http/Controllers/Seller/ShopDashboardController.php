@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Fabric;
+use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
+use App\Services\ImageOptimizationService;
 use App\Services\ShopAccessService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -30,14 +35,14 @@ class ShopDashboardController extends Controller
         'featured-contact-story' => ['featured', 'contact', 'story'],
     ];
 
-    public function __construct(private ShopAccessService $access) {}
+    public function __construct(private ShopAccessService $access, private ImageOptimizationService $images) {}
 
     public function index(Request $request): View
     {
         $shop = $this->dashboardShop($request);
         $this->access->authorize($request->user(), $shop);
 
-        $shop->load(['categories', 'products', 'settings']);
+        $shop->load(['categories', 'products.images', 'settings']);
         $limits = $this->access->limits($shop);
         $subscription = $this->access->activeSubscription($shop);
         $sponsorships = $shop->isWholesaler()
@@ -190,15 +195,67 @@ class ShopDashboardController extends Controller
             'minimum_order_quantity' => ['required', 'integer', 'min:1'],
             'pack_size' => ['nullable', 'integer', 'min:1'],
             'availability' => ['required', Rule::in(['available', 'out_of_stock', 'on_enquiry'])],
+            'images' => ['nullable', 'array', 'max:'.(int) $limits['product_image_limit']],
+            'images.*' => ['image', 'max:5120'],
         ]);
+
+        $uploads = array_values(array_filter(
+            $request->file('images', []),
+            fn (mixed $upload): bool => $upload instanceof UploadedFile,
+        ));
+        $optimizedImages = array_map(
+            fn (UploadedFile $upload): array => $this->images->optimize($upload, 1600, 2200),
+            $uploads,
+        );
+        $uploadBytes = array_sum(array_map(
+            fn (array $image): int => strlen($image['contents']),
+            $optimizedImages,
+        ));
+
+        if ((int) $shop->storage_used_bytes + $uploadBytes > (int) $shop->storage_quota_bytes) {
+            throw ValidationException::withMessages([
+                'images' => 'These images exceed your shop storage allowance. Try fewer or smaller images.',
+            ]);
+        }
+
+        unset($data['images']);
         $pricePaise = ($data['wholesale_price'] ?? null) === null
             ? null
             : (int) round((float) $data['wholesale_price'] * 100);
-        $product = $shop->products()->create($data + [
-            'price_paise' => $pricePaise,
-            'slug' => Str::slug($data['name']).'-'.Str::lower(Str::random(5)),
-            'blouse_piece' => 'not_specified',
-        ]);
+
+        $storedPaths = [];
+        try {
+            $product = DB::transaction(function () use ($shop, $data, $pricePaise, $optimizedImages, $uploadBytes, &$storedPaths): Product {
+                $product = $shop->products()->create($data + [
+                    'price_paise' => $pricePaise,
+                    'slug' => Str::slug($data['name']).'-'.Str::lower(Str::random(5)),
+                    'blouse_piece' => 'not_specified',
+                ]);
+
+                foreach ($optimizedImages as $index => $optimizedImage) {
+                    $path = $this->images->store($optimizedImage, "shops/{$shop->id}/products/{$product->id}");
+                    $storedPaths[] = $path;
+                    $product->images()->create([
+                        'path' => $path,
+                        'alt_text' => $product->name.' product image '.($index + 1),
+                        'sort_order' => $index,
+                    ]);
+                }
+
+                if ($uploadBytes > 0) {
+                    $shop->update(['storage_used_bytes' => (int) $shop->storage_used_bytes + $uploadBytes]);
+                }
+
+                return $product;
+            }, 3);
+        } catch (\Throwable $exception) {
+            if ($storedPaths !== []) {
+                Storage::disk('public')->delete($storedPaths);
+            }
+
+            throw $exception;
+        }
+
         $this->access->audit($request->user(), $shop, 'catalogue.product-created', $product);
 
         return back()->with('status', 'Product created.');
