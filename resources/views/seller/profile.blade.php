@@ -64,6 +64,12 @@
                             <aside class="brand-editor-sidebar">
                                 <div class="brand-editor-sidebar-heading"><strong>Choose a layout</strong><span data-brand-layout-count>6 options</span></div>
                                 <div class="brand-editor-templates" data-brand-templates role="listbox" aria-label="Brand layouts"></div>
+                                <div class="brand-editor-preset-panel">
+                                    <div class="brand-editor-sidebar-heading"><strong>Saree-inspired starter</strong><span data-brand-preset-count>6 presets</span></div>
+                                    <p class="brand-editor-preset-copy">Start with a ready-made mood inspired by silk, zari, handloom and festive collections.</p>
+                                    <div class="brand-editor-presets" data-brand-presets role="listbox" aria-label="Saree-inspired presets"></div>
+                                    <p class="brand-editor-preset-status" data-brand-preset-status>Select a preset to apply its colours, typography and motif. You can refine every field.</p>
+                                </div>
                                 <div class="brand-editor-help"><span aria-hidden="true">✦</span><p>Every layout is editable. Your saved shop details and catalogue stay unchanged.</p></div>
                             </aside>
                             <div class="brand-editor-main">
@@ -142,6 +148,25 @@
                 ],
             };
 
+            const presets = {
+                logo: [
+                    { id: 'silk-paisley', name: 'Silk Paisley', description: 'Rich silk tones with a paisley mark.', motif: 'paisley', layout: 'boutique-badge', primary: '#632e41', accent: '#c99a62', background: '#fffaf5', text: '#302629', font: 'editorial', tagline: 'Silk sarees, beautifully sourced' },
+                    { id: 'lotus-bride', name: 'Lotus Bride', description: 'Soft ivory and rose for wedding edits.', motif: 'lotus', layout: 'initial-circle', primary: '#8d3550', accent: '#d7a46a', background: '#fff7f1', text: '#3f2931', font: 'classic', tagline: 'Wedding sarees, made memorable' },
+                    { id: 'handloom-earth', name: 'Handloom Earth', description: 'Warm natural shades for woven craft.', motif: 'loom', layout: 'textile-motif', primary: '#3e5b53', accent: '#bd8a58', background: '#f5efe4', text: '#2e3935', font: 'classic', tagline: 'Woven stories from our loom' },
+                    { id: 'pallu-gold', name: 'Pallu Gold', description: 'Zari-inspired lines with a luxe finish.', motif: 'pallu', layout: 'framed-name', primary: '#3d2b37', accent: '#d3a35e', background: '#fbf3e7', text: '#30252b', font: 'editorial', tagline: 'Zari details, thoughtfully curated' },
+                    { id: 'peacock-teal', name: 'Peacock Teal', description: 'Jewel tones inspired by a peacock border.', motif: 'peacock', layout: 'geometric-emblem', primary: '#174c53', accent: '#d7a24f', background: '#f3faf7', text: '#1d3538', font: 'modern', tagline: 'Colourful sarees for every celebration' },
+                    { id: 'festive-jamawar', name: 'Festive Jamawar', description: 'A bright, celebratory boutique seal.', motif: 'star', layout: 'wordmark', primary: '#8b2f3e', accent: '#e0b16c', background: '#fff8ec', text: '#3e252b', font: 'editorial', tagline: 'Festive edits for every occasion' },
+                ],
+                banner: [
+                    { id: 'royal-silk', name: 'Royal Silk', description: 'Deep plum and zari for a premium edit.', layout: 'text-photo', primary: '#472038', accent: '#d5a362', background: '#f3e5d4', text: '#2e2027', font: 'editorial', tagline: 'The art of a beautifully draped saree' },
+                    { id: 'lotus-wedding', name: 'Lotus Wedding', description: 'A warm blush palette for bridal drops.', layout: 'photo-text', primary: '#7f324b', accent: '#d79a91', background: '#fff2ef', text: '#40252e', font: 'classic', tagline: 'Wedding sarees for unforgettable days' },
+                    { id: 'handloom-studio', name: 'Handloom Studio', description: 'Natural greens and clay for woven collections.', layout: 'three-photo', primary: '#31554c', accent: '#c08a52', background: '#edf3ea', text: '#263b35', font: 'modern', tagline: 'Woven by hand, chosen with care' },
+                    { id: 'zari-gallery', name: 'Zari Gallery', description: 'A quiet gold frame for your collection.', layout: 'centered-name', primary: '#4a2b3e', accent: '#d4aa6a', background: '#f2e3d2', text: '#35262c', font: 'editorial', tagline: 'A considered collection of sarees' },
+                    { id: 'festive-edit', name: 'Festive Edit', description: 'A confident announcement for new drops.', layout: 'collection-announcement', primary: '#772742', accent: '#e7b66f', background: '#f7e8d8', text: '#30232b', font: 'editorial', tagline: 'New season colour, craft and celebration' },
+                    { id: 'showroom-warmth', name: 'Showroom Warmth', description: 'A welcoming introduction for your shop.', layout: 'showroom-intro', primary: '#58313a', accent: '#d5a06a', background: '#f3e8dc', text: '#34262a', font: 'classic', tagline: 'Come discover your next favourite saree' },
+                ],
+            };
+
             const fontFamilies = {
                 editorial: 'Georgia, Times New Roman, serif',
                 classic: 'Palatino Linotype, Book Antiqua, Georgia, serif',
@@ -167,6 +192,8 @@
             const mobileCrop = editor.querySelector('[data-brand-mobile-crop]');
             const feedback = editor.querySelector('[data-brand-feedback]');
             const templateList = editor.querySelector('[data-brand-templates]');
+            const presetList = editor.querySelector('[data-brand-presets]');
+            const presetStatus = editor.querySelector('[data-brand-preset-status]');
             const previewStage = editor.querySelector('[data-brand-preview-stage]');
             const cropPreviews = editor.querySelector('[data-banner-crop-previews]');
             const photoTools = editor.querySelector('[data-brand-photo-tools]');
@@ -208,6 +235,8 @@
                     offsetX: 0,
                     offsetY: 0,
                     transparent: false,
+                    motif: isLogo ? 'paisley' : 'none',
+                    presetId: '',
                     images: [],
                     imageSrcs: kind === 'logo' ? (initialLogo ? [initialLogo] : []) : (initialBanner ? [initialBanner] : []),
                 };
@@ -246,14 +275,17 @@
                     button.dataset.brandLayout = layout.id;
                     button.setAttribute('role', 'option');
                     button.setAttribute('aria-selected', layout.id === currentLayout ? 'true' : 'false');
+                    button.classList.toggle('is-active', layout.id === currentLayout);
                     button.innerHTML = `<span class="brand-editor-template-preview"><span>${currentKind === 'logo' ? 'A' : String(index + 1).padStart(2, '0')}</span></span><span class="brand-editor-template-copy"><strong>${layout.name}</strong><small>${layout.description}</small></span>`;
                     button.addEventListener('click', () => {
                         currentLayout = layout.id;
+                        state.presetId = '';
                         templateList.querySelectorAll('.brand-editor-template').forEach((item) => {
                             const active = item.dataset.brandLayout === currentLayout;
                             item.classList.toggle('is-active', active);
                             item.setAttribute('aria-selected', active ? 'true' : 'false');
                         });
+                        renderPresetList();
                         photoHint.textContent = currentKind === 'logo' ? 'Optional uploaded image' : (currentLayout === 'centered-name' ? 'Optional image texture' : 'Add one or more photographs');
                         setFeedback('');
                         render();
@@ -270,6 +302,45 @@
                     });
                     templateList.append(button);
                 });
+            }
+
+            function renderPresetList() {
+                presetList.replaceChildren();
+                presets[currentKind].forEach((preset) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'brand-editor-preset';
+                    button.dataset.brandPreset = preset.id;
+                    button.setAttribute('role', 'option');
+                    button.setAttribute('aria-selected', preset.id === state.presetId ? 'true' : 'false');
+                    const initials = preset.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2);
+                    button.innerHTML = `<span class="brand-editor-preset-swatch" style="background:linear-gradient(135deg, ${preset.primary}, ${preset.accent})"><span>${initials}</span></span><span class="brand-editor-preset-copy-block"><strong>${preset.name}</strong><small>${preset.description}</small></span>`;
+                    button.classList.toggle('is-active', preset.id === state.presetId);
+                    button.addEventListener('click', () => applyPreset(preset.id));
+                    button.addEventListener('keydown', (event) => {
+                        if (!['ArrowDown', 'ArrowUp'].includes(event.key)) return;
+                        event.preventDefault();
+                        const buttons = [...presetList.querySelectorAll('.brand-editor-preset')];
+                        const nextIndex = (buttons.indexOf(button) + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
+                        buttons[nextIndex].focus();
+                        buttons[nextIndex].click();
+                    });
+                    presetList.append(button);
+                });
+                presetStatus.textContent = state.presetId ? 'Preset applied. Refine any field, then use the finished asset.' : 'Select a preset to apply its colours, typography and motif. You can refine every field.';
+            }
+
+            function applyPreset(id) {
+                const preset = presets[currentKind].find((item) => item.id === id);
+                if (!preset) return;
+                state = { ...state, ...preset, presetId: preset.id };
+                currentLayout = preset.layout;
+                renderTemplateList();
+                renderPresetList();
+                photoHint.textContent = currentKind === 'logo' ? 'Optional uploaded image' : (currentLayout === 'centered-name' ? 'Optional image texture' : 'Add one or more photographs');
+                syncControls();
+                setFeedback(`${preset.name} preset applied. Your shop name and images stay editable.`);
+                render();
             }
 
             function syncControls() {
@@ -351,6 +422,70 @@
                 return block.lines.length * block.lineHeight;
             }
 
+            function drawSareeMotif(ctx, motif, x, y, size, colour) {
+                if (!motif || motif === 'none') return;
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.strokeStyle = colour;
+                ctx.fillStyle = colour;
+                ctx.lineWidth = Math.max(4, size * .045);
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                if (motif === 'paisley') {
+                    ctx.beginPath();
+                    ctx.moveTo(size * .08, size * .95);
+                    ctx.bezierCurveTo(-size * .18, size * .35, size * .12, -size * .12, size * .64, size * .1);
+                    ctx.bezierCurveTo(size * 1.02, size * .24, size * .95, size * .75, size * .47, size * 1.02);
+                    ctx.bezierCurveTo(size * .3, size * 1.08, size * .18, size * .98, size * .08, size * .95);
+                    ctx.stroke();
+                    ctx.beginPath(); ctx.arc(size * .5, size * .54, size * .13, 0, Math.PI * 1.7); ctx.stroke();
+                } else if (motif === 'lotus') {
+                    for (let index = 0; index < 5; index += 1) {
+                        ctx.save(); ctx.translate(size * .5, size * .65); ctx.rotate((index - 2) * .34);
+                        ctx.beginPath(); ctx.ellipse(0, -size * .25, size * .15, size * .36, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+                    }
+                    ctx.beginPath(); ctx.moveTo(size * .12, size * .68); ctx.quadraticCurveTo(size * .5, size * .95, size * .88, size * .68); ctx.stroke();
+                } else if (motif === 'loom') {
+                    for (let index = -2; index < 7; index += 1) {
+                        ctx.beginPath(); ctx.moveTo(index * size * .18, size * .02); ctx.lineTo((index + 4) * size * .18, size); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(index * size * .18, size); ctx.lineTo((index + 4) * size * .18, size * .02); ctx.stroke();
+                    }
+                } else if (motif === 'pallu') {
+                    ctx.beginPath();
+                    ctx.moveTo(0, size * .22); ctx.lineTo(size * .24, size * .5); ctx.lineTo(0, size * .78);
+                    ctx.moveTo(size * .32, size * .22); ctx.lineTo(size * .56, size * .5); ctx.lineTo(size * .32, size * .78);
+                    ctx.moveTo(size * .64, size * .22); ctx.lineTo(size * .88, size * .5); ctx.lineTo(size * .64, size * .78);
+                    ctx.stroke();
+                } else if (motif === 'peacock') {
+                    ctx.beginPath(); ctx.arc(size * .43, size * .55, size * .28, Math.PI * .9, Math.PI * 1.9); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(size * .43, size * .55); ctx.quadraticCurveTo(size * .68, size * .18, size * .8, size * .08); ctx.stroke();
+                    for (let index = 0; index < 5; index += 1) {
+                        ctx.beginPath(); ctx.ellipse(size * (.5 + index * .08), size * (.22 - index * .02), size * .08, size * .18, index * .16, 0, Math.PI * 2); ctx.stroke();
+                    }
+                } else if (motif === 'star') {
+                    ctx.beginPath();
+                    for (let index = 0; index < 16; index += 1) {
+                        const radius = index % 2 === 0 ? size * .48 : size * .2;
+                        const angle = -Math.PI / 2 + index * Math.PI / 8;
+                        const pointX = size * .5 + Math.cos(angle) * radius;
+                        const pointY = size * .5 + Math.sin(angle) * radius;
+                        if (index === 0) ctx.moveTo(pointX, pointY); else ctx.lineTo(pointX, pointY);
+                    }
+                    ctx.closePath(); ctx.stroke();
+                }
+                ctx.restore();
+            }
+
+            function drawLogoMotif(ctx, centreX, centreY, size) {
+                if (!state.motif || state.motif === 'none') return;
+                ctx.save();
+                ctx.globalAlpha = .18;
+                drawSareeMotif(ctx, state.motif, centreX - size * .5, centreY - size * .5, size, state.accent);
+                ctx.globalAlpha = .1;
+                drawSareeMotif(ctx, state.motif, centreX + size * .28, centreY - size * .05, size * .45, state.primary);
+                ctx.restore();
+            }
+
             function drawPhoto(ctx, image, x, y, width, height, crop = state) {
                 if (!image) {
                     const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
@@ -401,6 +536,7 @@
                     ctx.restore();
                     ctx.save();
                 }
+                drawLogoMotif(ctx, centreX, centreY, 420);
                 ctx.lineWidth = 16;
                 ctx.strokeStyle = accent;
                 ctx.fillStyle = primary;
@@ -676,6 +812,7 @@
                 capturePreviewSnapshot();
                 setCanvasSize(kind);
                 renderTemplateList();
+                renderPresetList();
                 syncControls();
                 editor.hidden = false;
                 editor.setAttribute('aria-hidden', 'false');
