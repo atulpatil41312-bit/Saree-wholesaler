@@ -1,0 +1,369 @@
+/*
+ * WholeMarket premium storefront layer.
+ * Loaded after each template stylesheet so every design keeps its own identity
+ * while sharing the same editorial polish, interaction states and responsive rhythm.
+ */
+:root {
+    --wm-premium-shadow: 0 18px 55px rgba(42, 23, 30, .11);
+    --wm-premium-shadow-soft: 0 8px 26px rgba(42, 23, 30, .08);
+    --wm-premium-radius: 14px;
+}
+
+/* Shared motion and controls */
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a, button, input, select, textarea, article, .product-image img,
+    .ve-product-image img, .stp-product-photo img, .wta-product-image img,
+    .wm .card img {
+        transition: color .2s ease, background-color .2s ease, border-color .2s ease,
+            box-shadow .25s ease, transform .35s ease, opacity .2s ease;
+    }
+}
+
+.announcement,
+.ve-announcement,
+.stp-topline,
+.wta-utility,
+.wm .notice {
+    background-image: linear-gradient(90deg, rgba(255,255,255,.08), transparent 48%, rgba(255,255,255,.07));
+    box-shadow: 0 1px 0 rgba(255,255,255,.12) inset;
+}
+
+.brand,
+.ve-brand,
+.stp-brand,
+.wta-brand,
+.wm .brand {
+    letter-spacing: .04em;
+}
+
+.brand:hover,
+.ve-brand:hover,
+.stp-brand:hover,
+.wta-brand:hover,
+.wm .brand:hover {
+    text-decoration: none;
+}
+
+.primary,
+.ve-primary,
+.stp-primary,
+.wta-button,
+.wm .button {
+    border-radius: 8px;
+    box-shadow: 0 8px 18px rgba(73, 28, 45, .13);
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.primary:hover,
+.ve-primary:hover,
+.stp-primary:hover,
+.wta-button:hover,
+.wm .button:hover {
+    box-shadow: 0 12px 24px rgba(73, 28, 45, .2);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Classic storefront and product detail */
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) header {
+    border-bottom: 1px solid rgba(121, 91, 76, .14);
+    box-shadow: 0 5px 22px rgba(60, 31, 38, .04);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .hero {
+    border: 1px solid rgba(155, 119, 90, .18);
+    border-radius: 18px;
+    box-shadow: var(--wm-premium-shadow);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .hero-image {
+    border-radius: 0 18px 18px 0;
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .products {
+    align-items: stretch;
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .product {
+    box-shadow: 0 5px 18px rgba(60, 31, 38, .04);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .product:hover {
+    box-shadow: var(--wm-premium-shadow);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .product-image img {
+    filter: saturate(.98) contrast(1.02);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .search,
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .collection-controls select {
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(60, 31, 38, .04);
+}
+
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .story,
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .contact {
+    border-radius: var(--wm-premium-radius);
+    box-shadow: var(--wm-premium-shadow-soft);
+}
+
+/* Vastra Emerald */
+body.vastra-emerald .ve-header {
+    box-shadow: 0 6px 24px rgba(22, 62, 50, .08);
+}
+
+body.vastra-emerald .ve-hero {
+    border: 1px solid rgba(47, 88, 70, .14);
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(22, 62, 50, .12);
+    overflow: hidden;
+}
+
+body.vastra-emerald .ve-hero-image {
+    margin-right: 24px;
+}
+
+body.vastra-emerald .ve-category-tile,
+body.vastra-emerald .ve-story,
+body.vastra-emerald .ve-contact {
+    border-radius: var(--wm-premium-radius);
+    box-shadow: var(--wm-premium-shadow-soft);
+}
+
+body.vastra-emerald .ve-category-tile {
+    box-shadow: 0 12px 30px rgba(22, 62, 50, .13);
+}
+
+body.vastra-emerald .ve-product {
+    padding: 10px;
+    border: 1px solid rgba(22, 62, 50, .1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .58);
+}
+
+body.vastra-emerald .ve-product:hover {
+    box-shadow: var(--wm-premium-shadow-soft);
+    transform: translateY(-5px);
+}
+
+body.vastra-emerald .ve-product-image {
+    border-radius: 8px;
+}
+
+body.vastra-emerald .ve-controls select,
+body.vastra-emerald .ve-search,
+body.vastra-emerald .ve-filter-button {
+    border-radius: 8px;
+}
+
+/* Saree template pack (classic, royal, rose and indigo variants) */
+body.saree-template-pack .stp-header {
+    background: rgba(255, 253, 250, .9);
+    box-shadow: 0 6px 24px rgba(71, 35, 46, .07);
+}
+
+body.saree-template-pack .stp-hero {
+    border: 1px solid rgba(159, 78, 97, .16);
+    border-radius: 18px;
+    box-shadow: var(--wm-premium-shadow);
+    overflow: hidden;
+}
+
+body.saree-template-pack .stp-hero-visual {
+    min-height: 600px;
+}
+
+body.saree-template-pack .stp-edit-card {
+    border-radius: 12px;
+    box-shadow: var(--wm-premium-shadow-soft);
+    overflow: hidden;
+}
+
+body.saree-template-pack .stp-edit-card:hover {
+    box-shadow: var(--wm-premium-shadow);
+    transform: translateY(-5px);
+}
+
+body.saree-template-pack .stp-product {
+    border: 1px solid rgba(159, 78, 97, .13);
+    border-radius: 12px;
+    padding: 8px;
+    background: rgba(255, 255, 255, .64);
+}
+
+body.saree-template-pack .stp-product:hover {
+    box-shadow: var(--wm-premium-shadow-soft);
+    transform: translateY(-5px);
+}
+
+body.saree-template-pack .stp-product-photo {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+body.saree-template-pack .stp-filters,
+body.saree-template-pack .stp-contact-card,
+body.saree-template-pack .stp-sourcing {
+    border-radius: 12px;
+}
+
+/* Wholesale Atelier */
+body.wholesaler-templates .wta-header {
+    background: rgba(255, 252, 246, .92);
+    box-shadow: 0 6px 24px rgba(61, 36, 25, .08);
+}
+
+body.wholesaler-templates .wta-hero {
+    border: 1px solid var(--wta-line);
+    border-radius: 18px;
+    box-shadow: 0 22px 60px rgba(61, 36, 25, .13);
+    overflow: hidden;
+}
+
+body.wholesaler-templates .wta-hero-art img {
+    filter: saturate(.96) contrast(1.03);
+}
+
+body.wholesaler-templates .wta-collection-card,
+body.wholesaler-templates .wta-product-card {
+    border-radius: 12px;
+    box-shadow: var(--wm-premium-shadow-soft);
+    overflow: hidden;
+}
+
+body.wholesaler-templates .wta-collection-card:hover,
+body.wholesaler-templates .wta-product-card:hover {
+    box-shadow: var(--wm-premium-shadow);
+    transform: translateY(-5px);
+}
+
+body.wholesaler-templates .wta-product-card {
+    background: rgba(255, 252, 246, .72);
+}
+
+body.wholesaler-templates .wta-product-copy {
+    padding: 1rem 1rem 1.1rem;
+}
+
+body.wholesaler-templates .wta-filters input,
+body.wholesaler-templates .wta-filters select,
+body.wholesaler-templates .wta-filters button,
+body.wholesaler-templates .wta-enquiry-form input,
+body.wholesaler-templates .wta-enquiry-form textarea,
+body.wholesaler-templates .wta-enquiry-form button {
+    border-radius: 8px;
+}
+
+body.wholesaler-templates .wta-story,
+body.wholesaler-templates .wta-contact {
+    border-radius: var(--wm-premium-radius);
+    box-shadow: var(--wm-premium-shadow-soft);
+}
+
+/* Retailer pack: royal drape, silk atelier and heritage weaves */
+body.retailer-template-pack .wm {
+    background-image: radial-gradient(circle at 15% 0%, rgba(164, 122, 56, .07), transparent 32rem);
+}
+
+body.retailer-template-pack .wm header {
+    box-shadow: 0 6px 24px rgba(64, 38, 27, .07);
+}
+
+body.retailer-template-pack .wm .hero {
+    border-radius: 18px;
+    box-shadow: var(--wm-premium-shadow);
+    overflow: hidden;
+}
+
+body.retailer-template-pack .wm .royal-drape .hero h1 em,
+body.retailer-template-pack .wm .royal-drape .hero .eyebrow,
+body.retailer-template-pack .wm .royal-drape .hero p {
+    color: #f8ead5;
+}
+
+body.retailer-template-pack .wm .royal-drape .hero .eyebrow {
+    opacity: .86;
+}
+
+body.retailer-template-pack .wm .hero img {
+    filter: saturate(.98) contrast(1.03);
+}
+
+body.retailer-template-pack .wm .category,
+body.retailer-template-pack .wm .card,
+body.retailer-template-pack .wm .panel,
+body.retailer-template-pack .wm .story {
+    border-radius: 12px;
+    box-shadow: var(--wm-premium-shadow-soft);
+}
+
+body.retailer-template-pack .wm .category:hover img,
+body.retailer-template-pack .wm .card:hover img {
+    transform: scale(1.04);
+}
+
+body.retailer-template-pack .wm .card {
+    background: rgba(255, 255, 255, .72);
+    overflow: hidden;
+}
+
+body.retailer-template-pack .wm .card h3,
+body.retailer-template-pack .wm .card p,
+body.retailer-template-pack .wm .card .tag,
+body.retailer-template-pack .wm .card .price {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+body.retailer-template-pack .wm .filters input,
+body.retailer-template-pack .wm .filters select,
+body.retailer-template-pack .wm .filters button,
+body.retailer-template-pack .wm .panel,
+body.retailer-template-pack .wm .detail {
+    border-radius: 8px;
+}
+
+/* Product detail pages */
+body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .story-art,
+body.vastra-emerald .ve-product-detail,
+body.saree-template-pack .stp-product-detail,
+body.wholesaler-templates .wta-product-layout,
+body.retailer-template-pack .wm .detail {
+    border-radius: var(--wm-premium-radius);
+    overflow: hidden;
+    box-shadow: var(--wm-premium-shadow);
+}
+
+/* Small screens: premium density without horizontal overflow */
+@media (max-width: 700px) {
+    .primary, .ve-primary, .stp-primary, .wta-button, .wm .button {
+        min-height: 46px;
+    }
+
+    body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .hero,
+    body.vastra-emerald .ve-hero,
+    body.saree-template-pack .stp-hero,
+    body.wholesaler-templates .wta-hero,
+    body.retailer-template-pack .wm .hero {
+        border-radius: 14px;
+    }
+
+    body:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack) .hero-image {
+        border-radius: 0 0 14px 14px;
+    }
+
+    body.vastra-emerald .ve-product,
+    body.saree-template-pack .stp-product,
+    body.wholesaler-templates .wta-product-card,
+    body.retailer-template-pack .wm .card {
+        box-shadow: 0 5px 18px rgba(42, 23, 30, .07);
+    }
+}
