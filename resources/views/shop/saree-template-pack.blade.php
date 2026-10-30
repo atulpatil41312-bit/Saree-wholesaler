@@ -73,6 +73,8 @@
                 @endif
             </section>
 
+            @include('shop.partials.expanding-gallery', ['shop' => $shop, 'products' => $products, 'assetBase' => $assetBase, 'productFallbackImages' => $productFallbackImages])
+
             @if ($categories->isNotEmpty())
                 <section id="edits" class="stp-edits">
                     <div class="stp-section-heading"><div><span class="stp-eyebrow">FIND YOUR NEXT FAVOURITE</span><h2>Shop the mood.</h2></div><a href="#collection" class="stp-text-link">View the collection ↗</a></div>

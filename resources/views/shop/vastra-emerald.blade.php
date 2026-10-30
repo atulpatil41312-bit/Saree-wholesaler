@@ -57,6 +57,8 @@
 
         <div class="ve-ribbon">TIMELESS WEAVES <i>✳</i> DISTINCTIVE COLOURS <i>✳</i> THOUGHTFUL SOURCING <i>✳</i> MADE FOR YOUR STORE</div>
 
+        @include('shop.partials.expanding-gallery', ['shop' => $shop, 'products' => $products, 'assetBase' => asset('templates/vastra-emerald'), 'productFallbackImages' => $productFallbackImages])
+
         <section class="ve-benefits" aria-label="Wholesale benefits">
             <div><span>✧</span><b>Wholesale, simplified</b><small>Prices and quantities upfront</small></div>
             <div><span>◇</span><b>A considered collection</b><small>Filter by category or fabric</small></div>

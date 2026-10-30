@@ -123,6 +123,8 @@
                 </div>
             </section>
 
+            @include('shop.partials.expanding-gallery', ['shop' => $shop, 'products' => $products, 'assetBase' => $assetBase, 'productFallbackImages' => $productFallbackImages])
+
             @foreach ($sectionOrder as $section)
                 @if ($section === 'featured' && $showFeatured)
                     <section class="wta-section wta-featured" aria-labelledby="featured-collections-title">

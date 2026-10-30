@@ -61,6 +61,8 @@
                 <img src="{{ $heroImage }}" alt="{{ $shop->name }} collection" width="720" height="900">
             </section>
 
+            @include('shop.partials.expanding-gallery', ['shop' => $shop, 'products' => $products, 'assetBase' => $assetBase, 'productFallbackImages' => $productFallbackImages])
+
             @if ($categories->isNotEmpty())
                 <section id="categories" class="wrap" aria-labelledby="category-heading">
                     <p class="eyebrow">SHOP BY MOOD</p><h2 id="category-heading">Find your next favourite.</h2>
