@@ -74,7 +74,7 @@
                 <section class="design-section" aria-labelledby="template-options-heading">
                     <div class="design-section-heading">
                         <div><p class="seller-overline">Choose a direction</p><h2 id="template-options-heading">Template options</h2></div>
-                        <p>Pick the style that best fits your collection.</p>
+                        <p>See each homepage direction at a glance, then open Preview for the full storefront.</p>
                     </div>
 
                     <div class="design-template-grid">
@@ -84,7 +84,11 @@
                             @php($isAvailable = $templateAvailability[$template] ?? false)
                             <article class="design-template-card {{ $isActive ? 'is-active' : '' }} {{ $isAvailable ? '' : 'is-locked' }}">
                                 <div class="design-template-media">
-                                    <img src="{{ asset('templates/shared/ivory-party.webp') }}" alt="{{ $label }} storefront preview" loading="lazy">
+                                    <div class="design-template-preview preview-{{ Str::slug($template) }}" aria-label="{{ $label }} storefront preview">
+                                        <div class="design-preview-copy"><span>{{ $details['badge'] }}</span><strong>{{ $details['hero_heading'] }}</strong><em>{{ $details['hero_emphasis'] }}</em></div>
+                                        <div class="design-preview-photo"><img src="{{ asset($details['asset_path'].'/'.$details['hero_image']) }}" alt="{{ $label }} storefront preview" loading="lazy"></div>
+                                        <span class="design-preview-wordmark">{{ $shop->name }}</span>
+                                    </div>
                                     <span class="design-template-badge">{{ $details['badge'] }}</span>
                                     <span class="design-template-state {{ $isActive ? 'is-current' : '' }} {{ $isAvailable ? '' : 'is-locked' }}"><span aria-hidden="true">{{ $isActive ? '✓' : ($isAvailable ? '○' : '⚿') }}</span>{{ $isActive ? 'Active now' : ($isAvailable ? 'Available' : 'Renew to unlock') }}</span>
                                 </div>

@@ -696,3 +696,131 @@ body.seller-design-page .design-settings-footer a:hover {
         justify-content: center;
     }
 }
+
+/* Distinct, glanceable template previews */
+body.seller-design-page .design-template-preview {
+    aspect-ratio: 1.24 / 1;
+    background: #efe5dc;
+    isolation: isolate;
+    overflow: hidden;
+    position: relative;
+}
+
+body.seller-design-page .design-template-preview::after {
+    background: linear-gradient(180deg, transparent 55%, rgba(30, 15, 27, .26));
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+}
+
+body.seller-design-page .design-preview-photo {
+    bottom: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 51%;
+    z-index: 0;
+}
+
+body.seller-design-page .design-preview-photo img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    width: 100%;
+}
+
+body.seller-design-page .design-preview-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    left: 6%;
+    max-width: 53%;
+    position: absolute;
+    top: 20%;
+    z-index: 3;
+}
+
+body.seller-design-page .design-preview-copy span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    margin-bottom: 7px;
+    opacity: .78;
+    text-transform: uppercase;
+}
+
+body.seller-design-page .design-preview-copy strong,
+body.seller-design-page .design-preview-copy em {
+    font-family: Georgia, serif;
+    font-size: clamp(17px, 2vw, 27px);
+    font-weight: 400;
+    letter-spacing: -.045em;
+    line-height: .98;
+}
+
+body.seller-design-page .design-preview-copy em {
+    font-size: clamp(16px, 1.9vw, 25px);
+    font-style: italic;
+}
+
+body.seller-design-page .design-preview-wordmark {
+    bottom: 10px;
+    color: rgba(255, 255, 255, .9);
+    font-family: Georgia, serif;
+    font-size: 9px;
+    left: 6%;
+    letter-spacing: .1em;
+    position: absolute;
+    text-transform: uppercase;
+    z-index: 3;
+}
+
+body.seller-design-page .preview-classic { background: #f1e4d7; }
+body.seller-design-page .preview-classic .design-preview-copy { color: #3b2930; }
+body.seller-design-page .preview-classic .design-preview-copy em { color: #8e2f4c; }
+
+body.seller-design-page .preview-vastra-emerald { background: #f1f1e7; }
+body.seller-design-page .preview-vastra-emerald .design-preview-photo { border-radius: 55px 0 0 0; }
+body.seller-design-page .preview-vastra-emerald .design-preview-copy { color: #173f39; }
+body.seller-design-page .preview-vastra-emerald .design-preview-copy em { color: #9c8754; }
+
+body.seller-design-page .preview-royal-noir { background: #121b17; }
+body.seller-design-page .preview-royal-noir .design-preview-copy { color: #fff8ec; }
+body.seller-design-page .preview-royal-noir .design-preview-copy em { color: #d4ab6b; }
+body.seller-design-page .preview-royal-noir .design-preview-photo { width: 54%; }
+
+body.seller-design-page .preview-rose-atelier { background: #f3e5e0; }
+body.seller-design-page .preview-rose-atelier .design-preview-photo { border-radius: 75px 0 0 75px; right: 4%; top: 8%; bottom: 8%; }
+body.seller-design-page .preview-rose-atelier .design-preview-copy { color: #3e2b32; }
+body.seller-design-page .preview-rose-atelier .design-preview-copy em { color: #ac4a62; }
+
+body.seller-design-page .preview-indigo-edit { background: #e5edf4; }
+body.seller-design-page .preview-indigo-edit .design-preview-copy { color: #1d3b57; }
+body.seller-design-page .preview-indigo-edit .design-preview-copy em { color: #527697; }
+body.seller-design-page .preview-indigo-edit .design-preview-photo { border-radius: 0 0 0 55px; }
+
+body.seller-design-page .preview-wholesaler-templates { background: #142019; }
+body.seller-design-page .preview-wholesaler-templates .design-preview-copy { color: #f8f0df; }
+body.seller-design-page .preview-wholesaler-templates .design-preview-copy em { color: #d2ad68; }
+
+body.seller-design-page .preview-royal-drape { background: #571f38; }
+body.seller-design-page .preview-royal-drape .design-preview-copy { color: #fff4e4; }
+body.seller-design-page .preview-royal-drape .design-preview-copy em { color: #e4b975; }
+body.seller-design-page .preview-royal-drape .design-preview-photo { border-radius: 64px 64px 0 0; right: 5%; top: 7%; width: 46%; }
+
+body.seller-design-page .preview-silk-atelier { background: #f4f2e9; }
+body.seller-design-page .preview-silk-atelier .design-preview-copy { color: #164a45; }
+body.seller-design-page .preview-silk-atelier .design-preview-copy em { color: #a58c55; }
+body.seller-design-page .preview-silk-atelier .design-preview-photo { border-radius: 68px 68px 0 0; right: 5%; top: 7%; width: 48%; }
+
+body.seller-design-page .preview-heritage-weaves { background: #eee4d2; }
+body.seller-design-page .preview-heritage-weaves::before { background: repeating-linear-gradient(135deg, rgba(117, 83, 51, .1) 0 2px, transparent 2px 11px); content: ''; inset: 0; position: absolute; z-index: 1; }
+body.seller-design-page .preview-heritage-weaves .design-preview-copy { color: #4b352c; }
+body.seller-design-page .preview-heritage-weaves .design-preview-copy em { color: #966c4d; }
+
+@media (max-width: 760px) {
+    body.seller-design-page .design-template-preview { aspect-ratio: 1.55 / 1; }
+}
