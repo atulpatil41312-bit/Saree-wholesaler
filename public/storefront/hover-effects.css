@@ -1,0 +1,102 @@
+/*
+ * WholeMarket storefront motion layer.
+ *
+ * Inspired by the performance-first hover patterns in FreeFrontend's CSS
+ * hover collection: keep motion on opacity and transforms so cards feel
+ * tactile without forcing layout recalculation.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+    :where(.hero-image > img, .ve-hero-image img, .stp-hero-visual > img, .wm .hero img, .wta-hero-art img) {
+        transition: transform .7s cubic-bezier(.22, .61, .36, 1), filter .35s ease;
+        will-change: transform;
+    }
+
+    :where(.hero:hover .hero-image > img, .ve-hero:hover .ve-hero-image img, .stp-hero:hover .stp-hero-visual > img, .wm .hero:hover img, .wta-hero:hover .wta-hero-art img) {
+        filter: saturate(1.04);
+        transform: scale(1.035);
+    }
+
+    :where(.product, .ve-product, .stp-product, .wm .card, .wta-product-card) {
+        transition: transform .3s cubic-bezier(.22, .61, .36, 1), box-shadow .3s ease;
+        will-change: transform;
+    }
+
+    :where(.product:hover, .product:focus-within, .ve-product:hover, .ve-product:focus-within, .stp-product:hover, .stp-product:focus-within, .wm .card:hover, .wm .card:focus-within, .wta-product-card:hover, .wta-product-card:focus-within) {
+        transform: translateY(-5px);
+    }
+
+    :where(.product-image img, .ve-product-image img, .stp-product-photo img, .wm .card img, .wta-product-image img) {
+        transition: transform .55s cubic-bezier(.22, .61, .36, 1), filter .35s ease;
+        will-change: transform;
+    }
+
+    :where(.product:hover .product-image img, .product:focus-within .product-image img, .ve-product:hover .ve-product-image img, .ve-product:focus-within .ve-product-image img, .stp-product:hover .stp-product-photo img, .stp-product:focus-within .stp-product-photo img, .wm .card:hover img, .wm .card:focus-within img, .wta-product-card:hover .wta-product-image img, .wta-product-card:focus-within .wta-product-image img) {
+        filter: saturate(1.06);
+        transform: scale(1.045);
+    }
+
+    :where(.category-tile, .ve-category-tile, .stp-edit-card, .wm .category, .wta-collection-card) {
+        transition: transform .35s cubic-bezier(.22, .61, .36, 1), box-shadow .35s ease;
+        will-change: transform;
+    }
+
+    :where(.category-tile:hover, .category-tile:focus-within, .ve-category-tile:hover, .ve-category-tile:focus-within, .stp-edit-card:hover, .stp-edit-card:focus-within, .wm .category:hover, .wm .category:focus-within, .wta-collection-card:hover, .wta-collection-card:focus-within) {
+        box-shadow: 0 14px 34px rgba(46, 24, 29, .14);
+        transform: translateY(-6px);
+    }
+
+    :where(.category-tile img, .ve-category-tile img, .stp-edit-card img, .wm .category img, .wta-collection-card img) {
+        transition: transform .6s cubic-bezier(.22, .61, .36, 1), filter .35s ease;
+        will-change: transform;
+    }
+
+    :where(.category-tile:hover img, .category-tile:focus-within img, .ve-category-tile:hover img, .ve-category-tile:focus-within img, .stp-edit-card:hover img, .stp-edit-card:focus-within img, .wm .category:hover img, .wm .category:focus-within img, .wta-collection-card:hover img, .wta-collection-card:focus-within img) {
+        filter: saturate(1.07);
+        transform: scale(1.06);
+    }
+
+    :where(.primary, .ve-primary, .stp-primary, .wta-button, .wm .button, .wm .floating) {
+        transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+        will-change: transform;
+    }
+
+    :where(.primary:hover, .ve-primary:hover, .stp-primary:hover, .wta-button:hover, .wm .button:hover, .wm .floating:hover, .primary:focus-visible, .ve-primary:focus-visible, .stp-primary:focus-visible, .wta-button:focus-visible, .wm .button:focus-visible, .wm .floating:focus-visible) {
+        box-shadow: 0 10px 24px rgba(96, 37, 55, .18);
+        transform: translateY(-3px);
+    }
+
+    :where(.primary:active, .ve-primary:active, .stp-primary:active, .wta-button:active, .wm .button:active, .wm .floating:active) {
+        transform: translateY(-1px) scale(.985);
+    }
+
+    :where(body:not(.retailer-template-pack) nav a, .stp-nav a, .ve-nav a, .wta-nav a, .wta-mobile-menu nav a) {
+        position: relative;
+        text-decoration: none;
+    }
+
+    :where(body:not(.retailer-template-pack) nav a, .stp-nav a, .ve-nav a, .wta-nav a, .wta-mobile-menu nav a)::after {
+        background: currentColor;
+        bottom: -.35rem;
+        content: '';
+        height: 1px;
+        left: 0;
+        position: absolute;
+        transform: scaleX(0);
+        transform-origin: right center;
+        transition: transform .25s ease;
+        width: 100%;
+    }
+
+    :where(body:not(.retailer-template-pack) nav a:hover, body:not(.retailer-template-pack) nav a:focus-visible, .stp-nav a:hover, .stp-nav a:focus-visible, .ve-nav a:hover, .ve-nav a:focus-visible, .wta-nav a:hover, .wta-nav a:focus-visible, .wta-mobile-menu nav a:hover, .wta-mobile-menu nav a:focus-visible)::after {
+        transform: scaleX(1);
+        transform-origin: left center;
+    }
+}
+
+@media (hover: none) {
+    :where(.product:hover, .ve-product:hover, .stp-product:hover, .wm .card:hover, .wta-product-card:hover, .category-tile:hover, .ve-category-tile:hover, .stp-edit-card:hover, .wm .category:hover, .wta-collection-card:hover) {
+        box-shadow: none;
+        transform: none;
+    }
+}
