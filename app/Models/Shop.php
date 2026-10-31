@@ -37,6 +37,8 @@ class Shop extends Model
 
     public const IVORY_WEAVES_TEMPLATE = 'ivory-weaves';
 
+    public const LASHKARAA_EDIT_TEMPLATE = 'lashkaraa-edit';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -49,6 +51,7 @@ class Shop extends Model
         self::SILK_ATELIER_TEMPLATE => 'Silk Atelier',
         self::HERITAGE_WEAVES_TEMPLATE => 'Heritage Weaves',
         self::IVORY_WEAVES_TEMPLATE => 'Ivory Weaves',
+        self::LASHKARAA_EDIT_TEMPLATE => 'Lashkaraa Edit',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -143,6 +146,15 @@ class Shop extends Model
             'hero_heading' => 'Sarees for your',
             'hero_emphasis' => 'everyday poetry.',
         ],
+        self::LASHKARAA_EDIT_TEMPLATE => [
+            'label' => 'Lashkaraa Edit',
+            'description' => 'A fashion-commerce inspired storefront with strong category navigation, editorial merchandising and mobile-first shopping.',
+            'badge' => 'LUXE BAZAAR',
+            'asset_path' => 'storefront',
+            'hero_image' => 'saree.jpg',
+            'hero_heading' => 'Wear your',
+            'hero_emphasis' => 'story.',
+        ],
     ];
 
     protected $attributes = [
@@ -187,6 +199,7 @@ class Shop extends Model
                 self::SILK_ATELIER_TEMPLATE,
                 self::HERITAGE_WEAVES_TEMPLATE,
                 self::IVORY_WEAVES_TEMPLATE,
+                self::LASHKARAA_EDIT_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -217,6 +230,7 @@ class Shop extends Model
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates',
             self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack',
             self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves',
+            self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit',
             default => 'shop.show',
         };
     }
@@ -229,6 +243,7 @@ class Shop extends Model
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates-product',
             self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack-product',
             self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves-product',
+            self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit-product',
             default => 'shop.product',
         };
     }
