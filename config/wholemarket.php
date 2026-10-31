@@ -19,7 +19,7 @@ return [
             'name' => 'Basic',
             'shop_type' => 'wholesaler',
             'limits' => [
-                'templates' => ['classic', 'vastra-emerald', 'royal-noir', 'wholesaler-templates'],
+                'templates' => ['classic', 'vastra-emerald', 'royal-noir', 'wholesaler-templates', 'ivory-weaves'],
                 'product_limit' => 30,
                 'category_limit' => 5,
                 'product_image_limit' => 2,
@@ -55,7 +55,7 @@ return [
             'name' => 'Retailer Basic',
             'shop_type' => 'retailer',
             'limits' => [
-                'templates' => ['classic', 'wholesaler-templates', 'royal-drape', 'silk-atelier', 'heritage-weaves'],
+                'templates' => ['classic', 'wholesaler-templates', 'royal-drape', 'silk-atelier', 'heritage-weaves', 'ivory-weaves'],
                 'product_limit' => 20,
                 'category_limit' => 5,
                 'product_image_limit' => 2,

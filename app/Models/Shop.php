@@ -35,6 +35,8 @@ class Shop extends Model
 
     public const HERITAGE_WEAVES_TEMPLATE = 'heritage-weaves';
 
+    public const IVORY_WEAVES_TEMPLATE = 'ivory-weaves';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -46,6 +48,7 @@ class Shop extends Model
         self::ROYAL_DRAPE_TEMPLATE => 'Royal Drape',
         self::SILK_ATELIER_TEMPLATE => 'Silk Atelier',
         self::HERITAGE_WEAVES_TEMPLATE => 'Heritage Weaves',
+        self::IVORY_WEAVES_TEMPLATE => 'Ivory Weaves',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -131,6 +134,15 @@ class Shop extends Model
             'hero_heading' => 'Woven with',
             'hero_emphasis' => 'a story.',
         ],
+        self::IVORY_WEAVES_TEMPLATE => [
+            'label' => 'Ivory Weaves',
+            'description' => 'A calm, editorial saree atelier with rounded cards, forest-green accents and story-led browsing.',
+            'badge' => 'IVORY WEAVES',
+            'asset_path' => 'templates/ivory-weaves',
+            'hero_image' => 'hero.png',
+            'hero_heading' => 'Sarees for your',
+            'hero_emphasis' => 'everyday poetry.',
+        ],
     ];
 
     protected $attributes = [
@@ -174,6 +186,7 @@ class Shop extends Model
                 self::ROYAL_DRAPE_TEMPLATE,
                 self::SILK_ATELIER_TEMPLATE,
                 self::HERITAGE_WEAVES_TEMPLATE,
+                self::IVORY_WEAVES_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -203,6 +216,7 @@ class Shop extends Model
             self::ROYAL_NOIR_TEMPLATE, self::ROSE_ATELIER_TEMPLATE, self::INDIGO_EDIT_TEMPLATE => 'shop.saree-template-pack',
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates',
             self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack',
+            self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves',
             default => 'shop.show',
         };
     }
@@ -214,6 +228,7 @@ class Shop extends Model
             self::ROYAL_NOIR_TEMPLATE, self::ROSE_ATELIER_TEMPLATE, self::INDIGO_EDIT_TEMPLATE => 'shop.saree-template-pack-product',
             self::WHOLESALE_ATELIER_TEMPLATE => 'shop.wholesaler-templates-product',
             self::ROYAL_DRAPE_TEMPLATE, self::SILK_ATELIER_TEMPLATE, self::HERITAGE_WEAVES_TEMPLATE => 'shop.retailer-template-pack-product',
+            self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves-product',
             default => 'shop.product',
         };
     }
