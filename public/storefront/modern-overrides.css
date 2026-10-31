@@ -1,0 +1,363 @@
+/*
+ * WholeMarket modern saree-commerce layer.
+ *
+ * This stylesheet is deliberately scoped to public storefront pages. It gives
+ * every existing wholesaler and retailer template a shared 2026 visual system
+ * while leaving the template-specific layouts, data and permissions intact.
+ */
+body.wm-storefront-page {
+    --wm-modern-ink: #241a23;
+    --wm-modern-muted: #756b73;
+    --wm-modern-accent: #812b49;
+    --wm-modern-accent-deep: #4d1d35;
+    --wm-modern-gold: #c29b5e;
+    --wm-modern-paper: #fbfaf8;
+    --wm-modern-panel: #fffdfb;
+    --wm-modern-line: rgba(69, 36, 52, .14);
+    --wm-modern-shadow: 0 24px 70px rgba(53, 24, 40, .12);
+    --wm-modern-shadow-soft: 0 12px 30px rgba(53, 24, 40, .08);
+    background:
+        radial-gradient(circle at 0 0, rgba(209, 164, 103, .13), transparent 28rem),
+        linear-gradient(180deg, #fffdfb 0%, #fbf8f5 55%, #fffdfb 100%);
+    color: var(--wm-modern-ink);
+}
+
+body.wm-storefront-page.vastra-emerald,
+body.wm-storefront-page.ivory-weaves {
+    --wm-modern-accent: #1f5b4a;
+    --wm-modern-accent-deep: #12382f;
+    --wm-modern-gold: #b69860;
+}
+
+body.wm-storefront-page.royal-noir,
+body.wm-storefront-page.wholesaler-templates {
+    --wm-modern-accent: #a44750;
+    --wm-modern-accent-deep: #3a1822;
+    --wm-modern-gold: #d5ad67;
+    --wm-modern-panel: #fffaf3;
+}
+
+body.wm-storefront-page.retailer-template-pack,
+body.wm-storefront-page.lashkaraa-edit {
+    --wm-modern-accent: #9f3d55;
+    --wm-modern-accent-deep: #4a1d32;
+    --wm-modern-gold: #c49b5e;
+}
+
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .wm header),
+body.wm-storefront-page > header {
+    position: relative;
+    z-index: 5;
+    border-bottom-color: var(--wm-modern-line);
+    box-shadow: 0 8px 28px rgba(60, 31, 48, .06);
+    background: rgba(255, 253, 251, .88);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .wm header) a,
+body.wm-storefront-page > header a {
+    transition: color .22s ease, opacity .22s ease, transform .22s ease;
+}
+
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .wm header) a:hover,
+body.wm-storefront-page > header a:hover {
+    color: var(--wm-modern-accent);
+}
+
+body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .wm .hero) {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--wm-modern-line);
+    box-shadow: var(--wm-modern-shadow);
+}
+
+body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .wm .hero)::before {
+    position: absolute;
+    z-index: 3;
+    top: 18px;
+    right: 20px;
+    width: 86px;
+    height: 86px;
+    border: 1px solid rgba(255, 255, 255, .36);
+    border-radius: 50%;
+    content: '';
+    pointer-events: none;
+    opacity: .7;
+}
+
+body.wm-storefront-page :is(.hero-copy, .stp-hero-copy, .ve-hero-copy, .wta-hero-copy, .iw-hero-copy, .le-hero-copy) {
+    position: relative;
+    z-index: 2;
+}
+
+body.wm-storefront-page :is(.primary, .stp-primary, .ve-primary, .wta-button, .iw-primary, .le-primary, .wm .button) {
+    position: relative;
+    overflow: hidden;
+    border-color: var(--wm-modern-accent);
+    background: linear-gradient(135deg, var(--wm-modern-accent), var(--wm-modern-accent-deep));
+    box-shadow: 0 10px 24px rgba(73, 28, 45, .16);
+    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+body.wm-storefront-page :is(.primary, .stp-primary, .ve-primary, .wta-button, .iw-primary, .le-primary, .wm .button)::after {
+    position: absolute;
+    inset: 0 auto 0 -130%;
+    width: 80%;
+    content: '';
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
+    transform: skewX(-18deg);
+    transition: left .7s ease;
+}
+
+body.wm-storefront-page :is(.primary, .stp-primary, .ve-primary, .wta-button, .iw-primary, .le-primary, .wm .button):hover {
+    box-shadow: 0 15px 32px rgba(73, 28, 45, .22);
+    filter: saturate(1.08);
+    transform: translateY(-3px);
+}
+
+body.wm-storefront-page :is(.primary, .stp-primary, .ve-primary, .wta-button, .iw-primary, .le-primary, .wm .button):hover::after {
+    left: 135%;
+}
+
+/* Hero carousel created by modern-enhancements.js. */
+.wm-hero-carousel {
+    overflow: hidden;
+}
+
+.wm-hero-carousel > img.wm-hero-original {
+    display: none !important;
+}
+
+.wm-hero-carousel__slides {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+}
+
+.wm-hero-carousel__slide {
+    position: absolute !important;
+    z-index: 0;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center 38% !important;
+    opacity: 0;
+    transform: scale(1.055);
+    transition: opacity .85s ease, transform 6s cubic-bezier(.2, .6, .2, 1);
+}
+
+.wm-hero-carousel__slide.is-active {
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wm-hero-carousel__controls {
+    position: absolute;
+    z-index: 4;
+    right: 18px;
+    bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 38px;
+    padding: 5px 7px;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 999px;
+    background: rgba(24, 17, 25, .38);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.wm-hero-carousel__controls button {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+.wm-hero-carousel__controls button:hover,
+.wm-hero-carousel__controls button:focus-visible {
+    background: rgba(255, 255, 255, .2);
+    outline: none;
+}
+
+.wm-hero-carousel__counter {
+    min-width: 42px;
+    color: rgba(255, 255, 255, .9);
+    font: 600 9px/1 Arial, sans-serif;
+    letter-spacing: .14em;
+    text-align: center;
+}
+
+/* Product merchandising: soft bento-like cards with stronger scanability. */
+body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card) {
+    border: 1px solid var(--wm-modern-line);
+    border-radius: 16px;
+    background: rgba(255, 253, 251, .84);
+    box-shadow: var(--wm-modern-shadow-soft);
+    transition: transform .3s cubic-bezier(.22, .61, .36, 1), box-shadow .3s ease, border-color .3s ease;
+}
+
+body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card):hover,
+body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card):focus-within {
+    border-color: rgba(129, 43, 73, .28);
+    box-shadow: var(--wm-modern-shadow);
+    transform: translateY(-6px);
+}
+
+body.wm-storefront-page :is(.product-image, .stp-product-photo, .ve-product-image, .wta-product-image, .iw-product-photo, .le-product-image, .wm .card img) {
+    overflow: hidden;
+}
+
+body.wm-storefront-page :is(.product-image, .stp-product-photo, .ve-product-image, .wta-product-image, .iw-product-photo, .le-product-image) img,
+body.wm-storefront-page .wm .card img {
+    transition: transform .6s cubic-bezier(.22, .61, .36, 1), filter .35s ease;
+}
+
+body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card):hover :is(.product-image, .stp-product-photo, .ve-product-image, .wta-product-image, .iw-product-photo, .le-product-image) img,
+body.wm-storefront-page .wm .card:hover img {
+    filter: saturate(1.08) contrast(1.02);
+    transform: scale(1.045);
+}
+
+body.wm-storefront-page :is(.save, .stp-heart, .ve-save, .iw-save, .le-heart, .wm .save) {
+    border: 1px solid rgba(129, 43, 73, .12);
+    box-shadow: 0 8px 18px rgba(53, 24, 40, .13);
+    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+}
+
+body.wm-storefront-page :is(.save, .stp-heart, .ve-save, .iw-save, .le-heart, .wm .save):hover {
+    background: var(--wm-modern-accent);
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* Modern footer: a dark editorial anchor with clear contact hierarchy. */
+body.wm-storefront-page .wm-site-footer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin-top: clamp(56px, 8vw, 110px);
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    background:
+        radial-gradient(circle at 86% 0, rgba(194, 155, 94, .2), transparent 24rem),
+        linear-gradient(135deg, #281824, #52233b 58%, #2d1a2b);
+    box-shadow: 0 -18px 60px rgba(43, 23, 36, .12);
+}
+
+body.wm-storefront-page .wm-site-footer::before {
+    position: absolute;
+    z-index: -1;
+    top: -110px;
+    right: 7%;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 50%;
+    content: '';
+}
+
+body.wm-storefront-page .wm-site-footer__inner {
+    position: relative;
+    z-index: 1;
+}
+
+body.wm-storefront-page .wm-site-footer__column {
+    gap: 14px;
+}
+
+body.wm-storefront-page .wm-site-footer__column h2 {
+    color: #f7e7d1;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+body.wm-storefront-page .wm-site-footer__column > a:hover,
+body.wm-storefront-page .wm-site-footer__market-link:hover {
+    color: #f7d79c !important;
+    transform: translateX(3px);
+}
+
+body.wm-storefront-page .wm-site-footer__bottom {
+    position: relative;
+    z-index: 1;
+    margin-top: 44px;
+    border-top-color: rgba(255, 255, 255, .18);
+}
+
+body.wm-storefront-page .wm-site-footer__socials .wm-contact-icon {
+    border-color: rgba(255, 255, 255, .28);
+    background: rgba(255, 255, 255, .12);
+}
+
+body.wm-storefront-page .wm-site-footer__socials .wm-contact-icon:hover {
+    background: var(--wm-modern-gold);
+    color: #2b1724;
+}
+
+/* Soft entrance motion is opt-in from JS and disappears for reduced motion. */
+html.wm-motion-ready body.wm-storefront-page .wm-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+html.wm-motion-ready body.wm-storefront-page .wm-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (max-width: 760px) {
+    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .wm .hero) {
+        border-radius: 15px;
+        box-shadow: 0 18px 44px rgba(53, 24, 40, .1);
+    }
+
+    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .wm .hero)::before {
+        top: 12px;
+        right: 12px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .wm-hero-carousel__controls {
+        right: 12px;
+        bottom: 12px;
+        min-height: 34px;
+    }
+
+    .wm-hero-carousel__controls button {
+        width: 25px;
+        height: 25px;
+    }
+
+    body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card) {
+        border-radius: 12px;
+        box-shadow: 0 8px 22px rgba(53, 24, 40, .07);
+    }
+
+    body.wm-storefront-page .wm-site-footer {
+        margin-top: 60px;
+        padding-top: 48px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wm-hero-carousel__slide,
+    body.wm-storefront-page :is(.primary, .stp-primary, .ve-primary, .wta-button, .iw-primary, .le-primary, .wm .button),
+    body.wm-storefront-page :is(.product, .stp-product, .ve-product, .wta-product-card, .iw-product, .le-product, .wm .card),
+    html.wm-motion-ready body.wm-storefront-page .wm-reveal {
+        transition: none !important;
+    }
+}
