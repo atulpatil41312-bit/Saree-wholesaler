@@ -18,6 +18,7 @@
             '.wta-hero-art',
             '.iw-hero-image',
             '.le-hero-image',
+            '.me-hero-media',
             '.wm .hero-image',
         ];
         const productSelectors = [
