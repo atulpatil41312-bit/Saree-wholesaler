@@ -46,8 +46,9 @@ body.wm-storefront-page.lashkaraa-edit {
 
 body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .wm header),
 body.wm-storefront-page > header {
-    position: relative;
-    z-index: 5;
+    position: sticky;
+    top: 0;
+    z-index: 40;
     border-bottom-color: var(--wm-modern-line);
     box-shadow: 0 8px 28px rgba(60, 31, 48, .06);
     background: rgba(255, 253, 251, .88);
