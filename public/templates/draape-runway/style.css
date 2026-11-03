@@ -32,6 +32,35 @@ body.draape-runway .dr-header a {
     transition: color .2s ease, background-color .2s ease, transform .2s ease;
 }
 
+body.draape-runway .dr-header .dr-search {
+    min-width: 0;
+}
+
+body.draape-runway .dr-header .dr-search input {
+    min-width: 0;
+    color: var(--dr-ink);
+}
+
+body.draape-runway .dr-header .dr-search input::placeholder {
+    color: rgba(26, 26, 26, .5);
+}
+
+body.draape-runway .dr-header .dr-actions {
+    flex-shrink: 0;
+}
+
+body.draape-runway .dr-filter-button {
+    background: var(--dr-ink) !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+body.draape-runway .dr-filter-button:hover {
+    background: var(--dr-plum) !important;
+    transform: translateY(-1px);
+}
+
 body.draape-runway .dr-header a:focus-visible,
 body.draape-runway button:focus-visible,
 body.draape-runway input:focus-visible,
@@ -84,6 +113,12 @@ body.draape-runway .wm-product-action-secondary:hover {
 @media (min-width: 640px) {
     body.draape-runway .wm-product-actions {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    body.draape-runway .dr-header .dr-actions a {
+        padding-inline: 10px;
     }
 }
 

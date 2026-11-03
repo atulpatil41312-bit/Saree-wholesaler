@@ -84,12 +84,12 @@
                     @endif
                     <span class="truncate font-serif text-xl font-semibold uppercase tracking-[.16em] text-plum sm:text-2xl">{{ $shop->name }}</span>
                 </a>
-                <form class="hidden max-w-xl flex-1 items-center rounded-full bg-soft-gray px-4 py-2 md:flex" action="{{ $collectionUrl }}" method="get">
+                <form class="dr-search hidden max-w-xl flex-1 items-center rounded-full bg-soft-gray px-4 py-2 md:flex" action="{{ $collectionUrl }}" method="get">
                     <span class="mr-2 text-plum" aria-hidden="true">⌕</span>
                     <input class="min-w-0 flex-1 border-0 bg-transparent text-sm outline-none" name="q" value="{{ request('q') }}" placeholder="Search metallic organza, pre-stitched, silk..." aria-label="Search catalogue">
                     <span class="rounded-full bg-white px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-plum">Trending</span>
                 </form>
-                <div class="flex items-center gap-2 text-sm sm:gap-3">
+                <div class="dr-actions flex items-center gap-2 text-sm sm:gap-3">
                     <span class="hidden rounded-full bg-soft-gray px-3 py-2 text-xs font-semibold sm:inline">INR ₹</span>
                     <a class="relative rounded-full p-2 text-plum transition hover:bg-blush" href="#catalogue" aria-label="Saved favourites">♡<span class="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-plum px-1 text-[9px] font-bold text-white" data-favourite-count>0</span></a>
                     <a class="rounded-full bg-plum px-3 py-2 text-xs font-bold text-white transition hover:bg-coral sm:px-4" href="#catalogue">Shop the drop <span aria-hidden="true">↗</span></a>
@@ -105,7 +105,7 @@
             </nav>
         </header>
 
-        <main class="pt-[122px] sm:pt-[126px]">
+        <main class="pt-[146px] sm:pt-[126px]">
             <section class="bg-blush px-4 py-5 sm:px-8 lg:px-12">
                 <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-3 text-[10px] font-bold uppercase tracking-[.14em] text-plum">
                     <span>Runway capsule 04</span>
@@ -171,7 +171,7 @@
                         <form class="flex flex-wrap gap-2" action="{{ $collectionUrl }}" method="get">
                             <input class="min-h-10 rounded-full border border-black/10 bg-white px-4 text-xs outline-none focus:border-coral" type="search" name="q" value="{{ request('q') }}" placeholder="Search the edit" aria-label="Search catalogue">
                             <select class="min-h-10 rounded-full border border-black/10 bg-white px-4 text-xs outline-none focus:border-coral" name="sort"><option value="">Latest arrivals</option><option value="price_asc" @selected(request('sort') === 'price_asc')>Price: low to high</option><option value="price_desc" @selected(request('sort') === 'price_desc')>Price: high to low</option></select>
-                            <button class="min-h-10 rounded-full bg-ink px-5 text-xs font-bold uppercase tracking-wider text-white" type="submit">Filter</button>
+                            <button class="dr-filter-button min-h-10 rounded-full bg-ink px-5 text-xs font-bold uppercase tracking-wider text-white" type="submit">Filter</button>
                         </form>
                     </div>
                     @if ($products->isNotEmpty())
