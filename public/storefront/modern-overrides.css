@@ -39,14 +39,13 @@ body.wm-storefront-page.wholesaler-templates {
 
 body.wm-storefront-page.retailer-template-pack,
 body.wm-storefront-page.lashkaraa-edit,
-body.wm-storefront-page.mavuris-edit,
-body.wm-storefront-page.haute-heritage {
+body.wm-storefront-page.mavuris-edit {
     --wm-modern-accent: #9f3d55;
     --wm-modern-accent-deep: #4a1d32;
     --wm-modern-gold: #c49b5e;
 }
 
-body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .hh-header, .wm header),
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .wm header),
 body.wm-storefront-page > header {
     position: sticky;
     top: 0;
@@ -58,24 +57,24 @@ body.wm-storefront-page > header {
     backdrop-filter: blur(18px);
 }
 
-body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .hh-header, .wm header) a,
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .wm header) a,
 body.wm-storefront-page > header a {
     transition: color .22s ease, opacity .22s ease, transform .22s ease;
 }
 
-body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .hh-header, .wm header) a:hover,
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .wm header) a:hover,
 body.wm-storefront-page > header a:hover {
     color: var(--wm-modern-accent);
 }
 
-body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .hh-hero, .wm .hero) {
+body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .wm .hero) {
     position: relative;
     isolation: isolate;
     border: 1px solid var(--wm-modern-line);
     box-shadow: var(--wm-modern-shadow);
 }
 
-body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .hh-hero, .wm .hero)::before {
+body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .wm .hero)::before {
     position: absolute;
     z-index: 3;
     top: 18px;
@@ -322,12 +321,12 @@ html.wm-motion-ready body.wm-storefront-page .wm-reveal.is-visible {
 }
 
 @media (max-width: 760px) {
-    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .hh-hero, .wm .hero) {
+    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .wm .hero) {
         border-radius: 15px;
         box-shadow: 0 18px 44px rgba(53, 24, 40, .1);
     }
 
-    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .hh-hero, .wm .hero)::before {
+    body.wm-storefront-page :is(.hero, .stp-hero, .ve-hero, .wta-hero, .iw-hero, .le-hero, .me-hero, .wm .hero)::before {
         top: 12px;
         right: 12px;
         width: 52px;

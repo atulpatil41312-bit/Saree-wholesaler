@@ -19,7 +19,6 @@
             '.iw-hero-image',
             '.le-hero-image',
             '.me-hero-media',
-            '.hh-hero-media',
             '.wm .hero-image',
         ];
         const productSelectors = [
