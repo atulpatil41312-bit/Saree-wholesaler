@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
                         Shop::ROYAL_DRAPE_TEMPLATE,
                         Shop::SILK_ATELIER_TEMPLATE,
                         Shop::HERITAGE_WEAVES_TEMPLATE,
-                    ], true) ? 'retailer' : (in_array($position, [Shop::WHOLESALE_ATELIER_TEMPLATE, Shop::IVORY_WEAVES_TEMPLATE, Shop::LASHKARAA_EDIT_TEMPLATE, Shop::MAVURIS_EDIT_TEMPLATE], true) ? null : 'wholesaler'),
+                    ], true) ? 'retailer' : (in_array($position, [Shop::WHOLESALE_ATELIER_TEMPLATE, Shop::IVORY_WEAVES_TEMPLATE, Shop::LASHKARAA_EDIT_TEMPLATE, Shop::MAVURIS_EDIT_TEMPLATE, Shop::VARANASA_ATELIER_TEMPLATE], true) ? null : 'wholesaler'),
                     'is_active' => true,
                     'sort_order' => array_search($position, array_keys(Shop::templates()), true),
                     'configuration' => ['source' => 'built-in'],
