@@ -43,6 +43,8 @@ class Shop extends Model
 
     public const VARANASA_ATELIER_TEMPLATE = 'varanasa-atelier';
 
+    public const DRAAPE_RUNWAY_TEMPLATE = 'draape-runway';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -58,6 +60,7 @@ class Shop extends Model
         self::LASHKARAA_EDIT_TEMPLATE => 'Lashkaraa Edit',
         self::MAVURIS_EDIT_TEMPLATE => 'Mavuris Edit',
         self::VARANASA_ATELIER_TEMPLATE => 'Varanāsa Atelier',
+        self::DRAAPE_RUNWAY_TEMPLATE => 'Draape Runway',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -179,6 +182,15 @@ class Shop extends Model
             'hero_heading' => 'Woven in eternity,',
             'hero_emphasis' => 'draped in majesty.',
         ],
+        self::DRAAPE_RUNWAY_TEMPLATE => [
+            'label' => 'Draape Runway',
+            'description' => 'A high-contrast runway storefront with capsule drops, tactile product cards and modern saree styling.',
+            'badge' => 'DRAAPE RUNWAY',
+            'asset_path' => 'storefront',
+            'hero_image' => 'saree.jpg',
+            'hero_heading' => 'Not your',
+            'hero_emphasis' => 'ordinary saree.',
+        ],
     ];
 
     protected $attributes = [
@@ -226,6 +238,7 @@ class Shop extends Model
                 self::LASHKARAA_EDIT_TEMPLATE,
                 self::MAVURIS_EDIT_TEMPLATE,
                 self::VARANASA_ATELIER_TEMPLATE,
+                self::DRAAPE_RUNWAY_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -259,6 +272,7 @@ class Shop extends Model
             self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit',
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit',
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier',
+            self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway',
             default => 'shop.show',
         };
     }
@@ -274,6 +288,7 @@ class Shop extends Model
             self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit-product',
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit-product',
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier-product',
+            self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway-product',
             default => 'shop.product',
         };
     }

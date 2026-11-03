@@ -1,0 +1,99 @@
+body.draape-runway {
+    --dr-paper: #faf8f5;
+    --dr-ink: #1a1a1a;
+    --dr-coral: #ff5349;
+    --dr-plum: #9b1d5f;
+    --dr-blush: #fde2e4;
+    background: var(--dr-paper);
+    color: var(--dr-ink);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+body.draape-runway a {
+    text-decoration: none;
+}
+
+body.draape-runway img {
+    display: block;
+    max-width: 100%;
+}
+
+body.draape-runway button,
+body.draape-runway input,
+body.draape-runway select {
+    font: inherit;
+}
+
+body.draape-runway .dr-shell {
+    overflow: clip;
+}
+
+body.draape-runway .dr-header a {
+    transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+body.draape-runway .dr-header a:focus-visible,
+body.draape-runway button:focus-visible,
+body.draape-runway input:focus-visible,
+body.draape-runway select:focus-visible {
+    outline: 3px solid rgba(255, 83, 73, .38);
+    outline-offset: 3px;
+}
+
+body.draape-runway .wm-product-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+body.draape-runway .wm-product-action-primary,
+body.draape-runway .wm-product-action-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+body.draape-runway .wm-product-action-primary {
+    background: var(--dr-plum);
+    color: #fff;
+}
+
+body.draape-runway .wm-product-action-primary:hover {
+    background: var(--dr-coral);
+    transform: translateY(-1px);
+}
+
+body.draape-runway .wm-product-action-secondary {
+    border: 1px solid rgba(155, 29, 95, .28);
+    color: var(--dr-plum);
+}
+
+body.draape-runway .wm-product-action-secondary:hover {
+    background: var(--dr-blush);
+}
+
+@media (min-width: 640px) {
+    body.draape-runway .wm-product-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.draape-runway *,
+    body.draape-runway *::before,
+    body.draape-runway *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
