@@ -41,6 +41,8 @@ class Shop extends Model
 
     public const MAVURIS_EDIT_TEMPLATE = 'mavuris-edit';
 
+    public const HAUTE_HERITAGE_TEMPLATE = 'haute-heritage';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -55,6 +57,7 @@ class Shop extends Model
         self::IVORY_WEAVES_TEMPLATE => 'Ivory Weaves',
         self::LASHKARAA_EDIT_TEMPLATE => 'Lashkaraa Edit',
         self::MAVURIS_EDIT_TEMPLATE => 'Mavuris Edit',
+        self::HAUTE_HERITAGE_TEMPLATE => 'Haute Heritage',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -167,6 +170,15 @@ class Shop extends Model
             'hero_heading' => 'Timeless elegance,',
             'hero_emphasis' => 'beautifully woven.',
         ],
+        self::HAUTE_HERITAGE_TEMPLATE => [
+            'label' => 'Haute Heritage',
+            'description' => 'A quiet luxury salon with provenance-led storytelling, archival weaves and private-viewing enquiries.',
+            'badge' => 'HAUTE HERITAGE',
+            'asset_path' => 'storefront',
+            'hero_image' => 'saree.jpg',
+            'hero_heading' => 'Woven in eternity,',
+            'hero_emphasis' => 'draped in majesty.',
+        ],
     ];
 
     protected $attributes = [
@@ -213,6 +225,7 @@ class Shop extends Model
                 self::IVORY_WEAVES_TEMPLATE,
                 self::LASHKARAA_EDIT_TEMPLATE,
                 self::MAVURIS_EDIT_TEMPLATE,
+                self::HAUTE_HERITAGE_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -245,6 +258,7 @@ class Shop extends Model
             self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves',
             self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit',
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit',
+            self::HAUTE_HERITAGE_TEMPLATE => 'shop.haute-heritage',
             default => 'shop.show',
         };
     }
@@ -259,6 +273,7 @@ class Shop extends Model
             self::IVORY_WEAVES_TEMPLATE => 'shop.ivory-weaves-product',
             self::LASHKARAA_EDIT_TEMPLATE => 'shop.lashkaraa-edit-product',
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit-product',
+            self::HAUTE_HERITAGE_TEMPLATE => 'shop.haute-heritage-product',
             default => 'shop.product',
         };
     }
