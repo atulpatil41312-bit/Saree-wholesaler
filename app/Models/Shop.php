@@ -45,6 +45,8 @@ class Shop extends Model
 
     public const DRAAPE_RUNWAY_TEMPLATE = 'draape-runway';
 
+    public const MEHFIL_BOUTIQUE_TEMPLATE = 'mehfil-boutique';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -61,6 +63,7 @@ class Shop extends Model
         self::MAVURIS_EDIT_TEMPLATE => 'Mavuris Edit',
         self::VARANASA_ATELIER_TEMPLATE => 'Varanāsa Atelier',
         self::DRAAPE_RUNWAY_TEMPLATE => 'Draape Runway',
+        self::MEHFIL_BOUTIQUE_TEMPLATE => 'Mehfil Boutique',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -191,6 +194,15 @@ class Shop extends Model
             'hero_heading' => 'Not your',
             'hero_emphasis' => 'ordinary saree.',
         ],
+        self::MEHFIL_BOUTIQUE_TEMPLATE => [
+            'label' => 'Mehfil Boutique',
+            'description' => 'A heritage editorial catalogue with atelier-led navigation, detailed product dossiers and direct buyer enquiries.',
+            'badge' => 'MEHFIL ATELIER',
+            'asset_path' => 'storefront',
+            'hero_image' => 'saree.jpg',
+            'hero_heading' => 'The royal',
+            'hero_emphasis' => 'trousseau edit.',
+        ],
     ];
 
     protected $attributes = [
@@ -239,6 +251,7 @@ class Shop extends Model
                 self::MAVURIS_EDIT_TEMPLATE,
                 self::VARANASA_ATELIER_TEMPLATE,
                 self::DRAAPE_RUNWAY_TEMPLATE,
+                self::MEHFIL_BOUTIQUE_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -273,6 +286,7 @@ class Shop extends Model
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit',
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier',
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway',
+            self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique',
             default => 'shop.show',
         };
     }
@@ -289,6 +303,7 @@ class Shop extends Model
             self::MAVURIS_EDIT_TEMPLATE => 'shop.mavuris-edit-product',
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier-product',
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway-product',
+            self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique-product',
             default => 'shop.product',
         };
     }
