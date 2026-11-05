@@ -47,6 +47,8 @@ class Shop extends Model
 
     public const MEHFIL_BOUTIQUE_TEMPLATE = 'mehfil-boutique';
 
+    public const RANG_STUDIO_TEMPLATE = 'rang-studio';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -64,6 +66,7 @@ class Shop extends Model
         self::VARANASA_ATELIER_TEMPLATE => 'Varanāsa Atelier',
         self::DRAAPE_RUNWAY_TEMPLATE => 'Draape Runway',
         self::MEHFIL_BOUTIQUE_TEMPLATE => 'Mehfil Boutique',
+        self::RANG_STUDIO_TEMPLATE => 'Rang Studio',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -203,6 +206,15 @@ class Shop extends Model
             'hero_heading' => 'The royal',
             'hero_emphasis' => 'trousseau edit.',
         ],
+        self::RANG_STUDIO_TEMPLATE => [
+            'label' => 'Rang Studio',
+            'description' => 'A couture-inspired saree studio with archival storytelling, craft-led browsing and clear wholesale enquiries.',
+            'badge' => 'RANG STUDIO',
+            'asset_path' => 'storefront',
+            'hero_image' => 'saree.jpg',
+            'hero_heading' => 'The poetry of',
+            'hero_emphasis' => 'unbound drapes.',
+        ],
     ];
 
     protected $attributes = [
@@ -252,6 +264,7 @@ class Shop extends Model
                 self::VARANASA_ATELIER_TEMPLATE,
                 self::DRAAPE_RUNWAY_TEMPLATE,
                 self::MEHFIL_BOUTIQUE_TEMPLATE,
+                self::RANG_STUDIO_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -287,6 +300,7 @@ class Shop extends Model
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier',
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway',
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique',
+            self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio',
             default => 'shop.show',
         };
     }
@@ -304,6 +318,7 @@ class Shop extends Model
             self::VARANASA_ATELIER_TEMPLATE => 'shop.varanasa-atelier-product',
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway-product',
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique-product',
+            self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio-product',
             default => 'shop.product',
         };
     }
