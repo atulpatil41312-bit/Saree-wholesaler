@@ -19,13 +19,7 @@ class MarketController extends Controller
             ->with(['subscriptions.planVersion'])
             ->withCount('products')
             ->when($query !== '', function ($builder) use ($query): void {
-                $builder->where(function ($shopQuery) use ($query): void {
-                    $shopQuery
-                        ->where('name', 'like', "%{$query}%")
-                        ->orWhere('market_category', 'like', "%{$query}%")
-                        ->orWhere('description', 'like', "%{$query}%")
-                        ->orWhere('address', 'like', "%{$query}%");
-                });
+                $builder->where('name', 'like', "%{$query}%");
             })
             ->orderBy('name')
             ->get()
