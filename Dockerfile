@@ -22,7 +22,7 @@ RUN npm run build
 FROM php:8.3-apache-bookworm
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev libpq-dev libwebp-dev libzip-dev unzip \
+    && apt-get install -y --no-install-recommends ca-certificates libstdc++6 libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev libpq-dev libwebp-dev libzip-dev unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install bcmath gd mbstring pdo_pgsql zip \
     && a2enmod headers rewrite \
@@ -32,6 +32,11 @@ WORKDIR /var/www/html
 
 COPY --from=vendor /app ./
 COPY --from=assets /app/public/build ./public/build
+# The admin-only Stitch generation flow runs the SDK on demand. Keep the Node
+# runtime and its production dependencies in the final image; the API key still
+# remains a server-only Render environment variable.
+COPY --from=assets /usr/local/bin/node /usr/local/bin/node
+COPY --from=assets /app/node_modules ./node_modules
 COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/start-container /usr/local/bin/start-container
 

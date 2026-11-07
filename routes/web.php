@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PlanManagementController;
 use App\Http\Controllers\Admin\ShopController as AdminShopController;
+use App\Http\Controllers\Admin\StitchTemplateController;
 use App\Http\Controllers\Admin\SubscriptionManagementController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\Public\MarketController;
@@ -175,6 +176,11 @@ Route::middleware('auth')->group(function (): void {
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function (): void {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/stitch', [StitchTemplateController::class, 'index'])->name('admin.stitch.index');
+    Route::post('/stitch', [StitchTemplateController::class, 'store'])->name('admin.stitch.store');
+    Route::get('/stitch/{draft}', [StitchTemplateController::class, 'show'])->name('admin.stitch.show');
+    Route::get('/stitch/{draft}/image', [StitchTemplateController::class, 'image'])->name('admin.stitch.image');
+    Route::get('/stitch/{draft}/html', [StitchTemplateController::class, 'downloadHtml'])->name('admin.stitch.html');
     Route::post('/shops', [AdminShopController::class, 'store'])->name('admin.shops.store');
     Route::patch('/shops/{shop:id}', [AdminShopController::class, 'update'])->name('admin.shops.update');
 

@@ -1,0 +1,32 @@
+body.admin-page .stitch-layout { align-items: start; }
+body.admin-page .stitch-connection-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 9px 13px; font-size: 11px; font-weight: 700; }
+body.admin-page .stitch-connection-pill.is-ready { color: #1f6a40; background: #e8f6ee; }
+body.admin-page .stitch-connection-pill.is-missing { color: #8f3140; background: #fff0f0; }
+body.admin-page .stitch-draft-list { padding: 8px 24px 18px; }
+body.admin-page .stitch-draft-card { border-bottom: 1px solid var(--admin-border); padding: 20px 0; }
+body.admin-page .stitch-draft-card:last-child { border-bottom: 0; }
+body.admin-page .stitch-draft-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+body.admin-page .stitch-draft-device { color: #a37e61; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+body.admin-page .stitch-draft-card h3 { color: var(--admin-ink); font-family: Georgia, serif; font-size: 21px; font-weight: 400; margin: 6px 0; }
+body.admin-page .stitch-draft-card p { color: var(--admin-muted); font-size: 13px; line-height: 1.6; margin: 0; max-width: 680px; }
+body.admin-page .stitch-draft-meta { display: flex; flex-wrap: wrap; gap: 14px; color: #9a919f; font-size: 11px; margin-top: 14px; }
+body.admin-page .stitch-draft-actions { display: flex; align-items: center; gap: 15px; margin-top: 16px; }
+body.admin-page .stitch-text-link { color: var(--admin-plum); font-size: 12px; font-weight: 700; text-decoration: none; }
+body.admin-page .stitch-text-link:hover { text-decoration: underline; }
+body.admin-page .stitch-error { color: #982f3a !important; background: #fff5f5; border: 1px solid #f1cbcf; border-radius: 8px; padding: 10px 12px; margin-top: 14px !important; }
+body.admin-page .stitch-field-hint { color: var(--admin-muted); display: block; font-size: 11px; line-height: 1.5; margin-top: -7px; }
+body.admin-page .stitch-field-hint code { background: #f5edf3; border-radius: 4px; color: var(--admin-plum); padding: 2px 4px; }
+body.admin-page .stitch-safety-card { margin-top: 18px; }
+body.admin-page .stitch-preview-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, .75fr); gap: 22px; align-items: start; }
+body.admin-page .stitch-preview-canvas { min-height: 500px; display: grid; place-items: center; padding: 24px; background: #f4eef2; }
+body.admin-page .stitch-preview-canvas img { display: block; width: 100%; max-height: 760px; object-fit: contain; border: 1px solid var(--admin-border); border-radius: 9px; background: #fff; box-shadow: 0 16px 42px rgba(52,27,50,.12); }
+body.admin-page .stitch-prompt { color: var(--admin-ink); font-size: 14px; line-height: 1.75; padding: 24px; white-space: pre-wrap; }
+body.admin-page .stitch-detail-list { border-top: 1px solid var(--admin-border); margin: 0; padding: 0 24px; }
+body.admin-page .stitch-detail-list div { display: flex; justify-content: space-between; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--admin-border); }
+body.admin-page .stitch-detail-list div:last-child { border-bottom: 0; }
+body.admin-page .stitch-detail-list dt { color: var(--admin-muted); font-size: 11px; }
+body.admin-page .stitch-detail-list dd { color: var(--admin-ink); font-size: 11px; margin: 0; text-align: right; word-break: break-all; }
+body.admin-page .stitch-source-panel { margin-top: 22px; }
+body.admin-page .stitch-source { box-sizing: border-box; max-height: 560px; overflow: auto; margin: 0; padding: 24px; background: #241b26; color: #f8e9de; font: 12px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 980px) { body.admin-page .stitch-preview-grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { body.admin-page .stitch-draft-card-head, body.admin-page .admin-page-heading { align-items: flex-start; flex-direction: column; } body.admin-page .stitch-preview-canvas { min-height: 280px; padding: 12px; } }

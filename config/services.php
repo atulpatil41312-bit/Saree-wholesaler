@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'stitch' => [
+        'key' => env('STITCH_API_KEY'),
+        'project_id' => env('STITCH_PROJECT_ID'),
+        'node_binary' => env('STITCH_NODE_BINARY', 'node'),
+    ],
+
 ];

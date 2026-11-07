@@ -48,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ShopMembership::class);
     }
 
+    public function generatedTemplateDrafts(): HasMany
+    {
+        return $this->hasMany(GeneratedTemplateDraft::class);
+    }
+
     public function shops(): BelongsToMany
     {
         return $this->belongsToMany(Shop::class, 'shop_memberships')

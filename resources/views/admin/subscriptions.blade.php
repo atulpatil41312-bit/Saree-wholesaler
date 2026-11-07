@@ -17,6 +17,7 @@
             <nav class="admin-nav" aria-label="Admin navigation">
                 <span class="admin-nav-label">Workspace</span>
                 <a class="admin-nav-link" href="{{ route('admin.dashboard') }}"><span aria-hidden="true">⌂</span>Overview</a>
+                <a class="admin-nav-link" href="{{ route('admin.stitch.index') }}"><span aria-hidden="true">✦</span>Stitch studio</a>
                 <a class="admin-nav-link is-active" href="{{ route('admin.subscriptions.index') }}"><span aria-hidden="true">◈</span>Subscriptions</a>
                 <a class="admin-nav-link" href="{{ route('admin.plans.index') }}"><span aria-hidden="true">◇</span>Plans & access</a>
                 <span class="admin-nav-label admin-nav-label-spaced">Shortcuts</span>
