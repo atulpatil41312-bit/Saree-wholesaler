@@ -9,6 +9,24 @@ function argument(name) {
     return index >= 0 ? process.argv[index + 1] : undefined;
 }
 
+function stitchDownloadHeaders() {
+    const headers = {};
+
+    if (process.env.STITCH_API_KEY) {
+        headers['X-Goog-Api-Key'] = process.env.STITCH_API_KEY;
+    }
+
+    if (process.env.STITCH_ACCESS_TOKEN) {
+        headers.Authorization = `Bearer ${process.env.STITCH_ACCESS_TOKEN}`;
+    }
+
+    if (process.env.GOOGLE_CLOUD_PROJECT) {
+        headers['X-Goog-User-Project'] = process.env.GOOGLE_CLOUD_PROJECT;
+    }
+
+    return headers;
+}
+
 async function downloadHtml(value) {
     if (!value) {
         return '';
@@ -18,7 +36,7 @@ async function downloadHtml(value) {
         return value;
     }
 
-    const response = await fetch(value);
+    const response = await fetch(value, { headers: stitchDownloadHeaders() });
 
     if (!response.ok) {
         throw new Error(`Unable to download Stitch HTML (${response.status}).`);
@@ -36,7 +54,7 @@ async function downloadImage(value) {
         return null;
     }
 
-    const response = await fetch(value);
+    const response = await fetch(value, { headers: stitchDownloadHeaders() });
 
     if (!response.ok) {
         return null;
