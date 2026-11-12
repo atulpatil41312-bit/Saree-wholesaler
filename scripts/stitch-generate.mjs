@@ -27,7 +27,23 @@ function stitchDownloadHeaders() {
     return headers;
 }
 
-async function downloadHtml(value) {
+function decodeInlineFile(value) {
+    if (!value) {
+        return null;
+    }
+
+    const encoded = value.startsWith('data:') ? value.slice(value.indexOf(',') + 1) : value;
+
+    return Buffer.from(encoded, 'base64');
+}
+
+async function downloadHtml(value, inlineContent) {
+    const inlineFile = decodeInlineFile(inlineContent);
+
+    if (inlineFile) {
+        return inlineFile.toString('utf8');
+    }
+
     if (!value) {
         return '';
     }
@@ -45,7 +61,13 @@ async function downloadHtml(value) {
     return response.text();
 }
 
-async function downloadImage(value) {
+async function downloadImage(value, inlineContent) {
+    const inlineFile = decodeInlineFile(inlineContent);
+
+    if (inlineFile) {
+        return inlineFile;
+    }
+
     if (!value) {
         return null;
     }
@@ -91,8 +113,8 @@ async function main() {
 
     const project = stitch.project(projectId);
     const screen = await project.generate(prompt, device);
-    const html = await downloadHtml(await screen.getHtml());
-    const image = await downloadImage(await screen.getImage());
+    const html = await downloadHtml(await screen.getHtml(), screen.data?.htmlCode?.fileContentBase64);
+    const image = await downloadImage(await screen.getImage(), screen.data?.screenshot?.fileContentBase64);
 
     if (!html.trim()) {
         throw new Error('Stitch returned empty HTML.');
