@@ -8,6 +8,7 @@
 @endpush
 
 @section('content')
+    @php($stitchVerified = session('stitch_connection') === 'verified')
     <div class="admin-shell">
         <aside class="admin-sidebar">
             <a class="admin-brand" href="{{ route('admin.dashboard') }}" aria-label="WholeMarket admin home">
@@ -45,7 +46,7 @@
 
                 <section class="admin-page-heading" aria-labelledby="stitch-title">
                     <div><p class="admin-overline">Admin-only design workspace</p><h1 id="stitch-title">Stitch template studio</h1><p class="admin-page-intro">Generate private UI drafts with Google Stitch before your team adapts them into a WholeMarket template.</p></div>
-                    <span class="stitch-connection-pill {{ $stitchConfigured ? 'is-ready' : 'is-missing' }}"><span aria-hidden="true">{{ $stitchConfigured ? '●' : '!' }}</span>{{ $stitchConfigured ? 'Connected' : 'Needs setup' }}</span>
+                    <div class="stitch-heading-actions"><span class="stitch-connection-pill {{ $stitchVerified ? 'is-ready' : ($stitchConfigured ? 'is-configured' : 'is-missing') }}"><span aria-hidden="true">{{ $stitchVerified ? '●' : ($stitchConfigured ? '○' : '!') }}</span>{{ $stitchVerified ? 'Verified' : ($stitchConfigured ? 'Configured' : 'Needs setup') }}</span>@if($stitchConfigured)<form method="post" action="{{ route('admin.stitch.check') }}">@csrf<button class="admin-secondary-button" type="submit">Check project access</button></form>@endif</div>
                 </section>
 
                 <section class="admin-metrics" aria-label="Stitch studio metrics">
@@ -54,6 +55,14 @@
                     <article class="admin-metric-card"><span class="admin-metric-icon" aria-hidden="true">✓</span><div><span class="admin-metric-label">Ready previews</span><strong>{{ $drafts->getCollection()->where('status', 'ready')->count() }}</strong><small>HTML and screenshots saved</small></div></article>
                     <article class="admin-metric-card"><span class="admin-metric-icon" aria-hidden="true">◎</span><div><span class="admin-metric-label">Project</span><strong>{{ $stitchConfigured ? 'Linked' : '—' }}</strong><small>Configured in Render</small></div></article>
                 </section>
+
+                @if (session('stitch_projects'))
+                    <section class="admin-panel stitch-project-panel" aria-labelledby="stitch-projects-title">
+                        <div class="admin-panel-heading"><div><p class="admin-overline">Accessible Stitch projects</p><h2 id="stitch-projects-title">Use one of these project IDs</h2></div><span class="admin-count-pill">{{ count(session('stitch_projects')) }} found</span></div>
+                        <div class="stitch-project-list">@foreach(session('stitch_projects') as $project)<div class="stitch-project-row"><div><strong>{{ $project['title'] ?: 'Untitled Stitch project' }}</strong><small>{{ $project['id'] }}</small></div><code>{{ $project['id'] }}</code></div>@endforeach</div>
+                        <p class="stitch-project-help">If the configured ID is not listed, copy one of the IDs above into Render → Environment → <code>STITCH_PROJECT_ID</code>, then redeploy.</p>
+                    </section>
+                @endif
 
                 <section class="admin-layout-grid stitch-layout">
                     <div class="admin-panel stitch-draft-panel">
@@ -86,7 +95,7 @@
                                 @unless($stitchConfigured)<p class="stitch-field-hint">Add <code>STITCH_API_KEY</code> and <code>STITCH_PROJECT_ID</code> to Render, then redeploy.</p>@endunless
                             </form>
                         </section>
-                        <section class="admin-help-card stitch-safety-card"><span class="admin-help-icon" aria-hidden="true">✓</span><div><h3>Safe by default</h3><p>Generated HTML is stored privately and shown as source. It is not executed inside the admin dashboard, and no storefront data is sent to Stitch automatically.</p></div></section>
+                        <section class="admin-help-card stitch-safety-card"><span class="admin-help-icon" aria-hidden="true">✓</span><div><h3>Safe by default</h3><p>Generated HTML is stored privately and shown as source. It is not executed inside the admin dashboard, and no storefront data is sent to Stitch automatically.</p><p class="stitch-field-hint">If generation says “Requested entity was not found”, use <strong>Check project access</strong> above and update the Render project ID.</p></div></section>
                     </aside>
                 </section>
             </main>

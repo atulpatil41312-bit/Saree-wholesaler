@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\GeneratedTemplateDraft;
 use App\Models\User;
+use App\Services\StitchTemplateService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -63,5 +64,21 @@ class StitchTemplateStudioTest extends TestCase
             ->assertSessionHasErrors('prompt');
 
         $this->assertDatabaseCount('generated_template_drafts', 0);
+    }
+
+    public function test_admins_can_check_accessible_stitch_projects(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->mock(StitchTemplateService::class, function ($mock): void {
+            $mock->shouldReceive('listProjects')->once()->andReturn([
+                ['id' => 'projects/example', 'projectId' => 'projects/example', 'title' => 'Example project'],
+            ]);
+        });
+
+        $this->actingAs($admin)
+            ->post(route('admin.stitch.check'))
+            ->assertRedirect(route('admin.stitch.index'))
+            ->assertSessionHas('stitch_connection', 'verified')
+            ->assertSessionHas('stitch_projects.0.id', 'projects/example');
     }
 }

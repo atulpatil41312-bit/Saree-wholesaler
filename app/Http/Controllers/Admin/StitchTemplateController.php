@@ -62,6 +62,29 @@ class StitchTemplateController extends Controller
         return redirect()->route('admin.stitch.index')->with('status', 'Stitch generated a new private design draft.');
     }
 
+    public function checkConnection(StitchTemplateService $stitch): RedirectResponse
+    {
+        try {
+            $projects = $stitch->listProjects();
+
+            return redirect()->route('admin.stitch.index')
+                ->with('stitch_connection', 'verified')
+                ->with('stitch_projects', $projects)
+                ->with('status', 'Stitch credentials verified. Use an accessible project ID in Render.');
+        } catch (Throwable $exception) {
+            $message = $exception->getMessage();
+            $apiKey = config('services.stitch.key');
+
+            if (is_string($apiKey) && $apiKey !== '') {
+                $message = str_replace($apiKey, '[redacted]', $message);
+            }
+
+            return redirect()->route('admin.stitch.index')->withErrors([
+                'stitch_connection' => Str::limit($message, 1200),
+            ]);
+        }
+    }
+
     public function show(GeneratedTemplateDraft $draft): View
     {
         $html = null;

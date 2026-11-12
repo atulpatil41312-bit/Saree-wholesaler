@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { stitch } from '@google/stitch-sdk';
@@ -46,6 +46,20 @@ async function downloadImage(value) {
 }
 
 async function main() {
+    if (process.argv.includes('--list-projects')) {
+        const projects = await stitch.projects();
+
+        process.stdout.write(JSON.stringify({
+            projects: projects.map((project) => ({
+                id: project.id,
+                projectId: project.projectId,
+                title: project.data?.title ?? project.data?.displayName ?? project.data?.name ?? null,
+            })),
+        }));
+
+        return;
+    }
+
     const projectId = argument('--project-id') || process.env.STITCH_PROJECT_ID;
     const prompt = argument('--prompt');
     const device = argument('--device') || 'DESKTOP';

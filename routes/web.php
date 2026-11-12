@@ -177,6 +177,7 @@ Route::middleware('auth')->group(function (): void {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function (): void {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/stitch', [StitchTemplateController::class, 'index'])->name('admin.stitch.index');
+    Route::post('/stitch/check', [StitchTemplateController::class, 'checkConnection'])->name('admin.stitch.check');
     Route::post('/stitch', [StitchTemplateController::class, 'store'])->name('admin.stitch.store');
     Route::get('/stitch/{draft}', [StitchTemplateController::class, 'show'])->name('admin.stitch.show');
     Route::get('/stitch/{draft}/image', [StitchTemplateController::class, 'image'])->name('admin.stitch.image');
