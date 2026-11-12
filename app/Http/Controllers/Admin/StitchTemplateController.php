@@ -88,19 +88,24 @@ class StitchTemplateController extends Controller
     public function show(GeneratedTemplateDraft $draft): View
     {
         $html = null;
+        $imageAvailable = $draft->image_path && Storage::disk('local')->exists($draft->image_path);
 
         if ($draft->html_path && Storage::disk('local')->exists($draft->html_path)) {
             $html = Storage::disk('local')->get($draft->html_path);
         }
 
-        return view('admin.stitch.show', compact('draft', 'html'));
+        return view('admin.stitch.show', compact('draft', 'html', 'imageAvailable'));
     }
 
     public function image(GeneratedTemplateDraft $draft): BinaryFileResponse
     {
         abort_unless($draft->image_path && Storage::disk('local')->exists($draft->image_path), 404);
 
-        return response()->file(Storage::disk('local')->path($draft->image_path), [
+        $path = Storage::disk('local')->path($draft->image_path);
+        $mimeType = Storage::disk('local')->mimeType($draft->image_path) ?: 'image/png';
+
+        return response()->file($path, [
+            'Content-Type' => $mimeType,
             'Cache-Control' => 'private, no-store',
         ]);
     }
