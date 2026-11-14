@@ -58,6 +58,7 @@
                         <input name="q" value="{{ request('q') }}" placeholder="Search archive" aria-label="Search archive">
                         <button type="submit" aria-label="Search">⌕</button>
                     </form>
+                    <a class="va-action-primary" href="#va-catalogue">Catalogue</a>
                     <a href="#va-catalogue" aria-label="Saved favourites">♡ <span data-favourite-count>0</span></a>
                     <a href="#va-contact" aria-label="Contact seller">♢</a>
                 </div>
