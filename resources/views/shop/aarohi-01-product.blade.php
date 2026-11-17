@@ -73,7 +73,7 @@
         <section class="aarohi-related"><p class="aarohi-kicker">AAROHI wholesale standard</p><h2>Designed for confident buying.</h2><p>Each style is presented with the material, minimum and direct contact details needed to build a considered ethnicwear edit.</p></section>
     </main>
 
-    @include('shop.partials.storefront-footer', ['shop' => $shop])
+    @include('shop.partials.storefront-footer', ['shop' => $shop, 'footerTagline' => 'Considered ethnicwear, thoughtfully presented for your next boutique edit.', 'footerCollectionLabel' => 'Ethnicwear catalogue', 'footerCollectionAnchor' => 'catalogue', 'footerContactAnchor' => 'bulk-inquiry'])
 @endsection
 
 @push('scripts')

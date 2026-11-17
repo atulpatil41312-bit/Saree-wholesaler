@@ -9,6 +9,10 @@
     $footerInstagramUrl = filter_var($shop->instagram_url ?? null, FILTER_VALIDATE_URL) && in_array(parse_url($shop->instagram_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->instagram_url : null;
     $footerFacebookUrl = filter_var($shop->facebook_url ?? null, FILTER_VALIDATE_URL) && in_array(parse_url($shop->facebook_url, PHP_URL_SCHEME), ['http', 'https'], true) ? $shop->facebook_url : null;
     $footerAddress = collect([$shop->shop_number, $shop->address])->filter(fn ($value): bool => filled($value))->implode(', ');
+    $footerTagline ??= 'Beautiful sarees, thoughtfully presented for your next collection.';
+    $footerCollectionLabel ??= 'Saree catalogue';
+    $footerCollectionAnchor ??= 'collection';
+    $footerContactAnchor ??= 'contact';
 @endphp
 
 <footer class="wm-site-footer">
@@ -22,15 +26,15 @@
                 @endif
                 <span>{{ $shop->name }}<small>{{ $templateDetails['label'] ?? 'Saree collection' }}</small></span>
             </a>
-            <p class="wm-site-footer__tagline">Beautiful sarees, thoughtfully presented for your next collection.</p>
+            <p class="wm-site-footer__tagline">{{ $footerTagline }}</p>
             <a class="wm-site-footer__market-link" href="{{ route('market.index') }}">Powered by WholeMarket <span aria-hidden="true">↗</span></a>
         </div>
 
         <div class="wm-site-footer__column">
             <h2>Shop now</h2>
-            <a href="{{ $shop->publicUrl() }}#collection">View collection</a>
+            <a href="{{ $shop->publicUrl() }}#{{ $footerCollectionAnchor }}">View collection</a>
             <a href="{{ $shop->publicUrl() }}#categories">Browse categories</a>
-            <a href="{{ $shop->publicUrl() }}#contact">Ask about availability</a>
+            <a href="{{ $shop->publicUrl() }}#{{ $footerContactAnchor }}">Ask about availability</a>
             @if ($footerWhatsappUrl)
                 <a href="{{ $footerWhatsappUrl }}" target="_blank" rel="noopener noreferrer">WhatsApp enquiry</a>
             @endif
@@ -39,9 +43,9 @@
         <div class="wm-site-footer__column">
             <h2>Useful links</h2>
             <a href="{{ $shop->publicUrl() }}#about">About the shop</a>
-            <a href="{{ $shop->publicUrl() }}#collection">Saree catalogue</a>
+            <a href="{{ $shop->publicUrl() }}#{{ $footerCollectionAnchor }}">{{ $footerCollectionLabel }}</a>
             <a href="{{ route('market.index') }}">Explore WholeMarket</a>
-            <a href="{{ $shop->publicUrl() }}#contact">Contact the seller</a>
+            <a href="{{ $shop->publicUrl() }}#{{ $footerContactAnchor }}">Contact the seller</a>
         </div>
 
         <div class="wm-site-footer__column wm-site-footer__contact">

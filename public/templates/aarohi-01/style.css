@@ -116,10 +116,16 @@ body.aarohi-storefront .wm-whatsapp-float {
 .aarohi-hero-stats span { color: var(--aarohi-muted); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
 .aarohi-hero-media { min-height: 500px; overflow: hidden; position: relative; }
 .aarohi-hero-media::after { background: linear-gradient(180deg, transparent 58%, rgba(37, 7, 12, .8)); content: ""; inset: 0; pointer-events: none; position: absolute; }
-.aarohi-hero-media img { height: 100%; object-fit: cover; object-position: center; width: 100%; }
+.aarohi-hero-media img { height: 100%; object-fit: cover; object-position: top center; width: 100%; }
 .aarohi-hero-caption { bottom: 30px; color: #fff; left: 34px; position: absolute; z-index: 1; }
 .aarohi-hero-caption small { display: block; font-size: 9px; font-weight: 700; letter-spacing: .18em; margin-bottom: 8px; text-transform: uppercase; }
 .aarohi-hero-caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 25px; font-weight: 500; max-width: 240px; }
+.aarohi-proof-strip { background: #fff; border-bottom: 1px solid var(--aarohi-line); border-top: 1px solid var(--aarohi-line); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 auto; max-width: 1440px; }
+.aarohi-proof-strip > div { align-items: center; display: grid; gap: 3px 12px; grid-template-columns: 26px 1fr; padding: 19px clamp(16px, 4vw, 54px); }
+.aarohi-proof-strip > div + div { border-left: 1px solid var(--aarohi-line); }
+.aarohi-proof-strip span { color: var(--aarohi-gold); font-size: 10px; font-weight: 800; grid-row: span 2; letter-spacing: .08em; }
+.aarohi-proof-strip strong { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: 17px; font-weight: 500; }
+.aarohi-proof-strip small { color: var(--aarohi-muted); font-size: 10px; line-height: 1.45; }
 
 .aarohi-section { padding: clamp(48px, 7vw, 92px) clamp(16px, 4vw, 54px); }
 .aarohi-section-soft { background: var(--aarohi-soft); }
@@ -141,13 +147,19 @@ body.aarohi-storefront .wm-whatsapp-float {
 .aarohi-filterbar { background: #fff; border: 1px solid var(--aarohi-line); display: grid; gap: 10px; grid-template-columns: minmax(160px, 1.5fr) repeat(3, minmax(130px, 1fr)) auto; margin-bottom: 26px; padding: 12px; }
 .aarohi-filterbar input, .aarohi-filterbar select { background: var(--aarohi-cream); border: 1px solid var(--aarohi-line); color: var(--aarohi-ink); font: inherit; font-size: 12px; min-width: 0; padding: 11px 12px; }
 .aarohi-filterbar button { background: var(--aarohi-maroon); border: 1px solid var(--aarohi-maroon); color: #fff; cursor: pointer; font-size: 11px; font-weight: 800; padding: 0 18px; text-transform: uppercase; }
+.aarohi-filterbar input:focus, .aarohi-filterbar select:focus, .aarohi-enquiry-form input:focus, .aarohi-enquiry-form textarea:focus { border-color: var(--aarohi-maroon); box-shadow: 0 0 0 3px rgba(95, 0, 23, .08); outline: 0; }
+.aarohi-filter-clear { color: var(--aarohi-maroon); display: inline-flex; font-size: 10px; font-weight: 800; gap: 7px; letter-spacing: .06em; margin: -15px 0 18px; text-decoration: none; text-transform: uppercase; }
+.aarohi-filter-clear:hover { color: var(--aarohi-orange); }
 .aarohi-product-grid { display: grid; gap: 19px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .aarohi-product { background: #fff; border: 1px solid var(--aarohi-line); min-width: 0; transition: box-shadow .25s, transform .25s; }
 .aarohi-product:hover { box-shadow: 0 14px 35px rgba(31, 30, 29, .08); transform: translateY(-3px); }
 .aarohi-product-media { aspect-ratio: 3 / 4; background: #efe4de; display: block; overflow: hidden; position: relative; }
-.aarohi-product-media img { height: 100%; object-fit: cover; transition: transform .4s; width: 100%; }
+.aarohi-product-media img { height: 100%; object-fit: cover; object-position: top center; transition: transform .4s; width: 100%; }
 .aarohi-product:hover .aarohi-product-media img { transform: scale(1.04); }
 .aarohi-product-media > span { background: rgba(255, 255, 255, .9); color: var(--aarohi-maroon); font-size: 9px; font-weight: 800; left: 11px; letter-spacing: .1em; padding: 6px 8px; position: absolute; text-transform: uppercase; top: 11px; }
+.aarohi-product-media > b { background: var(--aarohi-maroon); bottom: 12px; color: #fff; font-size: 10px; font-weight: 800; left: 12px; letter-spacing: .06em; opacity: 0; padding: 8px 10px; position: absolute; text-transform: uppercase; transform: translateY(6px); transition: opacity .25s, transform .25s; }
+.aarohi-product-media > b span { font-size: 13px; margin-left: 5px; }
+.aarohi-product:hover .aarohi-product-media > b, .aarohi-product:focus-within .aarohi-product-media > b { opacity: 1; transform: translateY(0); }
 .aarohi-product-copy { padding: 16px 16px 18px; }
 .aarohi-product-copy > small { color: var(--aarohi-muted); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
 .aarohi-product-copy h3 { font-family: "Playfair Display", Georgia, serif; font-size: 20px; font-weight: 500; line-height: 1.15; margin: 9px 0; }
@@ -182,12 +194,13 @@ body.aarohi-storefront .wm-whatsapp-float {
 .aarohi-form-status { background: #edf9ef; color: #246a35; font-size: 11px; margin: 0; padding: 9px 10px; }
 
 .aarohi-detail { margin: auto; max-width: 1320px; padding: clamp(28px, 5vw, 70px) clamp(16px, 4vw, 54px); }
+.aarohi-detail, .aarohi-section, .aarohi-callout { scroll-margin-top: 90px; }
 .aarohi-breadcrumb { color: var(--aarohi-muted); font-size: 11px; margin: 0 0 22px; }
 .aarohi-breadcrumb a { color: var(--aarohi-maroon); }
 .aarohi-detail-grid { display: grid; gap: clamp(28px, 5vw, 70px); grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); }
 .aarohi-detail-gallery { display: grid; gap: 12px; grid-template-columns: 82px minmax(0, 1fr); }
 .aarohi-detail-main { aspect-ratio: 3 / 4; background: #efe4de; border: 1px solid var(--aarohi-line); overflow: hidden; }
-.aarohi-detail-main img { height: 100%; object-fit: cover; width: 100%; }
+.aarohi-detail-main img { height: 100%; object-fit: cover; object-position: top center; width: 100%; }
 .aarohi-detail-thumbs { display: flex; flex-direction: column; gap: 9px; }
 .aarohi-detail-thumb { aspect-ratio: 1; background: #f5eee9; border: 1px solid var(--aarohi-line); cursor: pointer; padding: 0; }
 .aarohi-detail-thumb.is-active { border: 2px solid var(--aarohi-maroon); }
@@ -228,6 +241,9 @@ body.aarohi-storefront .wm-whatsapp-float {
     .aarohi-hero { grid-template-columns: 1fr; }
     .aarohi-hero-copy { padding: 48px 22px; }
     .aarohi-hero-media { min-height: 390px; }
+    .aarohi-proof-strip { grid-template-columns: 1fr; }
+    .aarohi-proof-strip > div { padding: 15px 22px; }
+    .aarohi-proof-strip > div + div { border-left: 0; border-top: 1px solid var(--aarohi-line); }
     .aarohi-section-head { align-items: flex-start; flex-direction: column; }
     .aarohi-category-grid { grid-template-columns: 1fr; }
     .aarohi-category-card { min-height: 150px; }

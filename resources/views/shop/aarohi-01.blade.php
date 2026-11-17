@@ -84,6 +84,12 @@
             </div>
         </section>
 
+        <section class="aarohi-proof-strip" aria-label="Wholesale benefits">
+            <div><span>01</span><strong>Pack clarity</strong><small>MOQ and pack details on every style</small></div>
+            <div><span>02</span><strong>Live catalogue</strong><small>Browse your seller’s current availability</small></div>
+            <div><span>03</span><strong>Direct access</strong><small>Ask the studio before you commit</small></div>
+        </section>
+
         @if ($categories->isNotEmpty())
             <section class="aarohi-section" id="categories" aria-labelledby="aarohi-categories-heading">
                 <div class="aarohi-section-head">
@@ -116,6 +122,9 @@
                     <select name="sort" aria-label="Sort products"><option value="">Latest arrivals</option><option value="price_asc" @selected(request('sort') === 'price_asc')>Price: low to high</option><option value="price_desc" @selected(request('sort') === 'price_desc')>Price: high to low</option></select>
                     <button type="submit">Apply filters</button>
                 </form>
+                @if (request()->hasAny(['q', 'category', 'fabric', 'sort']))
+                    <a class="aarohi-filter-clear" href="{{ $collectionUrl }}#catalogue">Clear all filters <span aria-hidden="true">×</span></a>
+                @endif
 
                 @if ($products->isNotEmpty())
                     <div class="aarohi-product-grid">
@@ -126,6 +135,7 @@
                                 <a class="aarohi-product-media" href="{{ $product->publicUrl() }}">
                                     <img src="{{ $productImage }}" alt="{{ $product->name }}" width="720" height="960" loading="lazy">
                                     <span>{{ Str::headline($product->availability) }}</span>
+                                    <b>View style <span aria-hidden="true">↗</span></b>
                                 </a>
                                 <div class="aarohi-product-copy">
                                     <small>{{ $product->code }} · {{ $product->category?->name ?: 'Ethnicwear' }}</small>
@@ -168,5 +178,5 @@
         </section>
     </main>
 
-    @include('shop.partials.storefront-footer', ['shop' => $shop])
+    @include('shop.partials.storefront-footer', ['shop' => $shop, 'footerTagline' => 'Considered ethnicwear, thoughtfully presented for your next boutique edit.', 'footerCollectionLabel' => 'Ethnicwear catalogue', 'footerCollectionAnchor' => 'catalogue', 'footerContactAnchor' => 'bulk-inquiry'])
 @endsection
