@@ -8,6 +8,7 @@
 @endpush
 
 @section('content')
+    @php($activeTemplateCategory = $templateCategories[$shop->storefrontTemplate()] ?? 'sarees')
     <div class="seller-shell">
         <aside class="seller-sidebar">
             <a class="seller-brand" href="{{ route('seller.dashboard') }}" aria-label="{{ $shop->name }} dashboard">
@@ -77,12 +78,23 @@
                         <p>See each homepage direction at a glance, then open Preview for the full storefront.</p>
                     </div>
 
-                    <div class="design-template-grid">
+                    <div class="design-category-tabs" role="tablist" aria-label="Template categories">
+                        @foreach (['sarees' => 'Saree Templates', 'dresses' => 'Dress Templates'] as $category => $categoryLabel)
+                            @php($categoryCount = collect($templateCategories)->filter(fn (string $value): bool => $value === $category)->count())
+                            <button class="design-category-tab {{ $activeTemplateCategory === $category ? 'is-active' : '' }}" type="button" role="tab" aria-selected="{{ $activeTemplateCategory === $category ? 'true' : 'false' }}" data-template-tab="{{ $category }}">
+                                <span>{{ $categoryLabel }}</span>
+                                <small>{{ $categoryCount }} {{ Str::plural('template', $categoryCount) }}</small>
+                            </button>
+                        @endforeach
+                    </div>
+
+                    <div class="design-template-grid" data-template-grid>
                         @foreach ($templates as $template => $label)
                             @php($details = $templateDetails[$template])
                             @php($isActive = $template === $shop->storefrontTemplate())
                             @php($isAvailable = $templateAvailability[$template] ?? false)
-                            <article class="design-template-card {{ $isActive ? 'is-active' : '' }} {{ $isAvailable ? '' : 'is-locked' }}">
+                            @php($category = $templateCategories[$template] ?? 'sarees')
+                            <article class="design-template-card {{ $isActive ? 'is-active' : '' }} {{ $isAvailable ? '' : 'is-locked' }}" data-template-card data-template-category="{{ $category }}" @if ($category !== $activeTemplateCategory) hidden @endif>
                                 <div class="design-template-media">
                                     <div class="design-template-preview preview-{{ Str::slug($template) }}" aria-label="{{ $label }} storefront preview">
                                         <div class="design-preview-copy"><span>{{ $details['badge'] }}</span><strong>{{ $details['hero_heading'] }}</strong><em>{{ $details['hero_emphasis'] }}</em></div>
@@ -117,6 +129,11 @@
                                 </div>
                             </article>
                         @endforeach
+                    </div>
+                    <div class="design-category-empty" data-template-empty hidden>
+                        <span aria-hidden="true">✦</span>
+                        <h3>No templates in this category yet</h3>
+                        <p>New storefront directions will appear here as they become available.</p>
                     </div>
                 </section>
 
@@ -180,3 +197,31 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        (() => {
+            const tabs = [...document.querySelectorAll('[data-template-tab]')];
+            const cards = [...document.querySelectorAll('[data-template-card]')];
+            const empty = document.querySelector('[data-template-empty]');
+            if (!tabs.length || !cards.length) return;
+
+            const showCategory = (category) => {
+                let visible = 0;
+                tabs.forEach((tab) => {
+                    const active = tab.dataset.templateTab === category;
+                    tab.classList.toggle('is-active', active);
+                    tab.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+                cards.forEach((card) => {
+                    const visibleCard = card.dataset.templateCategory === category;
+                    card.hidden = !visibleCard;
+                    if (visibleCard) visible += 1;
+                });
+                if (empty) empty.hidden = visible !== 0;
+            };
+
+            tabs.forEach((tab) => tab.addEventListener('click', () => showCategory(tab.dataset.templateTab)));
+        })();
+    </script>
+@endpush

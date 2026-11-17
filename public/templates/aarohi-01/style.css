@@ -1,0 +1,247 @@
+body.aarohi-storefront {
+    --aarohi-cream: #fdf8f6;
+    --aarohi-soft: #f7f3f0;
+    --aarohi-white: #fff;
+    --aarohi-ink: #1c1b1a;
+    --aarohi-muted: #6e6162;
+    --aarohi-line: #e8e4dc;
+    --aarohi-maroon: #5f0017;
+    --aarohi-rich: #80182a;
+    --aarohi-orange: #c85a17;
+    --aarohi-gold: #c5a059;
+    background: var(--aarohi-cream);
+    color: var(--aarohi-ink);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+body.aarohi-storefront .wm-whatsapp-float {
+    z-index: 50;
+}
+
+.aarohi-preview {
+    background: var(--aarohi-maroon);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: .04em;
+    padding: 10px 18px;
+    text-align: center;
+}
+
+.aarohi-preview a { color: #ffd9d4; text-decoration: underline; }
+
+.aarohi-utility {
+    align-items: center;
+    background: var(--aarohi-maroon);
+    color: #fff;
+    display: flex;
+    font-size: 11px;
+    gap: 20px;
+    justify-content: space-between;
+    letter-spacing: .08em;
+    padding: 8px clamp(16px, 4vw, 54px);
+    text-transform: uppercase;
+}
+
+.aarohi-header {
+    background: var(--aarohi-white);
+    border-bottom: 1px solid var(--aarohi-line);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.aarohi-header-main {
+    align-items: center;
+    display: grid;
+    gap: 26px;
+    grid-template-columns: minmax(170px, .9fr) minmax(300px, 1.7fr) auto;
+    margin: auto;
+    max-width: 1440px;
+    padding: 18px clamp(16px, 4vw, 54px);
+}
+
+.aarohi-brand {
+    align-items: center;
+    color: var(--aarohi-ink);
+    display: inline-flex;
+    gap: 11px;
+    text-decoration: none;
+}
+
+.aarohi-brand-mark {
+    align-items: center;
+    border: 1px solid var(--aarohi-gold);
+    border-radius: 50%;
+    color: var(--aarohi-maroon);
+    display: inline-flex;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 24px;
+    height: 44px;
+    justify-content: center;
+    overflow: hidden;
+    width: 44px;
+}
+
+.aarohi-brand-mark img { height: 100%; object-fit: contain; width: 100%; }
+.aarohi-brand strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 600; letter-spacing: .06em; }
+.aarohi-brand small { color: var(--aarohi-muted); display: block; font-size: 9px; letter-spacing: .17em; margin-top: 3px; text-transform: uppercase; }
+
+.aarohi-nav { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.aarohi-nav a { color: var(--aarohi-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.aarohi-nav a:hover { color: var(--aarohi-rich); }
+
+.aarohi-header-actions { align-items: center; display: flex; gap: 12px; }
+.aarohi-search { align-items: center; border-bottom: 1px solid var(--aarohi-line); display: flex; gap: 6px; }
+.aarohi-search input { border: 0; color: var(--aarohi-ink); font-size: 12px; min-width: 140px; outline: 0; padding: 8px 2px; }
+.aarohi-search button { background: none; border: 0; color: var(--aarohi-maroon); cursor: pointer; font-size: 17px; padding: 4px; }
+.aarohi-currency { color: var(--aarohi-muted); font-size: 11px; white-space: nowrap; }
+
+.aarohi-main { margin: 0 auto; max-width: 1440px; }
+.aarohi-hero { background: var(--aarohi-soft); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 580px; }
+.aarohi-hero-copy { align-content: center; padding: clamp(42px, 7vw, 100px) clamp(24px, 7vw, 108px); }
+.aarohi-kicker { color: var(--aarohi-rich); font-size: 10px; font-weight: 800; letter-spacing: .24em; margin: 0 0 20px; text-transform: uppercase; }
+.aarohi-hero h1 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: clamp(40px, 5.4vw, 72px); font-weight: 600; letter-spacing: -.05em; line-height: .98; margin: 0; max-width: 600px; }
+.aarohi-hero h1 em { color: var(--aarohi-orange); font-weight: 500; }
+.aarohi-hero-copy > p:not(.aarohi-kicker) { color: var(--aarohi-muted); font-size: 15px; line-height: 1.8; margin: 28px 0; max-width: 530px; }
+.aarohi-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; }
+.aarohi-button { border: 1px solid var(--aarohi-maroon); display: inline-flex; font-size: 11px; font-weight: 800; gap: 15px; letter-spacing: .1em; padding: 14px 19px; text-decoration: none; text-transform: uppercase; transition: transform .2s, background .2s, color .2s; }
+.aarohi-button:hover { transform: translateY(-2px); }
+.aarohi-button-primary { background: var(--aarohi-maroon); color: #fff; }
+.aarohi-button-primary:hover { background: var(--aarohi-rich); }
+.aarohi-button-secondary { color: var(--aarohi-maroon); }
+.aarohi-button-secondary:hover { background: #fff; }
+.aarohi-hero-stats { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 40px; }
+.aarohi-hero-stats div { border-left: 1px solid var(--aarohi-gold); padding-left: 12px; }
+.aarohi-hero-stats strong { color: var(--aarohi-maroon); display: block; font-family: "Playfair Display", Georgia, serif; font-size: 23px; font-weight: 500; }
+.aarohi-hero-stats span { color: var(--aarohi-muted); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+.aarohi-hero-media { min-height: 500px; overflow: hidden; position: relative; }
+.aarohi-hero-media::after { background: linear-gradient(180deg, transparent 58%, rgba(37, 7, 12, .8)); content: ""; inset: 0; pointer-events: none; position: absolute; }
+.aarohi-hero-media img { height: 100%; object-fit: cover; object-position: center; width: 100%; }
+.aarohi-hero-caption { bottom: 30px; color: #fff; left: 34px; position: absolute; z-index: 1; }
+.aarohi-hero-caption small { display: block; font-size: 9px; font-weight: 700; letter-spacing: .18em; margin-bottom: 8px; text-transform: uppercase; }
+.aarohi-hero-caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 25px; font-weight: 500; max-width: 240px; }
+
+.aarohi-section { padding: clamp(48px, 7vw, 92px) clamp(16px, 4vw, 54px); }
+.aarohi-section-soft { background: var(--aarohi-soft); }
+.aarohi-section-head { align-items: end; display: flex; gap: 20px; justify-content: space-between; margin: 0 auto 30px; max-width: 1320px; }
+.aarohi-section-head h2 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: clamp(28px, 4vw, 43px); font-weight: 500; letter-spacing: -.04em; margin: 4px 0 0; }
+.aarohi-section-head p { color: var(--aarohi-muted); font-size: 13px; line-height: 1.7; margin: 0; max-width: 420px; }
+
+.aarohi-category-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: auto; max-width: 1320px; }
+.aarohi-category-card { background: #fff; border: 1px solid var(--aarohi-line); color: var(--aarohi-ink); min-height: 188px; overflow: hidden; padding: 24px; position: relative; text-decoration: none; }
+.aarohi-category-card::after { background: linear-gradient(135deg, transparent 45%, rgba(128, 24, 42, .1)); content: ""; inset: 0; position: absolute; }
+.aarohi-category-card:hover { border-color: var(--aarohi-gold); }
+.aarohi-category-card img { height: 100%; inset: 0; object-fit: cover; opacity: .16; position: absolute; transition: transform .4s; width: 100%; }
+.aarohi-category-card:hover img { transform: scale(1.06); }
+.aarohi-category-card > span { bottom: 22px; left: 24px; position: absolute; z-index: 1; }
+.aarohi-category-card small { color: var(--aarohi-rich); display: block; font-size: 9px; font-weight: 800; letter-spacing: .16em; margin-bottom: 9px; text-transform: uppercase; }
+.aarohi-category-card strong { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: 24px; font-weight: 500; }
+
+.aarohi-catalogue-wrap { margin: auto; max-width: 1320px; }
+.aarohi-filterbar { background: #fff; border: 1px solid var(--aarohi-line); display: grid; gap: 10px; grid-template-columns: minmax(160px, 1.5fr) repeat(3, minmax(130px, 1fr)) auto; margin-bottom: 26px; padding: 12px; }
+.aarohi-filterbar input, .aarohi-filterbar select { background: var(--aarohi-cream); border: 1px solid var(--aarohi-line); color: var(--aarohi-ink); font: inherit; font-size: 12px; min-width: 0; padding: 11px 12px; }
+.aarohi-filterbar button { background: var(--aarohi-maroon); border: 1px solid var(--aarohi-maroon); color: #fff; cursor: pointer; font-size: 11px; font-weight: 800; padding: 0 18px; text-transform: uppercase; }
+.aarohi-product-grid { display: grid; gap: 19px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.aarohi-product { background: #fff; border: 1px solid var(--aarohi-line); min-width: 0; transition: box-shadow .25s, transform .25s; }
+.aarohi-product:hover { box-shadow: 0 14px 35px rgba(31, 30, 29, .08); transform: translateY(-3px); }
+.aarohi-product-media { aspect-ratio: 3 / 4; background: #efe4de; display: block; overflow: hidden; position: relative; }
+.aarohi-product-media img { height: 100%; object-fit: cover; transition: transform .4s; width: 100%; }
+.aarohi-product:hover .aarohi-product-media img { transform: scale(1.04); }
+.aarohi-product-media > span { background: rgba(255, 255, 255, .9); color: var(--aarohi-maroon); font-size: 9px; font-weight: 800; left: 11px; letter-spacing: .1em; padding: 6px 8px; position: absolute; text-transform: uppercase; top: 11px; }
+.aarohi-product-copy { padding: 16px 16px 18px; }
+.aarohi-product-copy > small { color: var(--aarohi-muted); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+.aarohi-product-copy h3 { font-family: "Playfair Display", Georgia, serif; font-size: 20px; font-weight: 500; line-height: 1.15; margin: 9px 0; }
+.aarohi-product-copy h3 a { color: var(--aarohi-ink); text-decoration: none; }
+.aarohi-product-copy p { color: var(--aarohi-muted); font-size: 11px; line-height: 1.6; margin: 0 0 14px; }
+.aarohi-price-row { align-items: baseline; border-top: 1px solid var(--aarohi-line); display: flex; gap: 8px; justify-content: space-between; padding-top: 12px; }
+.aarohi-price-row strong { color: var(--aarohi-maroon); font-size: 15px; }
+.aarohi-price-row span { color: var(--aarohi-muted); font-size: 9px; text-align: right; }
+.aarohi-product .wm-product-actions { margin-top: 14px; }
+.aarohi-product .wm-product-action-primary, .aarohi-product .wm-product-action-secondary { font-size: 10px; }
+.aarohi-pagination { align-items: center; display: flex; gap: 20px; justify-content: center; margin-top: 28px; }
+.aarohi-pagination a { color: var(--aarohi-maroon); font-size: 11px; font-weight: 700; text-decoration: none; }
+.aarohi-pagination span { color: var(--aarohi-muted); font-size: 11px; }
+.aarohi-category-empty { align-items: center; background: #fff; border: 1px dashed var(--aarohi-line); display: flex; flex-direction: column; gap: 9px; padding: 48px 20px; text-align: center; }
+.aarohi-category-empty > span { color: var(--aarohi-gold); font-size: 20px; }
+.aarohi-category-empty h3 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: 25px; font-weight: 500; margin: 0; }
+.aarohi-category-empty p { color: var(--aarohi-muted); font-size: 12px; margin: 0; }
+.aarohi-related h2 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: 32px; font-weight: 500; margin: 5px 0 10px; }
+.aarohi-related > p:last-child { color: var(--aarohi-muted); font-size: 13px; line-height: 1.8; max-width: 620px; }
+
+.aarohi-callout { background: var(--aarohi-maroon); color: #fff; display: grid; gap: 28px; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); padding: clamp(42px, 6vw, 75px) clamp(16px, 8vw, 120px); }
+.aarohi-callout h2 { color: #fff; font-family: "Playfair Display", Georgia, serif; font-size: clamp(30px, 4vw, 48px); font-weight: 500; letter-spacing: -.04em; line-height: 1.05; margin: 0 0 15px; }
+.aarohi-callout p { color: #f4dfe0; font-size: 13px; line-height: 1.8; max-width: 560px; }
+.aarohi-callout .aarohi-button-secondary { border-color: #f4dfe0; color: #fff; }
+.aarohi-callout .aarohi-button-secondary:hover { color: var(--aarohi-maroon); }
+.aarohi-enquiry-form { background: #fff; color: var(--aarohi-ink); display: grid; gap: 11px; padding: 22px; }
+.aarohi-enquiry-form h3 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: 24px; font-weight: 500; margin: 0 0 4px; }
+.aarohi-enquiry-form label { display: grid; gap: 5px; }
+.aarohi-enquiry-form label span { color: var(--aarohi-muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.aarohi-enquiry-form input, .aarohi-enquiry-form textarea { border: 1px solid var(--aarohi-line); font: inherit; font-size: 12px; padding: 10px; resize: vertical; }
+.aarohi-enquiry-form button { background: var(--aarohi-maroon); border: 0; color: #fff; cursor: pointer; font-size: 11px; font-weight: 800; letter-spacing: .1em; padding: 12px; text-transform: uppercase; }
+.aarohi-form-status { background: #edf9ef; color: #246a35; font-size: 11px; margin: 0; padding: 9px 10px; }
+
+.aarohi-detail { margin: auto; max-width: 1320px; padding: clamp(28px, 5vw, 70px) clamp(16px, 4vw, 54px); }
+.aarohi-breadcrumb { color: var(--aarohi-muted); font-size: 11px; margin: 0 0 22px; }
+.aarohi-breadcrumb a { color: var(--aarohi-maroon); }
+.aarohi-detail-grid { display: grid; gap: clamp(28px, 5vw, 70px); grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); }
+.aarohi-detail-gallery { display: grid; gap: 12px; grid-template-columns: 82px minmax(0, 1fr); }
+.aarohi-detail-main { aspect-ratio: 3 / 4; background: #efe4de; border: 1px solid var(--aarohi-line); overflow: hidden; }
+.aarohi-detail-main img { height: 100%; object-fit: cover; width: 100%; }
+.aarohi-detail-thumbs { display: flex; flex-direction: column; gap: 9px; }
+.aarohi-detail-thumb { aspect-ratio: 1; background: #f5eee9; border: 1px solid var(--aarohi-line); cursor: pointer; padding: 0; }
+.aarohi-detail-thumb.is-active { border: 2px solid var(--aarohi-maroon); }
+.aarohi-detail-thumb img { height: 100%; object-fit: cover; width: 100%; }
+.aarohi-detail-copy .aarohi-kicker { margin-bottom: 12px; }
+.aarohi-detail-copy h1 { color: var(--aarohi-maroon); font-family: "Playfair Display", Georgia, serif; font-size: clamp(34px, 4vw, 54px); font-weight: 500; letter-spacing: -.04em; line-height: 1; margin: 0 0 18px; }
+.aarohi-detail-copy > p { color: var(--aarohi-muted); font-size: 14px; line-height: 1.8; margin: 0 0 25px; }
+.aarohi-detail-card { background: #fff; border: 1px solid var(--aarohi-line); padding: 22px; }
+.aarohi-detail-price { align-items: start; border-bottom: 1px solid var(--aarohi-line); display: flex; justify-content: space-between; padding-bottom: 17px; }
+.aarohi-detail-price small { color: var(--aarohi-muted); display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.aarohi-detail-price strong { color: var(--aarohi-maroon); display: block; font-family: "Playfair Display", Georgia, serif; font-size: 31px; font-weight: 500; margin-top: 4px; }
+.aarohi-detail-price > span { background: #f8e8d9; color: var(--aarohi-orange); font-size: 10px; font-weight: 800; letter-spacing: .05em; padding: 7px 9px; text-transform: uppercase; }
+.aarohi-specs { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin: 20px 0 0; }
+.aarohi-specs div { border-left: 1px solid var(--aarohi-gold); padding-left: 10px; }
+.aarohi-specs dt { color: var(--aarohi-muted); font-size: 10px; text-transform: uppercase; }
+.aarohi-specs dd { color: var(--aarohi-ink); font-size: 13px; margin: 3px 0 0; }
+.aarohi-detail-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.aarohi-detail-note { border-left: 2px solid var(--aarohi-gold); color: var(--aarohi-muted); font-size: 11px; line-height: 1.7; margin-top: 24px; padding-left: 13px; }
+.aarohi-detail-note strong { color: var(--aarohi-maroon); }
+.aarohi-related { border-top: 1px solid var(--aarohi-line); margin-top: 62px; padding-top: 42px; }
+
+@media (max-width: 1050px) {
+    .aarohi-header-main { grid-template-columns: 1fr auto; }
+    .aarohi-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
+    .aarohi-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .aarohi-filterbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .aarohi-filterbar button { min-height: 42px; }
+}
+
+@media (max-width: 760px) {
+    .aarohi-utility { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .aarohi-header-main { gap: 14px; grid-template-columns: 1fr auto; padding: 14px 16px; }
+    .aarohi-brand strong { font-size: 18px; }
+    .aarohi-brand small { font-size: 8px; }
+    .aarohi-search { display: none; }
+    .aarohi-nav { gap: 12px; overflow-x: auto; padding-bottom: 2px; white-space: nowrap; }
+    .aarohi-nav a { font-size: 9px; }
+    .aarohi-hero { grid-template-columns: 1fr; }
+    .aarohi-hero-copy { padding: 48px 22px; }
+    .aarohi-hero-media { min-height: 390px; }
+    .aarohi-section-head { align-items: flex-start; flex-direction: column; }
+    .aarohi-category-grid { grid-template-columns: 1fr; }
+    .aarohi-category-card { min-height: 150px; }
+    .aarohi-filterbar { grid-template-columns: 1fr; }
+    .aarohi-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .aarohi-product-copy { padding: 12px 11px 14px; }
+    .aarohi-product-copy h3 { font-size: 17px; }
+    .aarohi-price-row { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .aarohi-price-row span { text-align: left; }
+    .aarohi-callout { grid-template-columns: 1fr; padding: 48px 22px; }
+    .aarohi-detail-grid { grid-template-columns: 1fr; }
+    .aarohi-detail-gallery { grid-template-columns: 1fr; }
+    .aarohi-detail-thumbs { flex-direction: row; order: 2; overflow-x: auto; }
+    .aarohi-detail-thumb { flex: 0 0 68px; }
+    .aarohi-detail-copy h1 { font-size: 39px; }
+    .aarohi-specs { gap: 12px; }
+}

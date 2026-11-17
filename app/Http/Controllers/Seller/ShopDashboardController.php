@@ -66,11 +66,13 @@ class ShopDashboardController extends Controller
         $templateAvailability = collect($templates)
             ->mapWithKeys(fn (string $label, string $key): array => [$key => $this->access->canUseTemplate($shop, $key)])
             ->all();
+        $templateCategories = array_intersect_key(Shop::templateCategories(), $templates);
 
         return view('seller.design', [
             'shop' => $shop,
             'templates' => $templates,
             'templateDetails' => Shop::templateDetails(),
+            'templateCategories' => $templateCategories,
             'designSettings' => $shop->settings,
             'wholesaleAtelierAvailable' => array_key_exists(Shop::WHOLESALE_ATELIER_TEMPLATE, $templates),
             'templateAvailability' => $templateAvailability,

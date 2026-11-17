@@ -21,6 +21,7 @@ class TemplateFactory extends Factory
             'key' => fake()->unique()->slug(2),
             'name' => fake()->words(2, true),
             'shop_type' => 'wholesaler',
+            'category' => 'sarees',
             'is_active' => true,
             'sort_order' => 0,
             'configuration' => [],

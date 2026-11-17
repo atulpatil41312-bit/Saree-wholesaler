@@ -49,6 +49,8 @@ class Shop extends Model
 
     public const RANG_STUDIO_TEMPLATE = 'rang-studio';
 
+    public const AAROHI_TEMPLATE = 'aarohi-01';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -67,6 +69,7 @@ class Shop extends Model
         self::DRAAPE_RUNWAY_TEMPLATE => 'Draape Runway',
         self::MEHFIL_BOUTIQUE_TEMPLATE => 'Mehfil Boutique',
         self::RANG_STUDIO_TEMPLATE => 'Rang Studio',
+        self::AAROHI_TEMPLATE => 'AAROHI — Ethnic Fashion Boutique',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -215,6 +218,36 @@ class Shop extends Model
             'hero_heading' => 'The poetry of',
             'hero_emphasis' => 'unbound drapes.',
         ],
+        self::AAROHI_TEMPLATE => [
+            'label' => 'AAROHI — Ethnic Fashion Boutique',
+            'description' => 'A regal ethnicwear wholesale storefront with editorial drops, clear pack details and direct bulk enquiries.',
+            'badge' => 'AAROHI ETHNICWEAR',
+            'asset_path' => 'templates/aarohi-01',
+            'hero_image' => 'thumbnail.png',
+            'hero_heading' => 'Curated ethnic',
+            'hero_emphasis' => 'wholesale style.',
+        ],
+    ];
+
+    /** @var array<string, 'sarees'|'dresses'> */
+    private const TEMPLATE_CATEGORIES = [
+        self::DEFAULT_TEMPLATE => 'sarees',
+        self::VASTRA_EMERALD_TEMPLATE => 'sarees',
+        self::ROYAL_NOIR_TEMPLATE => 'sarees',
+        self::ROSE_ATELIER_TEMPLATE => 'sarees',
+        self::INDIGO_EDIT_TEMPLATE => 'sarees',
+        self::WHOLESALE_ATELIER_TEMPLATE => 'sarees',
+        self::ROYAL_DRAPE_TEMPLATE => 'sarees',
+        self::SILK_ATELIER_TEMPLATE => 'sarees',
+        self::HERITAGE_WEAVES_TEMPLATE => 'sarees',
+        self::IVORY_WEAVES_TEMPLATE => 'sarees',
+        self::LASHKARAA_EDIT_TEMPLATE => 'sarees',
+        self::MAVURIS_EDIT_TEMPLATE => 'sarees',
+        self::VARANASA_ATELIER_TEMPLATE => 'sarees',
+        self::DRAAPE_RUNWAY_TEMPLATE => 'sarees',
+        self::MEHFIL_BOUTIQUE_TEMPLATE => 'sarees',
+        self::RANG_STUDIO_TEMPLATE => 'sarees',
+        self::AAROHI_TEMPLATE => 'dresses',
     ];
 
     protected $attributes = [
@@ -243,6 +276,12 @@ class Shop extends Model
         return self::TEMPLATE_DETAILS;
     }
 
+    /** @return array<string, 'sarees'|'dresses'> */
+    public static function templateCategories(): array
+    {
+        return self::TEMPLATE_CATEGORIES;
+    }
+
     public static function supportsTemplate(string $template): bool
     {
         return array_key_exists($template, self::TEMPLATES);
@@ -265,6 +304,7 @@ class Shop extends Model
                 self::DRAAPE_RUNWAY_TEMPLATE,
                 self::MEHFIL_BOUTIQUE_TEMPLATE,
                 self::RANG_STUDIO_TEMPLATE,
+                self::AAROHI_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -301,6 +341,7 @@ class Shop extends Model
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway',
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique',
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio',
+            self::AAROHI_TEMPLATE => 'shop.aarohi-01',
             default => 'shop.show',
         };
     }
@@ -319,6 +360,7 @@ class Shop extends Model
             self::DRAAPE_RUNWAY_TEMPLATE => 'shop.draape-runway-product',
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique-product',
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio-product',
+            self::AAROHI_TEMPLATE => 'shop.aarohi-01-product',
             default => 'shop.product',
         };
     }

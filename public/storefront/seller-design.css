@@ -821,6 +821,113 @@ body.seller-design-page .preview-heritage-weaves::before { background: repeating
 body.seller-design-page .preview-heritage-weaves .design-preview-copy { color: #4b352c; }
 body.seller-design-page .preview-heritage-weaves .design-preview-copy em { color: #966c4d; }
 
+body.seller-design-page .design-category-tabs {
+    align-items: stretch;
+    border-bottom: 1px solid #e4d8e0;
+    display: flex;
+    gap: 8px;
+    margin: 0 0 22px;
+    overflow-x: auto;
+    padding: 0 0 1px;
+}
+
+body.seller-design-page .design-category-tab {
+    align-items: flex-start;
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    color: #6f5b6e;
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 170px;
+    padding: 12px 15px 14px;
+    text-align: left;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+body.seller-design-page .design-category-tab:hover,
+body.seller-design-page .design-category-tab:focus-visible {
+    background: #fbf5f9;
+    color: #5f2148;
+    outline: none;
+}
+
+body.seller-design-page .design-category-tab.is-active {
+    border-bottom-color: #6f204c;
+    color: #5f2148;
+}
+
+body.seller-design-page .design-category-tab span {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+body.seller-design-page .design-category-tab small {
+    color: #9a8396;
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+body.seller-design-page .design-template-card[hidden],
+body.seller-design-page .design-category-empty[hidden] {
+    display: none;
+}
+
+body.seller-design-page .design-category-empty {
+    align-items: center;
+    background: #fffafd;
+    border: 1px dashed #decdd9;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 15px;
+    padding: 45px 22px;
+    text-align: center;
+}
+
+body.seller-design-page .design-category-empty > span {
+    color: #b77f9c;
+    font-size: 20px;
+}
+
+body.seller-design-page .design-category-empty h3 {
+    color: #351c32;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0;
+}
+
+body.seller-design-page .design-category-empty p {
+    color: #8c7889;
+    font-size: 12px;
+    margin: 0;
+}
+
+body.seller-design-page .preview-aarohi-01 {
+    background: #fdf8f6;
+}
+
+body.seller-design-page .preview-aarohi-01 .design-preview-photo {
+    border-radius: 58px 0 0 0;
+    right: 0;
+    width: 58%;
+}
+
+body.seller-design-page .preview-aarohi-01 .design-preview-copy {
+    color: #5f0017;
+}
+
+body.seller-design-page .preview-aarohi-01 .design-preview-copy em {
+    color: #c85a17;
+}
+
 @media (max-width: 760px) {
     body.seller-design-page .design-template-preview { aspect-ratio: 1.55 / 1; }
+    body.seller-design-page .design-category-tab { min-width: 145px; }
 }

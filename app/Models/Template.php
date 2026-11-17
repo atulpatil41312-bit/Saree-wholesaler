@@ -11,7 +11,7 @@ class Template extends Model
     /** @use HasFactory<TemplateFactory> */
     use HasFactory;
 
-    protected $fillable = ['key', 'name', 'shop_type', 'is_active', 'sort_order', 'configuration'];
+    protected $fillable = ['key', 'name', 'shop_type', 'category', 'is_active', 'sort_order', 'configuration'];
 
     protected function casts(): array
     {
