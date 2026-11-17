@@ -51,6 +51,8 @@ class Shop extends Model
 
     public const AAROHI_TEMPLATE = 'aarohi-01';
 
+    public const SHREE_TEMPLATE = 'shree-01';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -70,6 +72,7 @@ class Shop extends Model
         self::MEHFIL_BOUTIQUE_TEMPLATE => 'Mehfil Boutique',
         self::RANG_STUDIO_TEMPLATE => 'Rang Studio',
         self::AAROHI_TEMPLATE => 'AAROHI — Ethnic Fashion Boutique',
+        self::SHREE_TEMPLATE => 'SHREE — Indian Ethnic Ready-to-Wear',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -227,6 +230,15 @@ class Shop extends Model
             'hero_heading' => 'Curated ethnic',
             'hero_emphasis' => 'wholesale style.',
         ],
+        self::SHREE_TEMPLATE => [
+            'label' => 'SHREE — Indian Ethnic Ready-to-Wear',
+            'description' => 'A festive, editorial ethnicwear storefront with silhouette-led browsing, best deals and direct buyer enquiries.',
+            'badge' => 'SHREE ETHNIC EDIT',
+            'asset_path' => 'templates/shree-01',
+            'hero_image' => 'thumbnail.png',
+            'hero_heading' => 'Elegance in every',
+            'hero_emphasis' => 'weave and flare.',
+        ],
     ];
 
     /** @var array<string, 'sarees'|'dresses'> */
@@ -248,6 +260,7 @@ class Shop extends Model
         self::MEHFIL_BOUTIQUE_TEMPLATE => 'sarees',
         self::RANG_STUDIO_TEMPLATE => 'sarees',
         self::AAROHI_TEMPLATE => 'dresses',
+        self::SHREE_TEMPLATE => 'dresses',
     ];
 
     protected $attributes = [
@@ -305,6 +318,7 @@ class Shop extends Model
                 self::MEHFIL_BOUTIQUE_TEMPLATE,
                 self::RANG_STUDIO_TEMPLATE,
                 self::AAROHI_TEMPLATE,
+                self::SHREE_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -342,6 +356,7 @@ class Shop extends Model
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique',
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio',
             self::AAROHI_TEMPLATE => 'shop.aarohi-01',
+            self::SHREE_TEMPLATE => 'shop.shree-01',
             default => 'shop.show',
         };
     }
@@ -361,6 +376,7 @@ class Shop extends Model
             self::MEHFIL_BOUTIQUE_TEMPLATE => 'shop.mehfil-boutique-product',
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio-product',
             self::AAROHI_TEMPLATE => 'shop.aarohi-01-product',
+            self::SHREE_TEMPLATE => 'shop.shree-01-product',
             default => 'shop.product',
         };
     }
