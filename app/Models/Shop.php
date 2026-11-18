@@ -53,6 +53,8 @@ class Shop extends Model
 
     public const SHREE_TEMPLATE = 'shree-01';
 
+    public const ETHNIC_PLUS_TEMPLATE = 'ethnic-plus-01';
+
     /** @var array<string, string> */
     public const TEMPLATES = [
         self::DEFAULT_TEMPLATE => 'WholeMarket Classic',
@@ -73,6 +75,7 @@ class Shop extends Model
         self::RANG_STUDIO_TEMPLATE => 'Rang Studio',
         self::AAROHI_TEMPLATE => 'AAROHI — Ethnic Fashion Boutique',
         self::SHREE_TEMPLATE => 'SHREE — Indian Ethnic Ready-to-Wear',
+        self::ETHNIC_PLUS_TEMPLATE => 'Ethnic Plus — Imperial Couture',
     ];
 
     /** @var array<string, array{label: string, description: string, badge: string, asset_path: string, hero_image: string, hero_heading: string, hero_emphasis: string}> */
@@ -239,6 +242,15 @@ class Shop extends Model
             'hero_heading' => 'Elegance in every',
             'hero_emphasis' => 'weave and flare.',
         ],
+        self::ETHNIC_PLUS_TEMPLATE => [
+            'label' => 'Ethnic Plus — Imperial Couture',
+            'description' => 'A regal dress and occasionwear storefront with editorial collections, inclusive sizing and atelier-led discovery.',
+            'badge' => 'IMPERIAL COUTURE',
+            'asset_path' => 'templates/ethnic-plus-01',
+            'hero_image' => 'thumbnail.png',
+            'hero_heading' => 'Dress for the',
+            'hero_emphasis' => 'moment.',
+        ],
     ];
 
     /** @var array<string, 'sarees'|'dresses'> */
@@ -261,6 +273,7 @@ class Shop extends Model
         self::RANG_STUDIO_TEMPLATE => 'sarees',
         self::AAROHI_TEMPLATE => 'dresses',
         self::SHREE_TEMPLATE => 'dresses',
+        self::ETHNIC_PLUS_TEMPLATE => 'dresses',
     ];
 
     protected $attributes = [
@@ -319,6 +332,7 @@ class Shop extends Model
                 self::RANG_STUDIO_TEMPLATE,
                 self::AAROHI_TEMPLATE,
                 self::SHREE_TEMPLATE,
+                self::ETHNIC_PLUS_TEMPLATE,
             ],
             'wholesaler' => array_values(array_diff(array_keys(self::TEMPLATES), [
                 self::ROYAL_DRAPE_TEMPLATE,
@@ -357,6 +371,7 @@ class Shop extends Model
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio',
             self::AAROHI_TEMPLATE => 'shop.aarohi-01',
             self::SHREE_TEMPLATE => 'shop.shree-01',
+            self::ETHNIC_PLUS_TEMPLATE => 'shop.ethnic-plus-01',
             default => 'shop.show',
         };
     }
@@ -377,6 +392,7 @@ class Shop extends Model
             self::RANG_STUDIO_TEMPLATE => 'shop.rang-studio-product',
             self::AAROHI_TEMPLATE => 'shop.aarohi-01-product',
             self::SHREE_TEMPLATE => 'shop.shree-01-product',
+            self::ETHNIC_PLUS_TEMPLATE => 'shop.ethnic-plus-01-product',
             default => 'shop.product',
         };
     }

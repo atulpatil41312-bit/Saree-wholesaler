@@ -28,12 +28,14 @@ class AarohiTemplateTest extends TestCase
             ->assertSeeText('Dress Templates')
             ->assertSeeText('AAROHI — Ethnic Fashion Boutique')
             ->assertSeeText('SHREE — Indian Ethnic Ready-to-Wear')
+            ->assertSeeText('Ethnic Plus — Imperial Couture')
             ->assertSee('data-template-category="dresses"', false)
             ->assertSee('data-template-category="sarees"', false);
 
         $this->assertSame('sarees', Shop::templateCategories()[Shop::DEFAULT_TEMPLATE]);
         $this->assertSame('dresses', Shop::templateCategories()[Shop::AAROHI_TEMPLATE]);
         $this->assertSame('dresses', Shop::templateCategories()[Shop::SHREE_TEMPLATE]);
+        $this->assertSame('dresses', Shop::templateCategories()[Shop::ETHNIC_PLUS_TEMPLATE]);
     }
 
     public function test_aarohi_renders_live_catalogue_for_retailers_and_wholesalers(): void
@@ -105,6 +107,42 @@ class AarohiTemplateTest extends TestCase
                 ->assertOk()
                 ->assertSeeText('Marigold Chanderi Set')
                 ->assertSeeText('Set of 4');
+        }
+    }
+
+    public function test_ethnic_plus_renders_live_catalogue_for_retailers_and_wholesalers(): void
+    {
+        foreach (['retailer', 'wholesaler'] as $type) {
+            $owner = User::factory()->create(['role' => $type]);
+            $shop = Shop::factory()->for($owner)->active()->create([
+                'type' => $type,
+                'name' => 'Ethnic Plus '.$type,
+                'slug' => 'ethnic-plus-'.$type,
+                'template' => Shop::ETHNIC_PLUS_TEMPLATE,
+            ]);
+            $shop->settings()->create(['template_key' => Shop::ETHNIC_PLUS_TEMPLATE]);
+            $category = $shop->categories()->create(['name' => 'Occasion Dresses', 'slug' => 'occasion-dresses']);
+            $product = $shop->products()->create([
+                'category_id' => $category->id,
+                'name' => 'Imperial Ruby Anarkali',
+                'slug' => 'imperial-ruby-anarkali-'.$type,
+                'code' => 'EP-'.$type,
+                'wholesale_price' => 2499,
+                'minimum_order_quantity' => 3,
+                'pack_size' => 'Set of 3',
+                'availability' => 'available',
+            ]);
+
+            $this->get(route($type === 'retailer' ? 'retailer.shops.show' : 'shops.show', $shop))
+                ->assertOk()
+                ->assertSeeText('Imperial Ruby Anarkali')
+                ->assertSeeText('Occasion Dresses')
+                ->assertSeeText('Ethnic Plus — Imperial Couture');
+
+            $this->get(route($type === 'retailer' ? 'retailer.shops.products.show' : 'shops.products.show', [$shop, $product]))
+                ->assertOk()
+                ->assertSeeText('Imperial Ruby Anarkali')
+                ->assertSeeText('Set of 3');
         }
     }
 }
