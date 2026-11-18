@@ -12,7 +12,7 @@
 @section('content')
     @php
         $shopUrl = $shop->publicUrl();
-        $fallbackImage = asset('templates/shree-01/thumbnail.png');
+        $fallbackImage = asset('templates/shree-01/fallback.svg');
         $productImages = $product->images->map(fn ($image): string => Storage::url($image->path))->values();
         $primaryImage = $productImages->first() ?: $fallbackImage;
         $showPrices = $shop->settings?->show_prices ?? true;

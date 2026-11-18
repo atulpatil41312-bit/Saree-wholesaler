@@ -13,8 +13,11 @@
     @php
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', ['template' => $template]) : $shopUrl;
-        $fallbackImage = asset('templates/shree-01/thumbnail.png');
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : $fallbackImage;
+        $fallbackImage = asset('templates/shree-01/fallback.svg');
+        $heroProduct = $products->getCollection()->first();
+        $heroImage = $shop->banner_path
+            ? Storage::url($shop->banner_path)
+            : ($heroProduct?->images?->first() ? Storage::url($heroProduct->images->first()->path) : $fallbackImage);
         $showPrices = $shop->settings?->show_prices ?? true;
         $whatsappNumber = preg_replace('/\D/', '', (string) $shop->whatsapp);
         $whatsappUrl = preg_match('/^\d{8,15}$/', $whatsappNumber) === 1

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-labelledby="title desc">
+  <title id="title">SHREE collection artwork</title>
+  <desc id="desc">An abstract burgundy and gold fashion silhouette on a warm ivory background.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7eee5"/>
+      <stop offset="1" stop-color="#e8d4ca"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#80182a"/>
+      <stop offset="1" stop-color="#3d101b"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#3d101b" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <circle cx="120" cy="120" r="180" fill="#fff" opacity=".35"/>
+  <circle cx="820" cy="1080" r="250" fill="#d4af37" opacity=".14"/>
+  <g filter="url(#shadow)" transform="translate(450 130)">
+    <circle cx="0" cy="90" r="58" fill="#d5a98f"/>
+    <path d="M-45 55c14-50 79-58 102-5-20-15-48-23-102 5Z" fill="#211318"/>
+    <path d="M-56 170c24-43 90-43 113 0l-12 215c-3 53-18 87-51 109-33-22-48-56-51-109Z" fill="#e1b477"/>
+    <path d="M-69 177c-54 90-52 270-123 570 88 43 183 54 291 2-59-293-75-465-118-572-16 22-34 33-50 0Z" fill="url(#dress)"/>
+    <path d="M-124 743c80 25 169 25 228 2l48 78c-116 58-247 58-331-1Z" fill="#d4af37"/>
+    <path d="M-80 245c47 42 109 46 161 2" fill="none" stroke="#d4af37" stroke-width="10" opacity=".78"/>
+    <path d="M-147 340c95 29 203 30 294 3M-172 455c117 31 257 30 345-4M-194 581c135 34 297 32 385-9" fill="none" stroke="#e2ba68" stroke-width="6" opacity=".55"/>
+  </g>
+  <text x="450" y="1040" fill="#80182a" font-family="Georgia,serif" font-size="54" text-anchor="middle" letter-spacing="10">SHREE</text>
+  <text x="450" y="1090" fill="#665e58" font-family="Arial,sans-serif" font-size="18" text-anchor="middle" letter-spacing="5">ETHNIC READY-TO-WEAR</text>
+</svg>
