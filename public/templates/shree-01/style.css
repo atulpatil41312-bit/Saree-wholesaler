@@ -1,15 +1,15 @@
 body.shree-storefront {
-    --shree-ivory: #fcf9f8;
-    --shree-cream: #f6f1ea;
-    --shree-soft: #f1e8dd;
-    --shree-ink: #1b1b1c;
-    --shree-muted: #665e58;
-    --shree-line: #e6ddd2;
-    --shree-burgundy: #80182a;
-    --shree-maroon: #5b1220;
-    --shree-gold: #d4af37;
-    --shree-ochre: #d99b26;
-    background: var(--shree-ivory);
+    --shree-ivory: #f5fbf8;
+    --shree-cream: #eaf4ef;
+    --shree-soft: #dcece5;
+    --shree-ink: #16352f;
+    --shree-muted: #5b716c;
+    --shree-line: #cfe1d9;
+    --shree-burgundy: #0c5c51;
+    --shree-maroon: #113c37;
+    --shree-gold: #c8a15a;
+    --shree-ochre: #b57a34;
+    background: linear-gradient(180deg, #fbfefc 0%, var(--shree-ivory) 48%, #edf6f1 100%);
     color: var(--shree-ink);
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 }
@@ -18,7 +18,7 @@ body.shree-storefront .wm-whatsapp-float { z-index: 50; }
 .shree-preview { background: var(--shree-maroon); color: #fff; font-size: 12px; letter-spacing: .05em; padding: 10px 18px; text-align: center; }
 .shree-preview a { color: #ffe5c5; text-decoration: underline; }
 .shree-utility { align-items: center; background: var(--shree-ink); color: #fff; display: flex; font-size: 10px; gap: 20px; justify-content: space-between; letter-spacing: .14em; padding: 8px clamp(16px, 4vw, 52px); text-transform: uppercase; }
-.shree-header { background: rgba(252,249,248,.96); border-bottom: 1px solid var(--shree-line); position: sticky; top: 0; z-index: 20; }
+.shree-header { background: rgba(245,251,248,.96); border-bottom: 1px solid var(--shree-line); position: sticky; top: 0; z-index: 20; }
 .shree-header-main { align-items: center; display: grid; gap: 24px; grid-template-columns: minmax(180px,.9fr) minmax(280px,1.7fr) auto; margin: auto; max-width: 1480px; padding: 16px clamp(16px,4vw,52px); }
 .shree-brand { align-items: center; color: var(--shree-ink); display: inline-flex; gap: 11px; text-decoration: none; }
 .shree-brand-mark { align-items: center; background: var(--shree-burgundy); border: 2px solid var(--shree-gold); border-radius: 50%; color: #fff; display: inline-flex; font-family: "Playfair Display",serif; font-size: 22px; height: 42px; justify-content: center; overflow: hidden; width: 42px; }
@@ -51,12 +51,12 @@ body.shree-storefront .wm-whatsapp-float { z-index: 50; }
 .shree-hero-meta span { border-left: 1px solid var(--shree-gold); color: var(--shree-muted); font-size: 9px; letter-spacing: .07em; padding-left: 11px; text-transform: uppercase; }
 .shree-hero-meta b { color: var(--shree-burgundy); display: block; font-family: "Playfair Display",serif; font-size: 21px; font-weight: 500; letter-spacing: 0; }
 .shree-hero-media { min-height: 500px; overflow: hidden; position: relative; }
-.shree-hero-media::after { background: linear-gradient(180deg,transparent 52%,rgba(34,11,17,.8)); content: ""; inset: 0; position: absolute; }
+.shree-hero-media::after { background: linear-gradient(180deg,transparent 52%,rgba(10,48,42,.84)); content: ""; inset: 0; position: absolute; }
 .shree-hero-media img { height: 100%; object-fit: cover; object-position: center 18%; width: 100%; }
 .shree-hero-overlay { bottom: 30px; color: #fff; left: 34px; position: absolute; z-index: 1; }
 .shree-hero-overlay small { display: block; font-size: 9px; font-weight: 800; letter-spacing: .18em; margin-bottom: 7px; text-transform: uppercase; }
 .shree-hero-overlay strong { display: block; font-family: "Playfair Display",serif; font-size: 26px; font-weight: 500; line-height: 1.08; }
-.shree-benefits { background: #fff; border-bottom: 1px solid var(--shree-line); border-top: 1px solid var(--shree-line); display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.shree-benefits { background: #f9fdfb; border-bottom: 1px solid var(--shree-line); border-top: 1px solid var(--shree-line); display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
 .shree-benefits > div { display: grid; gap: 3px 12px; grid-template-columns: 26px 1fr; padding: 19px clamp(16px,4vw,52px); }
 .shree-benefits > div + div { border-left: 1px solid var(--shree-line); }
 .shree-benefits b { color: var(--shree-gold); font-size: 10px; grid-row: span 2; letter-spacing: .1em; }
@@ -150,7 +150,7 @@ body.shree-storefront .wm-whatsapp-float { z-index: 50; }
 .shree-detail-price { align-items: start; border-bottom: 1px solid var(--shree-line); display: flex; justify-content: space-between; padding-bottom: 16px; }
 .shree-detail-price small { color: var(--shree-muted); display: block; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 .shree-detail-price strong { color: var(--shree-burgundy); display: block; font-family: "Playfair Display",serif; font-size: 30px; font-weight: 500; margin-top: 4px; }
-.shree-detail-price > span { background: #f6e5d5; color: var(--shree-burgundy); font-size: 9px; font-weight: 800; letter-spacing: .05em; padding: 6px 8px; text-transform: uppercase; }
+.shree-detail-price > span { background: #dcece5; color: var(--shree-burgundy); font-size: 9px; font-weight: 800; letter-spacing: .05em; padding: 6px 8px; text-transform: uppercase; }
 .shree-specs { display: grid; gap: 13px; grid-template-columns: 1fr 1fr; margin: 19px 0 0; }
 .shree-specs div { border-left: 1px solid var(--shree-gold); padding-left: 10px; }
 .shree-specs dt { color: var(--shree-muted); font-size: 9px; text-transform: uppercase; }

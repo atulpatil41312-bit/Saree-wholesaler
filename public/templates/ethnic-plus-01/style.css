@@ -1,16 +1,16 @@
 body.ethnic-plus-storefront {
-    --ep-canvas: #fdf9f4;
-    --ep-surface: #fff;
-    --ep-soft: #f7f3ee;
-    --ep-muted-surface: #f1ede8;
-    --ep-ink: #1a1412;
-    --ep-muted: #6b5f59;
-    --ep-line: #e5d7bf;
-    --ep-ruby: #721c24;
-    --ep-burgundy: #800020;
-    --ep-gold: #c5a059;
-    --ep-gold-light: #e9dac1;
-    background: var(--ep-canvas);
+    --ep-canvas: #fbf7fb;
+    --ep-surface: #fffdfd;
+    --ep-soft: #f1e8f1;
+    --ep-muted-surface: #eaddea;
+    --ep-ink: #281b2a;
+    --ep-muted: #6f6072;
+    --ep-line: #dfcfe0;
+    --ep-ruby: #7d2753;
+    --ep-burgundy: #4e1f48;
+    --ep-gold: #c99852;
+    --ep-gold-light: #ead9b6;
+    background: linear-gradient(180deg, #fffafd 0%, var(--ep-canvas) 50%, #f5edf6 100%);
     color: var(--ep-ink);
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 }
@@ -19,7 +19,7 @@ body.ethnic-plus-storefront .wm-whatsapp-float { z-index: 50; }
 .ep-preview { background: var(--ep-ruby); color: #fff; font-size: 12px; letter-spacing: .05em; padding: 10px 18px; text-align: center; }
 .ep-preview a { color: #ffe6bf; text-decoration: underline; }
 .ep-utility { align-items: center; background: var(--ep-ruby); color: #fff; display: flex; font-size: 9px; gap: 20px; justify-content: space-between; letter-spacing: .14em; padding: 8px clamp(16px,4vw,64px); text-transform: uppercase; }
-.ep-header { background: rgba(253,249,244,.96); border-bottom: 1px solid var(--ep-line); position: sticky; top: 0; z-index: 20; }
+.ep-header { background: rgba(251,247,251,.96); border-bottom: 1px solid var(--ep-line); position: sticky; top: 0; z-index: 20; }
 .ep-header-main { align-items: center; display: grid; gap: 20px; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); margin: auto; max-width: 1440px; padding: 17px clamp(16px,4vw,64px); }
 .ep-header-side { align-items: center; display: flex; gap: 15px; min-width: 0; }
 .ep-header-right { justify-content: flex-end; }
@@ -41,9 +41,9 @@ body.ethnic-plus-storefront .wm-whatsapp-float { z-index: 50; }
 .ep-brand:focus-visible,.ep-header-right a:focus-visible,.ep-nav a:focus-visible,.ep-search input:focus-visible,.ep-button:focus-visible,.ep-category-card:focus-visible,.ep-mini-card:focus-visible,.ep-product-media:focus-visible,.ep-product-copy h3 a:focus-visible,.ep-text-link:focus-visible,.ep-outline-link:focus-visible,.ep-pagination a:focus-visible { outline: 2px solid var(--ep-gold); outline-offset: 4px; }
 .ep-main { background: var(--ep-canvas); }
 .ep-hero { background: var(--ep-canvas); padding: clamp(14px,2vw,28px) clamp(14px,4vw,64px) clamp(28px,5vw,54px); }
-.ep-hero-media { aspect-ratio: 2.4 / 1; background-color: var(--ep-ink); background-image: var(--ep-hero-fallback, linear-gradient(135deg,#3d070f,#1a1412)); background-position: center; background-size: cover; margin: auto; max-width: 1440px; min-height: 430px; overflow: hidden; position: relative; }
+.ep-hero-media { aspect-ratio: 2.4 / 1; background-color: var(--ep-ink); background-image: var(--ep-hero-fallback, linear-gradient(135deg,#3b1834,#231425)); background-position: center; background-size: cover; margin: auto; max-width: 1440px; min-height: 430px; overflow: hidden; position: relative; }
 .ep-hero-media > img { height: 100%; object-fit: cover; object-position: center 35%; width: 100%; }
-.ep-hero-shade { background: linear-gradient(90deg,rgba(26,20,18,.88),rgba(26,20,18,.62) 45%,rgba(26,20,18,.05)); inset: 0; position: absolute; }
+.ep-hero-shade { background: linear-gradient(90deg,rgba(37,19,38,.9),rgba(37,19,38,.62) 45%,rgba(37,19,38,.05)); inset: 0; position: absolute; }
 .ep-hero-copy { color: #fff; left: clamp(24px,7vw,100px); max-width: 620px; position: absolute; top: 50%; transform: translateY(-50%); }
 .ep-kicker { color: var(--ep-ruby); font-size: 9px; font-weight: 800; letter-spacing: .23em; margin: 0 0 16px; text-transform: uppercase; }
 .ep-hero .ep-kicker { color: #f4d493; }
@@ -97,7 +97,7 @@ body.ethnic-plus-storefront .wm-whatsapp-float { z-index: 50; }
 .ep-inclusive-copy { align-content: center; background: var(--ep-soft); padding: clamp(30px,5vw,75px); }
 .ep-inclusive-media { min-height: 360px; overflow: hidden; position: relative; }
 .ep-inclusive-media img { height: 100%; object-fit: cover; width: 100%; }
-.ep-inclusive-media span { background: rgba(26,20,18,.76); bottom: 18px; color: #fff; font-size: 9px; left: 18px; letter-spacing: .12em; padding: 8px 10px; position: absolute; text-transform: uppercase; }
+.ep-inclusive-media span { background: rgba(37,19,38,.8); bottom: 18px; color: #fff; font-size: 9px; left: 18px; letter-spacing: .12em; padding: 8px 10px; position: absolute; text-transform: uppercase; }
 .ep-mini-grid { display: grid; gap: 12px; grid-template-columns: repeat(4,minmax(0,1fr)); margin: 18px auto 0; max-width: 1340px; }
 .ep-mini-card { color: var(--ep-ink); min-width: 0; text-decoration: none; }
 .ep-mini-card > span { aspect-ratio: 3/4; background: var(--ep-canvas); border: 1px solid var(--ep-line); display: block; overflow: hidden; }
