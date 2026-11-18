@@ -12,7 +12,7 @@
 @section('content')
     @php
         $shopUrl = $shop->publicUrl();
-        $fallbackImage = asset('templates/ethnic-plus-01/fallback.svg');
+        $fallbackImage = asset('templates/dress-models/dress-01.jpg');
         $productImages = $product->images->map(fn ($image): string => Storage::url($image->path))->values();
         $primaryImage = $productImages->first() ?: $fallbackImage;
         $showPrices = $shop->settings?->show_prices ?? true;

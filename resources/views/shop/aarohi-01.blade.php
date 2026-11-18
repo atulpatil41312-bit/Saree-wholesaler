@@ -13,8 +13,13 @@
     @php
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', ['template' => $template]) : $shopUrl;
-        $fallbackImage = asset('templates/aarohi-01/catalogue.png');
-        $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/aarohi-01/thumbnail.png');
+        $dressFallbackImages = collect(range(1, 8))->map(fn (int $index): string => asset('templates/dress-models/dress-'.str_pad((string) $index, 2, '0', STR_PAD_LEFT).'.jpg'))->all();
+        $fallbackImage = $dressFallbackImages[0];
+        $useDressPreviewImages = ! empty($previewingTemplate);
+        $bannerImage = filled($shop->banner_path) && Storage::disk('public')->exists($shop->banner_path)
+            ? Storage::url($shop->banner_path)
+            : null;
+        $heroImage = $bannerImage ?: $fallbackImage;
         $showPrices = $shop->settings?->show_prices ?? true;
         $whatsappNumber = preg_replace('/\D/', '', (string) $shop->whatsapp);
         $whatsappUrl = preg_match('/^\d{8,15}$/', $whatsappNumber) === 1
@@ -79,7 +84,7 @@
                 </div>
             </div>
             <div class="aarohi-hero-media">
-                <img src="{{ $heroImage }}" alt="{{ $shop->name }} ethnicwear collection" width="1200" height="900">
+                <img src="{{ $heroImage }}" alt="{{ $shop->name }} ethnicwear collection" width="1200" height="900" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='{{ $fallbackImage }}';">
                 <div class="aarohi-hero-caption"><small>THE AAROHI EDIT</small><strong>Details that make a difference.</strong></div>
             </div>
         </section>
@@ -99,7 +104,7 @@
                 <div class="aarohi-category-grid">
                     @foreach ($categories->take(6)->values() as $index => $category)
                         @php($categoryProduct = $products->getCollection()->firstWhere('category_id', $category->id))
-                        @php($categoryImage = $categoryProduct?->images?->first() ? Storage::url($categoryProduct->images->first()->path) : $fallbackImage)
+                        @php($categoryImage = $categoryProduct?->images?->first() && ! $useDressPreviewImages ? Storage::url($categoryProduct->images->first()->path) : $dressFallbackImages[$index % count($dressFallbackImages)])
                         <a class="aarohi-category-card" href="{{ $collectionUrl.'?category='.$category->id }}#catalogue">
                             <img src="{{ $categoryImage }}" alt="{{ $category->name }}" loading="lazy">
                             <span><small>Collection {{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</small><strong>{{ $category->name }} ↗</strong></span>
@@ -129,7 +134,7 @@
                 @if ($products->isNotEmpty())
                     <div class="aarohi-product-grid">
                         @foreach ($products as $product)
-                            @php($productImage = $product->images->first() ? Storage::url($product->images->first()->path) : $fallbackImage)
+                            @php($productImage = $product->images->first() && ! $useDressPreviewImages ? Storage::url($product->images->first()->path) : $dressFallbackImages[$loop->index % count($dressFallbackImages)])
                             @php($price = $showPrices && $product->priceInRupees() !== null ? '₹'.number_format($product->priceInRupees(), 2) : 'Price on enquiry')
                             <article class="aarohi-product">
                                 <a class="aarohi-product-media" href="{{ $product->publicUrl() }}">

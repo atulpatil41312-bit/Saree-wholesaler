@@ -247,7 +247,7 @@ class Shop extends Model
             'description' => 'A regal dress and occasionwear storefront with editorial collections, inclusive sizing and atelier-led discovery.',
             'badge' => 'IMPERIAL COUTURE',
             'asset_path' => 'templates/ethnic-plus-01',
-            'hero_image' => 'thumbnail.png',
+            'hero_image' => 'hero.jpg',
             'hero_heading' => 'Dress for the',
             'hero_emphasis' => 'moment.',
         ],
