@@ -41,7 +41,7 @@ body.ethnic-plus-storefront .wm-whatsapp-float { z-index: 50; }
 .ep-brand:focus-visible,.ep-header-right a:focus-visible,.ep-nav a:focus-visible,.ep-search input:focus-visible,.ep-button:focus-visible,.ep-category-card:focus-visible,.ep-mini-card:focus-visible,.ep-product-media:focus-visible,.ep-product-copy h3 a:focus-visible,.ep-text-link:focus-visible,.ep-outline-link:focus-visible,.ep-pagination a:focus-visible { outline: 2px solid var(--ep-gold); outline-offset: 4px; }
 .ep-main { background: var(--ep-canvas); }
 .ep-hero { background: var(--ep-canvas); padding: clamp(14px,2vw,28px) clamp(14px,4vw,64px) clamp(28px,5vw,54px); }
-.ep-hero-media { aspect-ratio: 2.4 / 1; background: var(--ep-ink); margin: auto; max-width: 1440px; min-height: 430px; overflow: hidden; position: relative; }
+.ep-hero-media { aspect-ratio: 2.4 / 1; background-color: var(--ep-ink); background-image: var(--ep-hero-fallback, linear-gradient(135deg,#3d070f,#1a1412)); background-position: center; background-size: cover; margin: auto; max-width: 1440px; min-height: 430px; overflow: hidden; position: relative; }
 .ep-hero-media > img { height: 100%; object-fit: cover; object-position: center 35%; width: 100%; }
 .ep-hero-shade { background: linear-gradient(90deg,rgba(26,20,18,.88),rgba(26,20,18,.62) 45%,rgba(26,20,18,.05)); inset: 0; position: absolute; }
 .ep-hero-copy { color: #fff; left: clamp(24px,7vw,100px); max-width: 620px; position: absolute; top: 50%; transform: translateY(-50%); }

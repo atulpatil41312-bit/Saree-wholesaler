@@ -18,9 +18,15 @@
         $heroProduct = $catalogueProducts->first();
         $featureProduct = $catalogueProducts->get(1) ?: $heroProduct;
         $editorialProduct = $catalogueProducts->get(2) ?: $heroProduct;
-        $heroImage = $shop->banner_path
+        // A shop can retain a banner path after the file has been removed or
+        // moved. Only use a banner when it is still available; otherwise the
+        // first catalogue image (or the editorial fallback) keeps the hero
+        // visually complete instead of showing a broken image.
+        $bannerImage = filled($shop->banner_path) && Storage::disk('public')->exists($shop->banner_path)
             ? Storage::url($shop->banner_path)
-            : ($heroProduct?->images?->first() ? Storage::url($heroProduct->images->first()->path) : $fallbackImage);
+            : null;
+        $heroImage = $bannerImage
+            ?: ($heroProduct?->images?->first() ? Storage::url($heroProduct->images->first()->path) : $fallbackImage);
         $featureImage = $featureProduct?->images?->first() ? Storage::url($featureProduct->images->first()->path) : $fallbackImage;
         $editorialImage = $editorialProduct?->images?->first() ? Storage::url($editorialProduct->images->first()->path) : $fallbackImage;
         $showPrices = $shop->settings?->show_prices ?? true;
@@ -57,7 +63,7 @@
 
     <main class="ep-main">
         <section class="ep-hero" aria-labelledby="ep-hero-heading">
-            <div class="ep-hero-media"><img src="{{ $heroImage }}" alt="{{ $shop->name }} occasionwear collection" width="1600" height="900"><div class="ep-hero-shade"></div><div class="ep-hero-copy"><p class="ep-kicker">THE IMPERIAL COUTURE EDIT</p><h1 id="ep-hero-heading">{{ $shop->name }}<br><em>occasion collection.</em></h1><p>{{ $shop->description ?: 'Regal Indian occasionwear for celebrations, heirloom memories and the modern boutique wardrobe.' }}</p><div class="ep-hero-offers"><span>{{ $products->total() }} live styles</span><span>Wholesale-ready details</span><span>Direct seller access</span></div><div class="ep-actions"><a class="ep-button ep-button-primary" href="{{ $collectionUrl }}#trending">Shop the edit <span aria-hidden="true">↗</span></a><a class="ep-button ep-button-outline" href="{{ $collectionUrl }}#plus-size-spotlight">Explore inclusive fits <span aria-hidden="true">↗</span></a></div></div></div>
+            <div class="ep-hero-media" style="--ep-hero-fallback: url('{{ $fallbackImage }}');"><img src="{{ $heroImage }}" alt="{{ $shop->name }} occasionwear collection" width="1600" height="900" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.hidden=true;"><div class="ep-hero-shade"></div><div class="ep-hero-copy"><p class="ep-kicker">THE IMPERIAL COUTURE EDIT</p><h1 id="ep-hero-heading">{{ $shop->name }}<br><em>occasion collection.</em></h1><p>{{ $shop->description ?: 'Regal Indian occasionwear for celebrations, heirloom memories and the modern boutique wardrobe.' }}</p><div class="ep-hero-offers"><span>{{ $products->total() }} live styles</span><span>Wholesale-ready details</span><span>Direct seller access</span></div><div class="ep-actions"><a class="ep-button ep-button-primary" href="{{ $collectionUrl }}#trending">Shop the edit <span aria-hidden="true">↗</span></a><a class="ep-button ep-button-outline" href="{{ $collectionUrl }}#plus-size-spotlight">Explore inclusive fits <span aria-hidden="true">↗</span></a></div></div></div>
         </section>
 
         <section class="ep-proof" aria-label="Shop benefits"><div><span>✦</span><strong>Authentic craft</strong><small>Curated Indian occasionwear</small></div><div><span>◈</span><strong>Clear buying</strong><small>MOQ, packs and prices on every style</small></div><div><span>↗</span><strong>Personal access</strong><small>Connect directly with {{ $shop->name }}</small></div></section>
