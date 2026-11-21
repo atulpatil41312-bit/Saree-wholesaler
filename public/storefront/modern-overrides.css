@@ -46,7 +46,7 @@ body.wm-storefront-page.varanasa-atelier {
     --wm-modern-gold: #c49b5e;
 }
 
-body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .va-header, .wm header),
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .va-header, .dr-header, .mf-header, .rs-header, .wm header),
 body.wm-storefront-page > header {
     position: sticky;
     top: 0;
@@ -364,3 +364,70 @@ html.wm-motion-ready body.wm-storefront-page .wm-reveal.is-visible {
         transition: none !important;
     }
 }
+
+/*
+ * Saree template identities.
+ *
+ * The shared modern layer intentionally gives every storefront the same
+ * interaction language, but the palette, header surface and footer anchor are
+ * scoped per template so a shop owner can tell the designs apart at a glance.
+ */
+body.wm-storefront-page:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack):not(.ivory-weaves):not(.lashkaraa-edit):not(.mavuris-edit):not(.varanasa-atelier):not(.draape-runway):not(.mehfil-boutique):not(.rang-studio),
+body.wm-storefront-page.vastra-emerald,
+body.wm-storefront-page.saree-template-pack.rose-atelier,
+body.wm-storefront-page.saree-template-pack.royal-noir,
+body.wm-storefront-page.saree-template-pack.indigo-edit,
+body.wm-storefront-page.wholesaler-templates,
+body.wm-storefront-page.ivory-weaves,
+body.wm-storefront-page.lashkaraa-edit,
+body.wm-storefront-page.mavuris-edit,
+body.wm-storefront-page.varanasa-atelier,
+body.wm-storefront-page.draape-runway,
+body.wm-storefront-page.mehfil-boutique,
+body.wm-storefront-page.rang-studio {
+    background-color: var(--wm-modern-paper);
+}
+
+body.wm-storefront-page:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack):not(.ivory-weaves):not(.lashkaraa-edit):not(.mavuris-edit):not(.varanasa-atelier):not(.draape-runway):not(.mehfil-boutique):not(.rang-studio) {
+    --wm-modern-accent: #6e3048;
+    --wm-modern-accent-deep: #422035;
+    --wm-modern-gold: #b9854e;
+    --wm-modern-paper: #fbf6f0;
+    --wm-modern-panel: #fffaf6;
+}
+
+body.wm-storefront-page.vastra-emerald { --wm-modern-accent: #1b6856; --wm-modern-accent-deep: #123b32; --wm-modern-gold: #b39353; --wm-modern-paper: #f4f8f1; --wm-modern-panel: #f8fbf3; }
+body.wm-storefront-page.saree-template-pack.rose-atelier { --wm-modern-accent: #a34461; --wm-modern-accent-deep: #5d253e; --wm-modern-gold: #ca9a56; --wm-modern-paper: #fff8f6; --wm-modern-panel: #fffdfc; }
+body.wm-storefront-page.saree-template-pack.royal-noir { --wm-modern-accent: #b97843; --wm-modern-accent-deep: #3a1f1b; --wm-modern-gold: #d6ac69; --wm-modern-paper: #171315; --wm-modern-panel: #2a2225; }
+body.wm-storefront-page.saree-template-pack.indigo-edit { --wm-modern-accent: #345f98; --wm-modern-accent-deep: #203b63; --wm-modern-gold: #b68c56; --wm-modern-paper: #f3f7fc; --wm-modern-panel: #f7faff; }
+body.wm-storefront-page.wholesaler-templates { --wm-modern-accent: #934333; --wm-modern-accent-deep: #5b201d; --wm-modern-gold: #d09a4c; --wm-modern-paper: #f7efe3; --wm-modern-panel: #fff9f1; }
+body.wm-storefront-page.ivory-weaves { --wm-modern-accent: #2c6b60; --wm-modern-accent-deep: #163833; --wm-modern-gold: #a17739; --wm-modern-paper: #f1f5ef; --wm-modern-panel: #fbfbf5; }
+body.wm-storefront-page.lashkaraa-edit { --wm-modern-accent: #294f77; --wm-modern-accent-deep: #1a314c; --wm-modern-gold: #9a6f3d; --wm-modern-paper: #eff1f6; --wm-modern-panel: #f7f8fb; }
+body.wm-storefront-page.mavuris-edit { --wm-modern-accent: #8d315e; --wm-modern-accent-deep: #52203d; --wm-modern-gold: #b57a4c; --wm-modern-paper: #f4eff6; --wm-modern-panel: #fffafd; }
+body.wm-storefront-page.varanasa-atelier { --wm-modern-accent: #6e3b64; --wm-modern-accent-deep: #45253f; --wm-modern-gold: #bd9855; --wm-modern-paper: #f3eaf4; --wm-modern-panel: #fbf8fc; }
+body.wm-storefront-page.draape-runway { --wm-modern-accent: #385b9a; --wm-modern-accent-deep: #203761; --wm-modern-gold: #c48d4a; --wm-modern-paper: #eef3fb; --wm-modern-panel: #f7f8fb; }
+body.wm-storefront-page.mehfil-boutique { --wm-modern-accent: #2d5872; --wm-modern-accent-deep: #1d3146; --wm-modern-gold: #b98b47; --wm-modern-paper: #eef4f7; --wm-modern-panel: #f8fbfd; }
+body.wm-storefront-page.rang-studio { --wm-modern-accent: #1d4d40; --wm-modern-accent-deep: #15352e; --wm-modern-gold: #c06a32; --wm-modern-paper: #eef4ef; --wm-modern-panel: #f8faf8; }
+
+body.wm-storefront-page { background: var(--wm-modern-paper); }
+
+/* The retailer pack contains three layouts in one stylesheet. :has() keeps
+ * each variant's identity without adding another database/template key. */
+body.wm-storefront-page.retailer-template-pack:has(.royal-drape) { --wm-modern-accent: #6b1f3b; --wm-modern-accent-deep: #421327; --wm-modern-gold: #c59a58; --wm-modern-paper: #fbf4ed; --wm-modern-panel: #fffaf5; }
+body.wm-storefront-page.retailer-template-pack:has(.silk-atelier) { --wm-modern-accent: #24536b; --wm-modern-accent-deep: #183645; --wm-modern-gold: #c88f55; --wm-modern-paper: #f3f8f8; --wm-modern-panel: #fbffff; }
+body.wm-storefront-page.retailer-template-pack:has(.heritage-weaves) { --wm-modern-accent: #8b4c2f; --wm-modern-accent-deep: #5a2d20; --wm-modern-gold: #bd934b; --wm-modern-paper: #f8efe1; --wm-modern-panel: #fffaf1; }
+body.wm-storefront-page.retailer-template-pack:has(.royal-drape) .wm,
+body.wm-storefront-page.retailer-template-pack:has(.silk-atelier) .wm,
+body.wm-storefront-page.retailer-template-pack:has(.heritage-weaves) .wm { background: var(--wm-modern-paper); }
+
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .va-header, .dr-header, .mf-header, .rs-header, .wm header),
+body.wm-storefront-page > header {
+    background: var(--wm-modern-panel) !important;
+}
+
+body.wm-storefront-page .wm-site-footer {
+    background: linear-gradient(135deg, var(--wm-modern-accent-deep), var(--wm-modern-accent) 62%, color-mix(in srgb, var(--wm-modern-accent) 72%, #111 28%));
+}
+
+body.wm-storefront-page :is(.stp-header, .ve-header, .wta-header, .iw-header, .le-header, .me-header, .va-header, .dr-header, .mf-header, .rs-header, .wm header) a:hover,
+body.wm-storefront-page > header a:hover { color: var(--wm-modern-accent) !important; }

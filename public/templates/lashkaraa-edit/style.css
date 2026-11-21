@@ -1,11 +1,11 @@
 .lashkaraa-edit {
-    --le-ink: #1f2725;
-    --le-muted: #68716d;
-    --le-line: #dedfd9;
-    --le-soft: #f5f4ef;
-    --le-gold: #b1844d;
-    --le-red: #8c2f42;
-    background: #fff;
+    --le-ink: #23262e;
+    --le-muted: #6b707b;
+    --le-line: #dfe1e7;
+    --le-soft: #f2f3f7;
+    --le-gold: #9a6f3d;
+    --le-red: #294f77;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7fa 60%, #eef1f6 100%);
     color: var(--le-ink);
     font-family: Arial, Helvetica, sans-serif;
 }

@@ -1,14 +1,14 @@
 .mehfil-boutique {
-    --mf-ink: #0f1b29;
-    --mf-ink-soft: #1e293b;
-    --mf-ivory: #fbf9f5;
-    --mf-paper: #f7f4ee;
-    --mf-gold: #c5a059;
-    --mf-gold-soft: #ffdea5;
-    --mf-line: #e6dfd5;
-    --mf-muted: #5f6670;
+    --mf-ink: #1d2430;
+    --mf-ink-soft: #2d3c51;
+    --mf-ivory: #f8fbfd;
+    --mf-paper: #eef4f7;
+    --mf-gold: #b98b47;
+    --mf-gold-soft: #f3d9a5;
+    --mf-line: #d9e3ea;
+    --mf-muted: #607080;
     --mf-whatsapp: #128c7e;
-    background: var(--mf-ivory);
+    background: linear-gradient(180deg, #fcfeff 0%, var(--mf-ivory) 55%, #edf4f8 100%);
     color: var(--mf-ink);
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
@@ -19,7 +19,7 @@
 
 .mf-skip { position: absolute; left: -9999px; top: auto; }
 .mf-skip:focus { left: 1rem; top: 1rem; z-index: 100; padding: .75rem 1rem; background: var(--mf-gold-soft); color: var(--mf-ink); }
-.mf-header { position: sticky; top: 0; z-index: 50; background: rgba(251,249,245,.96); border-bottom: 1px solid var(--mf-line); backdrop-filter: blur(14px); }
+.mf-header { position: sticky; top: 0; z-index: 50; background: rgba(248,251,253,.96); border-bottom: 1px solid var(--mf-line); backdrop-filter: blur(14px); }
 .mf-ribbon { background: var(--mf-ink); color: var(--mf-ivory); padding: .45rem 1rem; font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .mf-ribbon-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; max-width: 1440px; margin: 0 auto; }
 .mf-ribbon strong { color: var(--mf-gold-soft); }

@@ -1,15 +1,15 @@
 body.varanasa-atelier {
-    --va-ink: #231815;
-    --va-charcoal: #3a2e2b;
-    --va-muted: #7a6b67;
-    --va-burgundy: #5a1020;
-    --va-burgundy-dark: #3f0b16;
-    --va-gold: #c5a059;
-    --va-gold-light: #e6cf9b;
-    --va-surface: #fff8f6;
-    --va-surface-low: #fdf1ed;
-    --va-line: #e3d8d4;
-    background: var(--va-surface);
+    --va-ink: #271d2b;
+    --va-charcoal: #3a3043;
+    --va-muted: #766c7b;
+    --va-burgundy: #6e3b64;
+    --va-burgundy-dark: #45253f;
+    --va-gold: #bd9855;
+    --va-gold-light: #ead7ad;
+    --va-surface: #fbf8fc;
+    --va-surface-low: #f2e9f2;
+    --va-line: #e1d5e2;
+    background: linear-gradient(180deg, #fffaff 0%, var(--va-surface) 56%, #f3eaf4 100%);
     color: var(--va-ink);
     font-family: "Plus Jakarta Sans", "Jura", system-ui, sans-serif;
     margin: 0;

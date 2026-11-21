@@ -1,11 +1,11 @@
 .ivory-weaves {
-    --iw-forest: #293f35;
-    --iw-forest-deep: #1f3028;
-    --iw-ivory: #fffdf7;
-    --iw-sand: #f1eee4;
-    --iw-line: #ddd8cc;
-    --iw-gold: #a06824;
-    background: var(--iw-ivory);
+    --iw-forest: #234d46;
+    --iw-forest-deep: #163833;
+    --iw-ivory: #fbfbf5;
+    --iw-sand: #e8eee5;
+    --iw-line: #d7e0d5;
+    --iw-gold: #a17739;
+    background: linear-gradient(180deg, #fffffb 0%, var(--iw-ivory) 55%, #eff3eb 100%);
     color: var(--iw-forest);
     font-family: Georgia, 'Times New Roman', serif;
 }

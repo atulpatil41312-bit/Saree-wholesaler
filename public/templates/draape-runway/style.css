@@ -1,10 +1,10 @@
 body.draape-runway {
-    --dr-paper: #faf8f5;
-    --dr-ink: #1a1a1a;
-    --dr-coral: #ff5349;
-    --dr-plum: #9b1d5f;
-    --dr-blush: #fde2e4;
-    background: var(--dr-paper);
+    --dr-paper: #f7f8fb;
+    --dr-ink: #17233a;
+    --dr-coral: #dd5b4f;
+    --dr-plum: #385b9a;
+    --dr-blush: #e5edf9;
+    background: linear-gradient(180deg, #fcfdff 0%, var(--dr-paper) 55%, #edf1f8 100%);
     color: var(--dr-ink);
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 }

@@ -4,3 +4,18 @@ body.vastra-emerald .ve-primary:visited {
     color: #fff !important;
     font-weight: 600;
 }
+/* Emerald palette refinement for both catalogue and product views. */
+body.vastra-emerald {
+    --ve-emerald: #1b6856;
+    --ve-ink: #203b35;
+    --ve-muted: #64756e;
+    --ve-paper: #f4f8f1;
+    --ve-line: #d4e0d4;
+    --ve-gold: #b39353;
+    background: linear-gradient(180deg, #fbfdf8 0%, var(--ve-paper) 52%, #e9f0e4 100%);
+}
+
+body.vastra-emerald .ve-header { background: var(--ve-paper); }
+body.vastra-emerald .ve-announcement { background: var(--ve-emerald); }
+body.vastra-emerald .ve-ribbon { background: #dce8d8; color: #245749; }
+body.vastra-emerald .ve-footer { background: #dce8d8; }

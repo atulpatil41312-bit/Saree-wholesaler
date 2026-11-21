@@ -185,6 +185,20 @@ body.saree-template-pack.rose-atelier .stp-product-photo { border-radius: 8px; }
 body.saree-template-pack.rose-atelier .stp-sourcing,
 body.saree-template-pack.rose-atelier .stp-contact-card { border-radius: 17px; }
 
+/* Rose Atelier: blush, raspberry and champagne for a softer boutique identity. */
+body.saree-template-pack.rose-atelier { background: #fff8f6; }
+body.saree-template-pack.rose-atelier .stp-shell {
+    --stp-accent: #a34461;
+    --stp-paper: #fff8f6;
+    --stp-ink: #3d2530;
+    --stp-muted: #806b75;
+    --stp-line: #ecd9df;
+    --stp-soft: #f7e7e8;
+    --stp-card: #fffdfc;
+}
+body.saree-template-pack.rose-atelier .stp-topline { background: #743149; }
+body.saree-template-pack.rose-atelier .stp-footer { background: #f4dfe3; }
+
 body.saree-template-pack.indigo-edit { background: #f8fafc; }
 body.saree-template-pack.indigo-edit .stp-shell { --stp-accent: #304d78; --stp-paper: #f8fafc; --stp-ink: #22354f; --stp-muted: #69768a; --stp-line: #dce3ec; --stp-soft: #e9eff7; --stp-card: #fff; --stp-on-accent: #fff; }
 body.saree-template-pack.indigo-edit .stp-header { background: #fff; }
@@ -213,6 +227,36 @@ body.saree-template-pack.indigo-edit .stp-edit-card,
 body.saree-template-pack.indigo-edit .stp-sourcing,
 body.saree-template-pack.indigo-edit .stp-contact-card { border-radius: 10px; }
 body.saree-template-pack.indigo-edit .stp-edit-card b { font-family: Arial, Helvetica, sans-serif; }
+
+/* Royal Noir: cinematic espresso, copper and parchment. */
+body.saree-template-pack.royal-noir { background: #171315; }
+body.saree-template-pack.royal-noir .stp-shell {
+    --stp-accent: #c58b54;
+    --stp-paper: #171315;
+    --stp-ink: #f5eee4;
+    --stp-muted: #b9a9a1;
+    --stp-line: #403539;
+    --stp-soft: #241d22;
+    --stp-card: #2b232a;
+    --stp-on-accent: #23171a;
+}
+body.saree-template-pack.royal-noir .stp-hero { background: #241a1d; }
+body.saree-template-pack.royal-noir .stp-hero-visual::after { background: linear-gradient(90deg, #241a1d, transparent 48%), linear-gradient(0deg, #241a1dcc, transparent 45%); }
+body.saree-template-pack.royal-noir .stp-footer { background: #100e11; }
+
+/* Indigo Edit: crisp sapphire, cloud and silver for a modern catalogue feel. */
+body.saree-template-pack.indigo-edit { background: #f3f7fc; }
+body.saree-template-pack.indigo-edit .stp-shell {
+    --stp-accent: #315a94;
+    --stp-paper: #f3f7fc;
+    --stp-ink: #1e3555;
+    --stp-muted: #657994;
+    --stp-line: #d6e0ed;
+    --stp-soft: #e5edf7;
+    --stp-card: #ffffff;
+}
+body.saree-template-pack.indigo-edit .stp-header { background: #fafdff; }
+body.saree-template-pack.indigo-edit .stp-footer { background: #dce8f4; }
 
 @media (max-width: 1000px) {
     body.saree-template-pack .stp-header { gap: 16px; }

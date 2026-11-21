@@ -1,14 +1,14 @@
 .rang-studio {
-    --rs-bg: #fef8f9;
-    --rs-paper: #f8f2f3;
-    --rs-card: #fff;
-    --rs-ink: #241020;
-    --rs-muted: #6e6269;
-    --rs-line: #e5dadd;
-    --rs-accent: #a73924;
-    --rs-gold: #b58c38;
-    --rs-green: #263b34;
-    background: var(--rs-bg);
+    --rs-bg: #f8faf8;
+    --rs-paper: #eef4ef;
+    --rs-card: #fffef9;
+    --rs-ink: #19352d;
+    --rs-muted: #64736c;
+    --rs-line: #d5e1d8;
+    --rs-accent: #c06a32;
+    --rs-gold: #ad8a3f;
+    --rs-green: #1d4d40;
+    background: linear-gradient(180deg, #fdfffc 0%, var(--rs-bg) 55%, #edf3ed 100%);
     color: #1d1b1c;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }

@@ -1,12 +1,12 @@
 /* Mavuris Edit: editorial saree storefront inspired by modern silk ateliers. */
 body.mavuris-edit {
-    --me-ink: #171519;
-    --me-muted: #6f6a70;
-    --me-soft: #f6f5f2;
-    --me-line: #e6e2df;
-    --me-accent: #8b174f;
-    --me-dark: #080808;
-    background: #fff;
+    --me-ink: #211d26;
+    --me-muted: #716b78;
+    --me-soft: #f4eff6;
+    --me-line: #e3dbe7;
+    --me-accent: #8d315e;
+    --me-dark: #271a2d;
+    background: linear-gradient(180deg, #fffafd 0%, #faf5fb 60%, #f3eaf6 100%);
     color: var(--me-ink);
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -16,7 +16,7 @@ body.mavuris-edit a { color: inherit; }
 body.mavuris-edit button,
 body.mavuris-edit input,
 body.mavuris-edit select { font: inherit; }
-.me-shell { min-height: 100vh; overflow: clip; background: #fff; }
+.me-shell { min-height: 100vh; overflow: clip; background: transparent; }
 .me-shell a { text-decoration: none; }
 .me-skip { position: fixed; z-index: 100; top: 8px; left: 12px; padding: 10px 14px; color: #fff; background: var(--me-accent); transform: translateY(-160%); transition: transform .2s ease; }
 .me-skip:focus { transform: translateY(0); }

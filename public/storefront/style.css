@@ -10,5 +10,17 @@
 .catalogue-note{color:var(--muted);font-size:11px;letter-spacing:.25px;margin:0}
 .classic-storefront .wm-product-actions{padding:0 7px 7px}
 
+/* WholeMarket Classic: a warm editorial palette distinct from the other saree edits. */
+body.wm-storefront-page:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack):not(.ivory-weaves):not(.lashkaraa-edit):not(.mavuris-edit):not(.varanasa-atelier):not(.draape-runway):not(.mehfil-boutique):not(.rang-studio) {
+    --wine: #6e3048;
+    --ink: #302329;
+    --muted: #786a70;
+    --paper: #fbf6f0;
+    --line: #e7d9d3;
+    --gold: #b9854e;
+    background: linear-gradient(180deg, #fffaf6 0%, var(--paper) 55%, #f7ede6 100%);
+}
+body.wm-storefront-page:not(.vastra-emerald):not(.saree-template-pack):not(.wholesaler-templates):not(.retailer-template-pack):not(.ivory-weaves):not(.lashkaraa-edit):not(.mavuris-edit):not(.varanasa-atelier):not(.draape-runway):not(.mehfil-boutique):not(.rang-studio) footer { background: #f0e4da; }
+
 /* Authentication forms */
 .contact form{display:grid;gap:14px;max-width:470px;margin-top:25px}.contact form label{display:grid;gap:6px;color:var(--ink);font-size:11px;letter-spacing:.5px}.contact form input:not([type="checkbox"]){width:100%;border:1px solid #cbb9ae;background:#fff;padding:12px 13px;color:var(--ink)}.contact form input:focus{outline:2px solid #b18a53;outline-offset:2px}.contact form label:has(input[type="checkbox"]){display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0}.contact form .primary{justify-content:center;width:max-content;margin-top:3px}.contact form+ p{margin-top:24px}.contact form p{margin:0;font-size:11px;color:#9c3049}@media(max-width:600px){.contact form{max-width:none}.contact form .primary{width:100%}}
