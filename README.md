@@ -13,6 +13,16 @@ The repository includes `render.yaml` and a Docker build for a full Laravel depl
 
 The first request can take longer when running on Render's free plan. Every later push to `main` triggers a deployment automatically.
 
+## Deploy on DigitalOcean with GitHub Actions
+
+For a server-managed deployment, the repository includes a protected GitHub Actions workflow and
+an immutable-release script in [`deploy/digitalocean/`](deploy/digitalocean/). The workflow runs
+the existing build and test commands, uploads an archive over verified SSH, keeps previous
+releases for rollback, and checks the HTTPS `/up` endpoint before considering a release active.
+It never stores `.env`, uploads, or credentials in GitHub. Follow the one-time server setup and
+GitHub environment checklist in [`deploy/digitalocean/README.md`](deploy/digitalocean/README.md);
+no live server or DNS changes are made by repository checkout alone.
+
 ## Local development
 
 ```powershell
