@@ -116,6 +116,12 @@ mkdir "$temporary_dir"
 tar -xzf "$archive" -C "$temporary_dir"
 [[ ! -e "$temporary_dir/.env" ]] || die 'release archive must not contain .env.'
 
+# The web process must be able to read the immutable release tree. The parent
+# releases directory is expected to use the web-process group as its setgid
+# group so these permissions survive extraction.
+find "$temporary_dir" -type d -exec chmod g+rx {} +
+find "$temporary_dir" -type f -exec chmod g+r {} +
+
 mkdir -p "$temporary_dir/bootstrap/cache"
 ln -s "$shared_dir/.env" "$temporary_dir/.env"
 ln -s "$shared_dir/storage" "$temporary_dir/storage"
@@ -131,12 +137,25 @@ if [[ "$run_migrations" == 'true' ]]; then
     php "$temporary_dir/artisan" migrate --force --no-interaction
 fi
 
-php "$temporary_dir/artisan" optimize:clear --no-interaction
-php "$temporary_dir/artisan" config:cache --no-interaction
-php "$temporary_dir/artisan" route:cache --no-interaction
-php "$temporary_dir/artisan" view:cache --no-interaction
-
 mv -- "$temporary_dir" "$release_dir"
+
+# Cache after the temporary directory has been renamed. Laravel stores
+# absolute paths (for example compiled views and log files) in its cached
+# configuration; caching before the rename leaves those paths pointing at the
+# removed .tmp directory.
+if ! (
+    cd "$release_dir"
+    php artisan optimize:clear --no-interaction
+    php artisan config:cache --no-interaction
+    php artisan route:cache --no-interaction
+    php artisan view:cache --no-interaction
+); then
+    rm -rf -- "$release_dir"
+    die 'Laravel cache warm-up failed.'
+fi
+
+find "$release_dir" -type d -exec chmod g+rx {} +
+find "$release_dir" -type f -exec chmod g+r {} +
 
 previous_target=''
 if [[ -L "$current_link" ]]; then
@@ -156,6 +175,7 @@ rollback() {
     else
         rm -f -- "$current_link"
     fi
+    rm -rf -- "$release_dir"
 }
 
 if ! curl --fail --silent --show-error --max-time 20 "$health_url" >/dev/null; then
