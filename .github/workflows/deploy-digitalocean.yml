@@ -136,6 +136,9 @@ jobs:
       DEPLOY_SCRIPT: ${{ vars.DEPLOY_SCRIPT || '/opt/wholemarket/bin/deploy-release' }}
       DEPLOY_HEALTH_URL: ${{ vars.DEPLOY_HEALTH_URL }}
       DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+      # Optional passphrase for an encrypted deploy key. Keep this separate
+      # from the private-key secret; the workflow never prints either value.
+      DEPLOY_SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
       DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
       RUN_MIGRATIONS: ${{ github.event_name == 'workflow_dispatch' && inputs.run_migrations || 'false' }}
     steps:
@@ -173,12 +176,45 @@ jobs:
 
           key_file="$RUNNER_TEMP/wholemarket-deploy-key"
           known_hosts_file="$RUNNER_TEMP/wholemarket-known-hosts"
+          askpass_file="$RUNNER_TEMP/wholemarket-ssh-askpass"
           printf '%s\n' "$DEPLOY_SSH_PRIVATE_KEY" > "$key_file"
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$known_hosts_file"
 
           chmod 600 "$key_file" "$known_hosts_file"
-          ssh-keygen -y -f "$key_file" >/dev/null
           ssh-keygen -F "$DEPLOY_HOST" -f "$known_hosts_file" >/dev/null
+
+          # Load the key into an ephemeral ssh-agent so both later steps can
+          # use encrypted and unencrypted keys without exposing a passphrase
+          # on a command line or in logs.
+          cat > "$askpass_file" <<'EOF'
+          #!/usr/bin/env bash
+          printf '%s' "${DEPLOY_SSH_KEY_PASSPHRASE:-}"
+          EOF
+          chmod 700 "$askpass_file"
+
+          eval "$(ssh-agent -s)"
+          export SSH_ASKPASS="$askpass_file"
+          export SSH_ASKPASS_REQUIRE=force
+          export DISPLAY=:0
+          if ! ssh-add "$key_file" </dev/null; then
+            if [[ -z "${DEPLOY_SSH_KEY_PASSPHRASE:-}" ]]; then
+              echo 'The deploy key is encrypted. Add the DEPLOY_SSH_KEY_PASSPHRASE production secret.' >&2
+            else
+              echo 'The deploy key could not be unlocked with DEPLOY_SSH_KEY_PASSPHRASE.' >&2
+            fi
+            exit 1
+          fi
+
+          # Persist only agent metadata and file paths between steps. The
+          # private key and passphrase remain in the runner's protected temp
+          # directory and are never written to the repository or job output.
+          {
+            echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+            echo "SSH_AGENT_PID=$SSH_AGENT_PID"
+            echo "SSH_ASKPASS=$askpass_file"
+            echo 'SSH_ASKPASS_REQUIRE=force'
+            echo 'DISPLAY=:0'
+          } >> "$GITHUB_ENV"
 
           echo "key_file=$key_file" >> "$GITHUB_OUTPUT"
           echo "known_hosts_file=$known_hosts_file" >> "$GITHUB_OUTPUT"
@@ -196,9 +232,9 @@ jobs:
 
           scp \
             -P "$DEPLOY_PORT" \
-            -i "${{ steps.ssh.outputs.key_file }}" \
             -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
+            -o IdentitiesOnly=no \
+            -o IdentityAgent="$SSH_AUTH_SOCK" \
             -o StrictHostKeyChecking=yes \
             -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
             -o ConnectTimeout=15 \
@@ -223,9 +259,9 @@ jobs:
 
           ssh \
             -p "$DEPLOY_PORT" \
-            -i "${{ steps.ssh.outputs.key_file }}" \
             -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
+            -o IdentitiesOnly=no \
+            -o IdentityAgent="$SSH_AUTH_SOCK" \
             -o StrictHostKeyChecking=yes \
             -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
             -o ConnectTimeout=15 \

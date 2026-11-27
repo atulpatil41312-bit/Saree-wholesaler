@@ -30,9 +30,14 @@ Create a GitHub environment named `production` and, if desired, require a review
 Add these environment secrets. Their values must be entered only in GitHub Settings; never paste them into chat or commit them:
 
 - `DEPLOY_SSH_PRIVATE_KEY`: a dedicated key whose public key is restricted to the deployment account.
+- `DEPLOY_SSH_KEY_PASSPHRASE` (optional): the passphrase for the encrypted deploy key. Add it when
+  the private key is passphrase-protected; leave it unset for an unencrypted CI-only key.
 - `DEPLOY_KNOWN_HOSTS`: the server's verified SSH host-key line(s), collected out-of-band and reviewed before saving.
 
-The workflow does not accept a password, disables no host-key checks, and does not print these values. Keep the `production` environment protected and restrict who can push to `main`.
+The workflow does not accept a server password, disables no host-key checks, and does not print these values.
+The key is loaded into an ephemeral runner-local `ssh-agent`; the passphrase is read only through
+the protected GitHub secret when needed. Keep the `production` environment protected and restrict
+who can push to `main`.
 
 Run-on-push deployments do not run migrations. To apply a migration, start **Actions → Deploy WholeMarket to DigitalOcean → Run workflow**, choose `main`, and set `run_migrations` to `true`. The server refuses that operation unless a backup command is configured.
 
