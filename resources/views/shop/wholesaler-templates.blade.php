@@ -26,7 +26,7 @@
         $showPrices = $settings?->show_prices ?? true;
         $assetBase = asset('templates/wholesaler-templates');
         $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
-        $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
+        $productFallbackImages = ['models/look-2.jpg', 'models/hero.jpg', 'models/look-1.jpg', 'models/look-3.jpg'];
         $shopUrl = $shop->publicUrl();
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');

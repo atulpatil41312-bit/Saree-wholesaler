@@ -62,7 +62,9 @@ jobs:
         run: php artisan config:clear --ansi
 
       - name: Run application tests
-        run: php artisan test --compact
+        # Process isolation keeps image/GD tests from retaining state between
+        # feature classes on the hosted runner.
+        run: php artisan test --compact --process-isolation
 
       - name: Install production-only PHP dependencies
         run: composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader

@@ -11,7 +11,7 @@
         $assetBase = asset('templates/retailer-pack');
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');
         $categoryImages = ['models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg', 'models/hero.jpg'];
-        $productFallbackImages = ['models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg', 'models/look-3.jpg'];
+        $productFallbackImages = ['models/look-3.jpg', 'models/hero.jpg', 'models/look-1.jpg', 'models/look-2.jpg'];
         $whatsappNumber = preg_replace('/\D/', '', $shop->whatsapp ?? '');
         $hasWhatsapp = strlen($whatsappNumber) >= 8 && strlen($whatsappNumber) <= 15;
         $shopUrl = $shop->publicUrl();

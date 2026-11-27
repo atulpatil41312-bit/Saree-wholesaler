@@ -21,7 +21,11 @@
         $collectionUrl = ! empty($previewingTemplate) ? route('seller.design.preview', $template) : $shopUrl;
         $heroImage = $shop->banner_path ? Storage::url($shop->banner_path) : asset('templates/shared/ivory-party.webp');
         $categoryImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg'];
-        $productFallbackImages = ['saree0.jpg', 'saree1.jpg', 'saree2.jpg', 'saree.jpg'];
+        $productFallbackImages = match ($template) {
+            'rose-atelier' => ['saree2.jpg', 'saree0.jpg', 'saree1.jpg', 'saree.jpg'],
+            'indigo-edit' => ['saree1.jpg', 'saree0.jpg', 'saree2.jpg', 'saree.jpg'],
+            default => ['saree.jpg', 'saree0.jpg', 'saree1.jpg', 'saree2.jpg'],
+        };
     @endphp
 
     @if (! empty($previewingTemplate))
