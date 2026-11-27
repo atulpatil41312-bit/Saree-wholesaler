@@ -108,7 +108,10 @@ jobs:
           archive="$RUNNER_TEMP/wholemarket-${RELEASE_ID}.tar.gz"
           tar --sort=name --mtime='UTC 2024-01-01' --owner=0 --group=0 --numeric-owner \
             -czf "$archive" -C "$staging_dir/release" .
-          sha256sum "$archive" > "$archive.sha256"
+          # Store only the archive basename so the checksum remains valid
+          # after the artifact is downloaded into the deploy job's `release/`
+          # directory instead of pointing at this runner's temp path.
+          (cd "$(dirname "$archive")" && sha256sum "$(basename "$archive")") > "$archive.sha256"
 
       - name: Store release archive for the deploy job
         uses: actions/upload-artifact@v4
@@ -228,7 +231,7 @@ jobs:
           archive="release/wholemarket-${RELEASE_ID}.tar.gz"
           checksum="release/wholemarket-${RELEASE_ID}.tar.gz.sha256"
           test -f "$archive" && test -f "$checksum"
-          sha256sum --check "$checksum"
+          (cd release && sha256sum --check "$(basename "$checksum")")
 
           scp \
             -P "$DEPLOY_PORT" \
