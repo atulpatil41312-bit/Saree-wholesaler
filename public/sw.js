@@ -1,4 +1,6 @@
-const STATIC_CACHE = 'wholemarket-static-v3';
+// Bump this whenever storefront CSS/JS changes so existing PWA clients drop
+// stale cache-first template assets on their next service-worker update.
+const STATIC_CACHE = 'wholemarket-static-v4';
 const OFFLINE_PAGE = '/offline.html';
 const STATIC_ASSETS = [
     OFFLINE_PAGE,
