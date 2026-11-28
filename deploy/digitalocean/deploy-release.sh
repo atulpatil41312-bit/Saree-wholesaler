@@ -167,7 +167,10 @@ ln -s "$release_dir" "$next_link"
 mv -Tf -- "$next_link" "$current_link"
 
 refresh_token="$(openssl rand -hex 32)"
-refresh_capability="$release_dir/.opcache-refresh"
+# Keep the refresh capability outside immutable release directories. PHP-FPM
+# may still have the previous public/index.php cached when the current symlink
+# changes, so a release-local token would be invisible to that cached script.
+refresh_capability="$shared_dir/.opcache-refresh"
 printf '%s' "$refresh_token" > "$refresh_capability"
 chmod 0644 "$refresh_capability"
 trap 'rm -f -- "$refresh_capability"' EXIT
@@ -189,7 +192,7 @@ rollback() {
 if ! curl --fail --silent --show-error --max-time 20 \
     --resolve "$health_host:443:127.0.0.1" \
     -H "X-WholeMarket-Refresh: $refresh_token" \
-    "https://$health_host/opcache-refresh" >/dev/null; then
+    "https://$health_host/opcache-refresh.php" >/dev/null; then
     printf 'Warning: PHP OPcache refresh endpoint was unavailable; continuing with health check.\n' >&2
 fi
 
