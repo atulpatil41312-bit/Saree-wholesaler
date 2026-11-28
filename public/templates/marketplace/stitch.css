@@ -666,6 +666,13 @@ body.marketplace-page {
     background: #e7e0d5;
 }
 
+/* The campaign assets are portrait photographs. Keep the editorial card
+   height, but bias the crop upward so faces and blouse detailing remain
+   visible instead of landing below the fold of each card image. */
+.wm-marketplace.wm-stitch .wm-stitch-supplier-media img {
+    object-position: center 18%;
+}
+
 .wm-stitch-supplier-image span,
 .wm-stitch-supplier-media span {
     position: absolute;
