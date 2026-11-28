@@ -272,3 +272,19 @@ jobs:
             "$remote_command"
 
           curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 20 "$DEPLOY_HEALTH_URL" >/dev/null
+
+      - name: Refresh PHP-FPM workers after release switch
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          ssh \
+            -p "$DEPLOY_PORT" \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=no \
+            -o IdentityAgent="$SSH_AUTH_SOCK" \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
+            -o ConnectTimeout=15 \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            'sudo -n systemctl reload php8.3-fpm'
