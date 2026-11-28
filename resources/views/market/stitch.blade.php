@@ -6,7 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}?v={{ filemtime(public_path('templates/marketplace/stitch.css')) }}">
+    @php($marketCssVersion = substr(hash_file('sha256', public_path('templates/marketplace/stitch.css')), 0, 12))
+    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}?v={{ $marketCssVersion }}">
 @endpush
 
 @section('content')
