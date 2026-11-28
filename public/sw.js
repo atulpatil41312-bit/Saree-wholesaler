@@ -1,6 +1,6 @@
 // Bump this whenever storefront CSS/JS changes so existing PWA clients drop
 // stale cache-first template assets on their next service-worker update.
-const STATIC_CACHE = 'wholemarket-static-v4';
+const STATIC_CACHE = 'wholemarket-static-v5';
 const OFFLINE_PAGE = '/offline.html';
 const STATIC_ASSETS = [
     OFFLINE_PAGE,
@@ -52,6 +52,25 @@ self.addEventListener('fetch', (event) => {
     }
 
     if (!isStaticAsset(url.pathname)) {
+        return;
+    }
+
+    // Storefront template assets change with releases. Always prefer the
+    // network for them so an existing PWA client cannot keep an old design.
+    if (url.pathname.startsWith('/templates/marketplace/')) {
+        event.respondWith(
+            fetch(new Request(event.request, { cache: 'no-store' }))
+                .then((response) => {
+                    if (response.ok) {
+                        const copy = response.clone();
+                        caches.open(STATIC_CACHE).then((cache) => cache.put(event.request, copy));
+                    }
+
+                    return response;
+                })
+                .catch(() => caches.match(event.request)),
+        );
+
         return;
     }
 
