@@ -2,11 +2,18 @@
 
 declare(strict_types=1);
 
-$capabilityPath = dirname(dirname(dirname(__DIR__))).'/shared/.opcache-refresh';
+$appRoot = dirname(dirname(dirname(__DIR__)));
+$capabilityPath = null;
+foreach ([$appRoot.'/shared/.opcache-refresh', $appRoot.'/.opcache-refresh'] as $candidate) {
+    if (is_file($candidate)) {
+        $capabilityPath = $candidate;
+        break;
+    }
+}
 $remoteAddress = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
 $providedToken = (string) ($_SERVER['HTTP_X_WHOLEMARKET_REFRESH'] ?? '');
 
-if (! in_array($remoteAddress, ['127.0.0.1', '::1'], true) || ! is_file($capabilityPath)) {
+if (! in_array($remoteAddress, ['127.0.0.1', '::1'], true) || $capabilityPath === null) {
     http_response_code(404);
 
     exit;

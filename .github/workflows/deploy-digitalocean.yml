@@ -263,7 +263,7 @@ jobs:
             -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
             -o ConnectTimeout=15 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
-            "printf '%s' '$refresh_script' | base64 --decode > '${DEPLOY_APP_ROOT%/}/current/public/opcache-refresh.php' && chmod 0644 '${DEPLOY_APP_ROOT%/}/current/public/opcache-refresh.php'"
+            "printf '%s' '$refresh_script' | base64 --decode > '${DEPLOY_APP_ROOT%/}/shared/storage/app/public/opcache-refresh.php' && chmod 0644 '${DEPLOY_APP_ROOT%/}/shared/storage/app/public/opcache-refresh.php'"
 
           ssh \
             -p "$DEPLOY_PORT" \
@@ -278,14 +278,14 @@ jobs:
           set -Eeuo pipefail
           umask 027
           capability_path="${DEPLOY_APP_ROOT%/}/shared/.opcache-refresh"
-          script_path="${DEPLOY_APP_ROOT%/}/current/public/opcache-refresh.php"
+          script_path="${DEPLOY_APP_ROOT%/}/shared/storage/app/public/opcache-refresh.php"
           printf '%s' '$refresh_token' > "\$capability_path"
           chmod 0640 "\$capability_path"
           trap 'rm -f -- "\$capability_path" "\$script_path"' EXIT
           curl --fail --silent --show-error --max-time 20 \
             --resolve '$health_host:443:127.0.0.1' \
             -H 'X-WholeMarket-Refresh: $refresh_token' \
-            'https://$health_host/opcache-refresh.php' >/dev/null
+            'https://$health_host/storage/opcache-refresh.php' >/dev/null
           curl --fail --silent --show-error --max-time 20 \
             --resolve '$health_host:443:127.0.0.1' \
             'https://$health_host/up' >/dev/null
@@ -342,10 +342,11 @@ jobs:
           set -Eeuo pipefail
           umask 077
           capability_path="${DEPLOY_APP_ROOT%/}/shared/.opcache-refresh"
+          script_path="${DEPLOY_APP_ROOT%/}/shared/storage/app/public/opcache-refresh.php"
           printf '%s' '$refresh_token' > "\$capability_path"
-          trap 'rm -f -- "\$capability_path"' EXIT
+          trap 'rm -f -- "\$capability_path" "\$script_path"' EXIT
           curl --fail --silent --show-error --max-time 20 \
             --resolve '$health_host:443:127.0.0.1' \
             -H 'X-WholeMarket-Refresh: $refresh_token' \
-            'https://$health_host/opcache-refresh.php'
+            'https://$health_host/storage/opcache-refresh.php'
           REMOTE_SCRIPT
