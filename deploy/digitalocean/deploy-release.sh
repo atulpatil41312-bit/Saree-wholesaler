@@ -190,8 +190,7 @@ if ! curl --fail --silent --show-error --max-time 20 \
     --resolve "$health_host:443:127.0.0.1" \
     -H "X-WholeMarket-Refresh: $refresh_token" \
     "https://$health_host/opcache-refresh.php" >/dev/null; then
-    rollback
-    exit 1
+    printf 'Warning: PHP OPcache refresh endpoint was unavailable; continuing with health check.\n' >&2
 fi
 
 if ! curl --fail --silent --show-error --max-time 20 \
