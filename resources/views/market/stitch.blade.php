@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}?v={{ @filemtime(public_path('templates/marketplace/stitch.css')) ?: 1 }}">
 @endpush
 
 @section('content')
@@ -175,5 +175,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('templates/marketplace/interactions.js') }}" defer></script>
+    <script src="{{ asset('templates/marketplace/interactions.js') }}?v={{ @filemtime(public_path('templates/marketplace/interactions.js')) ?: 1 }}" defer></script>
 @endpush
