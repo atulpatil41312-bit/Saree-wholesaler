@@ -670,7 +670,14 @@ body.marketplace-page {
    height, but bias the crop upward so faces and blouse detailing remain
    visible instead of landing below the fold of each card image. */
 .wm-marketplace.wm-stitch .wm-stitch-supplier-media img {
-    object-position: center 18%;
+    object-position: center top;
+}
+
+/* Portrait campaign photographs need a little more vertical room than the
+   original landscape crop. This keeps faces and garment details visible
+   while preserving the three-column editorial directory layout. */
+.wm-marketplace.wm-stitch .wm-stitch-supplier-media {
+    height: clamp(250px, 26vw, 320px);
 }
 
 .wm-stitch-supplier-image span,
@@ -1469,6 +1476,10 @@ body.marketplace-page {
     .wm-stitch-supplier-image,
     .wm-stitch-supplier-media {
         height: 170px;
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-supplier-media {
+        height: 215px;
     }
 
     .wm-stitch-supplier-body {
