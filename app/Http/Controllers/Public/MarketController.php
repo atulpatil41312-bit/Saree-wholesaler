@@ -107,7 +107,7 @@ class MarketController extends Controller
             ->unique()
             ->count();
 
-        return view('market.index', [
+        return view('market.stitch', [
             'shops' => $shops,
             'query' => $query,
             'craft' => $craft,
