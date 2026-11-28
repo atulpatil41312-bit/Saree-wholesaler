@@ -27,12 +27,18 @@
             });
         }
 
+        const revealTargets = root.querySelectorAll('[data-wm-reveal]');
+        const revealAll = () => {
+            revealTargets.forEach((target) => target.classList.add('is-visible'));
+        };
+
+        // Enable the entrance animation only after the page has its targets. The
+        // fallback keeps a fast jump/keyboard navigation from leaving a section
+        // transparent when an observer callback is skipped by the browser.
         document.documentElement.classList.add('wm-market-motion');
 
-        const revealTargets = root.querySelectorAll('[data-wm-reveal]');
-
         if (!('IntersectionObserver' in window)) {
-            revealTargets.forEach((target) => target.classList.add('is-visible'));
+            revealAll();
             return;
         }
 
@@ -48,6 +54,8 @@
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
         revealTargets.forEach((target) => observer.observe(target));
+
+        window.setTimeout(revealAll, 900);
     };
 
     if (document.readyState === 'loading') {

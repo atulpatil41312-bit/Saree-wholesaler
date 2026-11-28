@@ -182,6 +182,21 @@ body.marketplace-page {
     transform: translateY(-2px);
 }
 
+.wm-stitch-nav-cta:focus-visible,
+.wm-stitch-menu:focus-visible,
+.wm-stitch-search input:focus-visible,
+.wm-stitch-search button:focus-visible,
+.wm-stitch-filters input:focus-visible,
+.wm-stitch-filters select:focus-visible,
+.wm-stitch-filters button:focus-visible,
+.wm-stitch-card-actions a:focus-visible,
+.wm-stitch-craft-card:focus-visible,
+.wm-stitch-product-media:focus-visible,
+.wm-stitch-supplier-media:focus-visible {
+    outline: 3px solid rgba(189, 150, 83, .62);
+    outline-offset: 3px;
+}
+
 .wm-stitch-menu {
     display: none;
     width: 42px;
@@ -544,6 +559,16 @@ body.marketplace-page {
     cursor: pointer;
     font-size: .75rem;
     font-weight: 700;
+    transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.wm-stitch-filter button:hover,
+.wm-stitch-filter button:focus-visible,
+.wm-stitch-filters button:hover,
+.wm-stitch-filters button:focus-visible {
+    background: var(--wm-primary-deep);
+    box-shadow: 0 8px 18px rgba(15, 76, 69, .17);
+    transform: translateY(-1px);
 }
 
 .wm-stitch-filter-reset,
@@ -1095,7 +1120,7 @@ body.marketplace-page {
 
 .wm-market-motion [data-wm-reveal] {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(18px);
     transition: opacity 600ms ease, transform 600ms cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -1111,6 +1136,54 @@ body.marketplace-page {
         animation-duration: .001ms !important;
         scroll-behavior: auto !important;
         transition-duration: .001ms !important;
+    }
+}
+
+/* Keep the navigation usable at tablet widths before the content shifts to
+   the compact mobile layout below 720px. */
+@media (max-width: 900px) {
+    .wm-stitch-header-inner {
+        min-height: 64px;
+    }
+
+    .wm-stitch-menu {
+        display: block;
+    }
+
+    .wm-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+        background: rgba(255, 253, 249, .98);
+        border: 1px solid var(--wm-line);
+        border-radius: 16px;
+        box-shadow: 0 16px 28px rgba(20, 24, 22, .14);
+    }
+
+    .wm-nav.is-open {
+        display: flex;
+    }
+
+    .wm-nav a {
+        padding: 11px 13px;
+        border-bottom: 1px solid rgba(222, 218, 210, .7);
+    }
+
+    .wm-nav a:last-child,
+    .wm-nav .wm-stitch-nav-login {
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .wm-stitch-nav-cta {
+        margin-top: 5px;
+        text-align: center;
     }
 }
 
