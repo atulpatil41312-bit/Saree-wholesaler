@@ -6,9 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
-    {{-- Release archives normalize mtimes, so the content hash keeps CSS cache-busting reliable. --}}
-    @php($marketCssVersion = substr(hash_file('sha256', public_path('templates/marketplace/stitch.css')), 0, 12))
-    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}?v={{ $marketCssVersion }}">
+    {{-- Keep this version aligned with visual asset releases; deploy archives normalize file mtimes. --}}
+    <link rel="stylesheet" href="{{ asset('templates/marketplace/stitch.css') }}?v=20261128-2">
 @endpush
 
 @section('content')
