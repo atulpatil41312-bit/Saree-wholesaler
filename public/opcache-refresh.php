@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 $appRoot = dirname(dirname(dirname(__DIR__)));
 $capabilityPath = null;
-foreach ([$appRoot.'/shared/.opcache-refresh', $appRoot.'/.opcache-refresh'] as $candidate) {
+foreach ([$appRoot.'/shared/.opcache-refresh', dirname(__DIR__).'/.opcache-refresh', $appRoot.'/.opcache-refresh'] as $candidate) {
     if (is_file($candidate)) {
         $capabilityPath = $candidate;
         break;
