@@ -8,7 +8,7 @@ This directory contains the repository-side pieces for a secure GitHub Actions d
 2. PHP dependencies, Vite assets, and the existing PHPUnit suite are verified.
 3. The workflow packages an immutable archive containing tracked application code, `vendor`, and `public/build`. It never packages `.env`, uploads, logs, or runtime cache.
 4. The archive is copied over SSH using a dedicated deployment account, a pinned `known_hosts` entry, and a GitHub `production` environment.
-5. `deploy-release.sh` extracts the archive into a new release directory, links the server-owned `.env` and persistent storage, warms Laravel caches, switches the `current` symlink atomically, and verifies the HTTPS `/up` endpoint.
+5. `deploy-release.sh` extracts the archive into a new release directory, links the server-owned `.env` and persistent storage, warms Laravel caches, switches the `current` symlink atomically, refreshes PHP OPcache through a localhost-only release capability, and verifies the HTTPS `/up` endpoint.
 6. A failed health check restores the previous `current` symlink. The previous releases remain available for manual rollback.
 
 The workflow serializes production deployments with GitHub Actions concurrency and the server script also uses `flock`. The deployment account must not be root. Do not give it a shell command that can be used to modify unrelated servers or read unrelated secrets.
