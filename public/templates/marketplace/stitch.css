@@ -766,21 +766,25 @@ body.marketplace-page {
 
 .wm-stitch-craft-card::after {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     inset: 0;
-    background: linear-gradient(0deg, rgba(10, 56, 50, .9), rgba(10, 56, 50, 0) 72%);
+    background: linear-gradient(0deg, rgba(10, 31, 28, .9), rgba(10, 31, 28, .08) 72%);
     content: "";
 }
 
 .wm-stitch-craft-card span {
     position: absolute;
+    z-index: 1;
     right: 16px;
     bottom: 15px;
     left: 16px;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .34);
 }
 
 .wm-stitch-craft-card strong {
     display: block;
+    color: #fff;
     font-family: "Instrument Serif", Georgia, serif;
     font-size: 1.55rem;
     font-weight: 400;
@@ -789,7 +793,7 @@ body.marketplace-page {
 .wm-stitch-craft-card small {
     display: block;
     margin-top: 3px;
-    color: #d7e5dc;
+    color: #f1f7f2;
     font-size: .68rem;
 }
 
