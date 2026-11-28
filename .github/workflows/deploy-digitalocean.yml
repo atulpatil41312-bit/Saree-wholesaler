@@ -273,10 +273,14 @@ jobs:
 
           curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 20 "$DEPLOY_HEALTH_URL" >/dev/null
 
-      - name: Refresh PHP-FPM workers after release switch
+      - name: Refresh PHP OPcache after release switch
         shell: bash
         run: |
           set -Eeuo pipefail
+
+          refresh_token="$(openssl rand -hex 32)"
+          health_host="${DEPLOY_HEALTH_URL#https://}"
+          health_host="${health_host%%/*}"
 
           ssh \
             -p "$DEPLOY_PORT" \
@@ -287,4 +291,14 @@ jobs:
             -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
             -o ConnectTimeout=15 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
-            'sudo -n systemctl reload php8.3-fpm'
+            'bash -s' <<REMOTE_SCRIPT
+          set -Eeuo pipefail
+          umask 077
+          capability_path="${DEPLOY_APP_ROOT%/}/shared/.opcache-refresh"
+          printf '%s' '$refresh_token' > "\$capability_path"
+          trap 'rm -f -- "\$capability_path"' EXIT
+          curl --fail --silent --show-error --max-time 20 \
+            --resolve '$health_host:443:127.0.0.1' \
+            -H 'X-WholeMarket-Refresh: $refresh_token' \
+            'https://$health_host/opcache-refresh.php'
+          REMOTE_SCRIPT
