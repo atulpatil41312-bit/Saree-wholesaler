@@ -230,7 +230,9 @@ jobs:
           set -Eeuo pipefail
           archive="release/wholemarket-${RELEASE_ID}.tar.gz"
           checksum="release/wholemarket-${RELEASE_ID}.tar.gz.sha256"
+          deploy_script="deploy-release-${RELEASE_ID}.sh"
           test -f "$archive" && test -f "$checksum"
+          test -f deploy/digitalocean/deploy-release.sh
           (cd release && sha256sum --check "$(basename "$checksum")")
 
           scp \
@@ -244,6 +246,17 @@ jobs:
             "$archive" \
             "$DEPLOY_USER@$DEPLOY_HOST:${DEPLOY_INBOX%/}/"
 
+          scp \
+            -P "$DEPLOY_PORT" \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=no \
+            -o IdentityAgent="$SSH_AUTH_SOCK" \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
+            -o ConnectTimeout=15 \
+            deploy/digitalocean/deploy-release.sh \
+            "$DEPLOY_USER@$DEPLOY_HOST:${DEPLOY_INBOX%/}/$deploy_script"
+
       - name: Activate release and verify health
         shell: bash
         env:
@@ -252,8 +265,9 @@ jobs:
           set -Eeuo pipefail
 
           remote_archive="${DEPLOY_INBOX%/}/wholemarket-${RELEASE_ID}.tar.gz"
+          remote_script="${DEPLOY_INBOX%/}/deploy-release-${RELEASE_ID}.sh"
           printf -v remote_command '%q ' \
-            bash "$DEPLOY_SCRIPT" \
+            bash "$remote_script" \
             --archive "$remote_archive" \
             --release "$RELEASE_ID" \
             --app-root "$DEPLOY_APP_ROOT" \
@@ -272,35 +286,3 @@ jobs:
             "$remote_command"
 
           curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 20 "$DEPLOY_HEALTH_URL" >/dev/null
-
-      - name: Refresh PHP OPcache after release switch
-        shell: bash
-        run: |
-          set -Eeuo pipefail
-
-          refresh_token="$(openssl rand -hex 32)"
-          health_host="${DEPLOY_HEALTH_URL#https://}"
-          health_host="${health_host%%/*}"
-
-          ssh \
-            -p "$DEPLOY_PORT" \
-            -o BatchMode=yes \
-            -o IdentitiesOnly=no \
-            -o IdentityAgent="$SSH_AUTH_SOCK" \
-            -o StrictHostKeyChecking=yes \
-            -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
-            -o ConnectTimeout=15 \
-            "$DEPLOY_USER@$DEPLOY_HOST" \
-            'bash -s' <<REMOTE_SCRIPT
-          set -Eeuo pipefail
-          umask 077
-          current_release="\$(readlink -f '${DEPLOY_APP_ROOT%/}/current')"
-          capability_path="\$current_release/.opcache-refresh"
-          printf '%s' '$refresh_token' > "\$capability_path"
-          chmod 0644 "\$capability_path"
-          trap 'rm -f -- "\$capability_path"' EXIT
-          curl --fail --silent --show-error --max-time 20 \
-            --resolve '$health_host:443:127.0.0.1' \
-            -H 'X-WholeMarket-Refresh: $refresh_token' \
-            'https://$health_host/opcache-refresh.php'
-          REMOTE_SCRIPT

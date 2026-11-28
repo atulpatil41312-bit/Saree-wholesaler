@@ -166,6 +166,14 @@ next_link="$app_root/.current-$release_id"
 ln -s "$release_dir" "$next_link"
 mv -Tf -- "$next_link" "$current_link"
 
+refresh_token="$(openssl rand -hex 32)"
+refresh_capability="$release_dir/.opcache-refresh"
+printf '%s' "$refresh_token" > "$refresh_capability"
+chmod 0644 "$refresh_capability"
+trap 'rm -f -- "$refresh_capability"' EXIT
+health_host="${health_url#https://}"
+health_host="${health_host%%/*}"
+
 rollback() {
     printf 'Health check failed; restoring the previous release.\n' >&2
     rollback_link="$app_root/.rollback-$release_id"
@@ -178,7 +186,17 @@ rollback() {
     rm -rf -- "$release_dir"
 }
 
-if ! curl --fail --silent --show-error --max-time 20 "$health_url" >/dev/null; then
+if ! curl --fail --silent --show-error --max-time 20 \
+    --resolve "$health_host:443:127.0.0.1" \
+    -H "X-WholeMarket-Refresh: $refresh_token" \
+    "https://$health_host/opcache-refresh.php" >/dev/null; then
+    rollback
+    exit 1
+fi
+
+if ! curl --fail --silent --show-error --max-time 20 \
+    --resolve "$health_host:443:127.0.0.1" \
+    "$health_url" >/dev/null; then
     rollback
     exit 1
 fi
