@@ -280,7 +280,7 @@ jobs:
             --health-url "$DEPLOY_HEALTH_URL" \
             --run-migrations "$RUN_MIGRATIONS"
 
-          ssh \
+          if ! remote_output="$(ssh \
             -p "$DEPLOY_PORT" \
             -o BatchMode=yes \
             -o IdentitiesOnly=no \
@@ -289,6 +289,12 @@ jobs:
             -o UserKnownHostsFile="${{ steps.ssh.outputs.known_hosts_file }}" \
             -o ConnectTimeout=15 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
-            "$remote_command"
+            "$remote_command" 2>&1)"; then
+            printf '%s\n' "$remote_output"
+            diagnostic="$(printf '%s' "$remote_output" | tail -n 8 | tr '\r\n' ' ' | sed 's/%/%25/g')"
+            echo "::error title=Remote deployment failed::$diagnostic"
+            exit 1
+          fi
+          printf '%s\n' "$remote_output"
 
           curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 20 "$DEPLOY_HEALTH_URL" >/dev/null
