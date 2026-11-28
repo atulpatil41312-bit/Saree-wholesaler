@@ -79,10 +79,10 @@
                     </div>
                     <div class="wm-stitch-hero-collage" aria-label="Saree and textile imagery">
                         <figure class="wm-stitch-hero-image wm-stitch-hero-image-primary"><img src="{{ $heroImages[0] ?? $fallbackImages[0] }}" alt="Janki party-wear saree" fetchpriority="high"></figure>
-                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-secondary"><img src="{{ $heroImages[1] ?? $fallbackImages[1] }}" alt="Grey sequin saree with pearl border" loading="lazy"></figure>
+                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-secondary"><img src="{{ $heroImages[1] ?? $fallbackImages[1] }}" alt="Grey sequin saree with pearl border" loading="eager"></figure>
                         <div class="wm-stitch-hero-stack">
-                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[2] ?? $fallbackImages[2] }}" alt="Teal sequin georgette saree" loading="lazy"></figure>
-                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[3] ?? $fallbackImages[3] }}" alt="Bala navy and gold wedding saree" loading="lazy"></figure>
+                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[2] ?? $fallbackImages[2] }}" alt="Teal sequin georgette saree" loading="eager"></figure>
+                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[3] ?? $fallbackImages[3] }}" alt="Bala navy and gold wedding saree" loading="eager"></figure>
                         </div>
                     </div>
                 </div>
