@@ -12,15 +12,18 @@
 @section('content')
     @php
         $fallbackImages = [
-            asset('storefront/saree.jpg'),
-            asset('storefront/saree0.jpg'),
-            asset('storefront/saree1.jpg'),
-            asset('storefront/saree2.jpg'),
+            asset('storefront/marketplace-janki.jpg'),
+            asset('storefront/marketplace-sequin-grey.jpg'),
+            asset('storefront/marketplace-teal-sequin.jpg'),
+            asset('storefront/marketplace-bala.jpg'),
         ];
-        $heroImages = $featuredProducts
-            ->map(fn ($product): ?string => $product->images->first() ? Storage::url($product->images->first()->path) : null)
-            ->filter()
-            ->merge($fallbackImages)
+        // Keep the curated marketplace imagery first so the public directory
+        // opens with the approved campaign visuals. Product imagery remains
+        // available as an additional fallback when the collage is extended.
+        $heroImages = collect($fallbackImages)
+            ->merge($featuredProducts
+                ->map(fn ($product): ?string => $product->images->first() ? Storage::url($product->images->first()->path) : null)
+                ->filter())
             ->unique()
             ->take(4)
             ->values();
@@ -75,11 +78,11 @@
                         </div>
                     </div>
                     <div class="wm-stitch-hero-collage" aria-label="Saree and textile imagery">
-                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-primary"><img src="{{ $heroImages[0] ?? $fallbackImages[0] }}" alt="Saree collection from a WholeMarket supplier"></figure>
-                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-secondary"><img src="{{ $heroImages[1] ?? $fallbackImages[1] }}" alt="Handwoven saree detail" loading="lazy"></figure>
+                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-primary"><img src="{{ $heroImages[0] ?? $fallbackImages[0] }}" alt="Janki party-wear saree" fetchpriority="high"></figure>
+                        <figure class="wm-stitch-hero-image wm-stitch-hero-image-secondary"><img src="{{ $heroImages[1] ?? $fallbackImages[1] }}" alt="Grey sequin saree with pearl border" loading="lazy"></figure>
                         <div class="wm-stitch-hero-stack">
-                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[2] ?? $fallbackImages[2] }}" alt="Textile texture" loading="lazy"></figure>
-                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[3] ?? $fallbackImages[3] }}" alt="Regional saree drape" loading="lazy"></figure>
+                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[2] ?? $fallbackImages[2] }}" alt="Teal sequin georgette saree" loading="lazy"></figure>
+                            <figure class="wm-stitch-hero-image"><img src="{{ $heroImages[3] ?? $fallbackImages[3] }}" alt="Bala navy and gold wedding saree" loading="lazy"></figure>
                         </div>
                     </div>
                 </div>
