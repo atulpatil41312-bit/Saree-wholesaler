@@ -1,0 +1,1475 @@
+:root {
+    --wm-primary: #0f4c45;
+    --wm-primary-deep: #0a3832;
+    --wm-ink: #141816;
+    --wm-ivory: #f7f5f2;
+    --wm-paper: #fffdf9;
+    --wm-terra: #8c3b1e;
+    --wm-gold: #bd9653;
+    --wm-muted: #59625e;
+    --wm-line: #dedad2;
+    --wm-shadow: 0 20px 52px rgba(20, 24, 22, .10);
+}
+
+body.marketplace-page {
+    margin: 0;
+    background: var(--wm-ivory);
+}
+
+.wm-stitch,
+.wm-stitch * {
+    box-sizing: border-box;
+}
+
+.wm-stitch {
+    min-height: 100vh;
+    color: var(--wm-ink);
+    background: var(--wm-ivory);
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+.wm-stitch a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wm-stitch button,
+.wm-stitch input,
+.wm-stitch select {
+    font: inherit;
+}
+
+.wm-stitch-shell {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.wm-skip {
+    position: fixed;
+    z-index: 100;
+    top: -80px;
+    left: 20px;
+    padding: 10px 14px;
+    color: #fff;
+    background: var(--wm-primary-deep);
+    border-radius: 8px;
+}
+
+.wm-skip:focus {
+    top: 20px;
+}
+
+.wm-stitch-header {
+    position: sticky;
+    z-index: 20;
+    top: 12px;
+    padding: 10px 0;
+}
+
+.wm-stitch-header-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 70px;
+    padding: 12px 18px 12px 22px;
+    background: rgba(255, 253, 249, .90);
+    border: 1px solid rgba(222, 218, 210, .90);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(20, 24, 22, .08);
+    backdrop-filter: blur(16px);
+}
+
+.wm-stitch-brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 12px;
+}
+
+.wm-stitch-brand strong {
+    display: block;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 1;
+}
+
+.wm-stitch-brand small {
+    display: block;
+    margin-top: 5px;
+    color: var(--wm-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .58rem;
+    letter-spacing: .12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.wm-stitch-mark {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    color: #fff;
+    background: var(--wm-primary);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(15, 76, 69, .22);
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.45rem;
+}
+
+.wm-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 19px;
+    color: var(--wm-muted);
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+.wm-nav a {
+    transition: color 180ms ease;
+}
+
+.wm-nav a:hover,
+.wm-nav a:focus-visible {
+    color: var(--wm-primary);
+}
+
+.wm-stitch-nav-login {
+    padding-left: 18px;
+    border-left: 1px solid var(--wm-line);
+}
+
+.wm-stitch-nav-cta,
+.wm-stitch-seller-actions a:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 15px;
+    color: #fff !important;
+    background: var(--wm-primary);
+    border-radius: 999px;
+    transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.wm-stitch-nav-cta:hover,
+.wm-stitch-nav-cta:focus-visible,
+.wm-stitch-seller-actions a:first-child:hover,
+.wm-stitch-seller-actions a:first-child:focus-visible {
+    background: var(--wm-primary-deep);
+    box-shadow: 0 10px 22px rgba(15, 76, 69, .22);
+    transform: translateY(-2px);
+}
+
+.wm-stitch-menu {
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    color: var(--wm-primary);
+    background: transparent;
+    border: 1px solid var(--wm-line);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.wm-stitch-menu span,
+.wm-stitch-menu span::before,
+.wm-stitch-menu span::after {
+    display: block;
+    width: 16px;
+    height: 1px;
+    margin: 0 auto;
+    background: currentColor;
+    transition: transform 180ms ease;
+    content: "";
+}
+
+.wm-stitch-menu span {
+    font-size: 0;
+}
+
+.wm-stitch-menu span::before {
+    transform: translateY(-5px);
+}
+
+.wm-stitch-menu span::after {
+    transform: translateY(4px);
+}
+
+.wm-stitch-hero {
+    padding: 18px 0 0;
+}
+
+.wm-stitch-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+    min-height: 640px;
+    overflow: hidden;
+    background: var(--wm-ink);
+    border-radius: 18px;
+    box-shadow: var(--wm-shadow);
+}
+
+.wm-stitch-hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 76px clamp(28px, 6vw, 88px);
+    color: #f6f2e9;
+}
+
+.wm-stitch-kicker {
+    margin: 0 0 16px;
+    color: var(--wm-gold);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .66rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.wm-stitch-hero h1,
+.wm-stitch-section h2,
+.wm-stitch-process h2,
+.wm-stitch-about h2,
+.wm-stitch-seller h2 {
+    margin: 0;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -.025em;
+    line-height: .98;
+}
+
+.wm-stitch-hero h1 {
+    max-width: 600px;
+    font-size: clamp(3.4rem, 6vw, 5.8rem);
+}
+
+.wm-stitch-hero h1 em {
+    display: block;
+    color: #d8a48b;
+    font-style: italic;
+}
+
+.wm-stitch-hero-copy > p:not(.wm-stitch-kicker) {
+    max-width: 480px;
+    margin: 25px 0 28px;
+    color: #c5cbc5;
+    font-size: .95rem;
+}
+
+.wm-stitch-search {
+    display: flex;
+    width: min(100%, 520px);
+    min-height: 56px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.wm-stitch-search input {
+    min-width: 0;
+    flex: 1;
+    padding: 0 15px;
+    color: var(--wm-ink);
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+.wm-stitch-search button {
+    padding: 0 18px;
+    color: #fff;
+    background: var(--wm-terra);
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-search button:hover,
+.wm-stitch-search button:focus-visible {
+    background: #6f2c16;
+}
+
+.wm-stitch-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 42px;
+}
+
+.wm-stitch-stat strong,
+.wm-stitch-stats > div strong {
+    display: block;
+    color: #fff;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.wm-stitch-stat span,
+.wm-stitch-stats > div span {
+    display: block;
+    margin-top: 5px;
+    color: #aab2ac;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .58rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-hero-collage {
+    position: relative;
+    min-height: 640px;
+    padding: 18px;
+    background: #1c2a26;
+}
+
+.wm-stitch-hero-collage::after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(125deg, rgba(15, 76, 69, .2), transparent 55%);
+    content: "";
+}
+
+.wm-stitch-hero-image {
+    position: absolute;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, .26);
+    border-radius: 10px;
+    box-shadow: 0 18px 32px rgba(0, 0, 0, .22);
+}
+
+.wm-stitch-hero-image img,
+.wm-stitch-craft-card img,
+.wm-stitch-supplier-image img,
+.wm-stitch-supplier-media img,
+.wm-stitch-product-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.wm-stitch-hero-image:hover img,
+.wm-stitch-craft-card:hover img,
+.wm-stitch-supplier-card:hover .wm-stitch-supplier-image img,
+.wm-stitch-supplier-card:hover .wm-stitch-supplier-media img,
+.wm-stitch-product-card:hover .wm-stitch-product-media img {
+    transform: scale(1.055);
+}
+
+.wm-stitch-hero-image:nth-child(1) { inset: 18px 42% 38% 18px; }
+.wm-stitch-hero-image:nth-child(2) { inset: 18px 18px 50% 62%; }
+.wm-stitch-hero-image:nth-child(3) { inset: 51% 43% 18px 18px; }
+.wm-stitch-hero-image:nth-child(4) { inset: 44% 18px 18px 57%; }
+
+.wm-stitch-hero-image-primary { inset: 18px 42% 38% 18px !important; }
+.wm-stitch-hero-image-secondary { inset: 18px 18px 50% 62% !important; }
+
+.wm-stitch-hero-stack {
+    position: absolute;
+    inset: 51% 18px 18px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.wm-stitch-hero-stack .wm-stitch-hero-image {
+    position: relative;
+    inset: auto !important;
+    height: auto;
+}
+
+.wm-stitch-hero-image img {
+    filter: saturate(.9) contrast(1.02);
+}
+
+.wm-stitch-marquee {
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+    padding: 15px 0;
+    color: #eef4ee;
+    background: var(--wm-primary);
+}
+
+.wm-stitch-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 30px;
+    animation: wm-stitch-marquee 32s linear infinite;
+}
+
+.wm-stitch-marquee span {
+    display: inline-flex;
+    align-items: center;
+    gap: 30px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .66rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.wm-stitch-marquee span::after {
+    color: #a7c7bd;
+    content: "✦";
+}
+
+@keyframes wm-stitch-marquee {
+    to { transform: translateX(-50%); }
+}
+
+.wm-stitch-section,
+.wm-stitch-process,
+.wm-stitch-about {
+    padding: 100px 0;
+}
+
+.wm-stitch-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.wm-stitch-section h2,
+.wm-stitch-process h2,
+.wm-stitch-about h2 {
+    max-width: 680px;
+    font-size: clamp(2.4rem, 4vw, 4.4rem);
+}
+
+.wm-stitch-text-link,
+.wm-stitch-outline-link {
+    color: var(--wm-primary);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+
+.wm-stitch-outline-link {
+    align-self: center;
+    padding: 9px 12px;
+    border: 1px solid rgba(15, 76, 69, .28);
+    border-radius: 999px;
+}
+
+.wm-stitch-filter,
+.wm-stitch-filters {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.wm-stitch-filters label {
+    display: block;
+}
+
+.wm-stitch-filters label > span {
+    display: block;
+    margin: 0 0 5px 2px;
+    color: var(--wm-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .56rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-filter input,
+.wm-stitch-filter select,
+.wm-stitch-filters input,
+.wm-stitch-filters select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 13px;
+    color: var(--wm-ink);
+    background: var(--wm-paper);
+    border: 1px solid var(--wm-line);
+    border-radius: 8px;
+    outline: 0;
+}
+
+.wm-stitch-filter input:focus,
+.wm-stitch-filter select:focus,
+.wm-stitch-filters input:focus,
+.wm-stitch-filters select:focus {
+    border-color: var(--wm-primary);
+    box-shadow: 0 0 0 3px rgba(15, 76, 69, .1);
+}
+
+.wm-stitch-filter button,
+.wm-stitch-filters button {
+    min-height: 44px;
+    padding: 0 17px;
+    color: #fff;
+    background: var(--wm-primary);
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.wm-stitch-filter-reset,
+.wm-stitch-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 12px;
+    color: var(--wm-terra);
+    border: 1px solid rgba(140, 59, 30, .3);
+    border-radius: 8px;
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.wm-stitch-supplier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.wm-stitch-supplier-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--wm-paper);
+    border: 1px solid var(--wm-line);
+    border-radius: 12px;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.wm-stitch-supplier-card:hover {
+    box-shadow: 0 18px 34px rgba(20, 24, 22, .1);
+    transform: translateY(-5px);
+}
+
+.wm-stitch-supplier-image,
+.wm-stitch-supplier-media {
+    position: relative;
+    display: block;
+    height: 220px;
+    overflow: hidden;
+    background: #e7e0d5;
+}
+
+.wm-stitch-supplier-image span,
+.wm-stitch-supplier-media span {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 8px;
+    color: #fff;
+    background: rgba(20, 24, 22, .84);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .56rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-supplier-media .wm-stitch-moq {
+    right: 12px;
+    left: auto;
+    color: var(--wm-ink);
+    background: rgba(255, 253, 249, .92);
+}
+
+.wm-stitch-supplier-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 21px;
+}
+
+.wm-stitch-supplier-body small,
+.wm-stitch-product-body > small {
+    color: var(--wm-terra);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .58rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-supplier-body h3,
+.wm-stitch-product-body h3 {
+    margin: 7px 0 5px;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.wm-stitch-supplier-body p {
+    min-height: 48px;
+    margin: 0;
+    color: var(--wm-muted);
+    font-size: .78rem;
+}
+
+.wm-stitch-supplier-city {
+    color: var(--wm-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .62rem !important;
+    letter-spacing: .03em;
+}
+
+.wm-stitch-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 16px 0;
+}
+
+.wm-stitch-tags span {
+    padding: 4px 7px;
+    color: var(--wm-primary);
+    border: 1px solid rgba(15, 76, 69, .22);
+    border-radius: 999px;
+    font-size: .62rem;
+}
+
+.wm-stitch-supplier-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--wm-line);
+    color: var(--wm-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .59rem;
+}
+
+.wm-stitch-supplier-actions,
+.wm-stitch-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.wm-stitch-supplier-actions a,
+.wm-stitch-card-actions a {
+    flex: 1;
+    padding: 10px 8px;
+    color: var(--wm-primary);
+    border: 1px solid rgba(15, 76, 69, .3);
+    border-radius: 7px;
+    text-align: center;
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+.wm-stitch-supplier-actions a:first-child,
+.wm-stitch-card-actions a.is-primary {
+    color: #fff;
+    background: var(--wm-primary);
+    border-color: var(--wm-primary);
+}
+
+.wm-stitch-view-all {
+    margin-top: 28px;
+    text-align: center;
+}
+
+.wm-stitch-view-all a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 17px;
+    color: var(--wm-primary);
+    border: 1px solid rgba(15, 76, 69, .28);
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.wm-stitch-crafts {
+    background: #eeebe4;
+}
+
+.wm-stitch-craft-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.wm-stitch-craft-card {
+    position: relative;
+    min-height: 205px;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 10px;
+    isolation: isolate;
+}
+
+.wm-stitch-craft-card::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(10, 56, 50, .9), rgba(10, 56, 50, 0) 72%);
+    content: "";
+}
+
+.wm-stitch-craft-card span {
+    position: absolute;
+    right: 16px;
+    bottom: 15px;
+    left: 16px;
+}
+
+.wm-stitch-craft-card strong {
+    display: block;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+}
+
+.wm-stitch-craft-card small {
+    display: block;
+    margin-top: 3px;
+    color: #d7e5dc;
+    font-size: .68rem;
+}
+
+.wm-stitch-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.wm-stitch-product-card {
+    overflow: hidden;
+    background: var(--wm-paper);
+    border: 1px solid var(--wm-line);
+    border-radius: 10px;
+}
+
+.wm-stitch-product-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #e9e2d8;
+}
+
+.wm-stitch-product-media span {
+    position: absolute;
+    top: 11px;
+    left: 11px;
+    padding: 4px 6px;
+    color: #fff;
+    background: rgba(20, 24, 22, .8);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .54rem;
+}
+
+.wm-stitch-product-body {
+    padding: 15px;
+}
+
+.wm-stitch-product-body h3 {
+    font-size: 1.35rem;
+}
+
+.wm-stitch-product-body h3 a:hover {
+    color: var(--wm-primary);
+}
+
+.wm-stitch-product-body p {
+    margin: 0 0 14px;
+    color: var(--wm-muted);
+    font-size: .68rem;
+}
+
+.wm-stitch-product-body > div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--wm-line);
+}
+
+.wm-stitch-product-body > div strong {
+    color: var(--wm-primary);
+    font-size: .7rem;
+}
+
+.wm-stitch-product-body > div span {
+    color: var(--wm-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .56rem;
+}
+
+.wm-stitch-process {
+    color: #e9f0ea;
+    background: var(--wm-primary-deep);
+}
+
+.wm-stitch-process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 40px;
+}
+
+.wm-stitch-process-grid article {
+    padding: 26px;
+    border: 1px solid rgba(217, 232, 222, .21);
+    border-radius: 10px;
+}
+
+.wm-stitch-process-grid article > span {
+    color: #bdcfbd;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .68rem;
+}
+
+.wm-stitch-process-grid h3 {
+    margin: 26px 0 8px;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.wm-stitch-process-grid p {
+    margin: 0;
+    color: #b6c7bd;
+    font-size: .8rem;
+}
+
+.wm-stitch-about {
+    background: var(--wm-paper);
+}
+
+.wm-stitch-about-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(40px, 8vw, 110px);
+}
+
+.wm-stitch-about-art {
+    display: grid;
+    min-height: 310px;
+    place-items: center;
+    align-content: center;
+    color: var(--wm-primary);
+    border: 1px solid var(--wm-gold);
+    outline: 1px solid rgba(189, 150, 83, .35);
+    outline-offset: -10px;
+    background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(189, 150, 83, .1) 12px 13px);
+}
+
+.wm-stitch-about-art span {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 7rem;
+    line-height: 1;
+}
+
+.wm-stitch-about-art small {
+    margin-top: 12px;
+    color: var(--wm-terra);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .61rem;
+    letter-spacing: .14em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.wm-stitch-about-grid > div:last-child > p:not(.wm-stitch-kicker) {
+    max-width: 650px;
+    margin: 22px 0 0;
+    color: var(--wm-muted);
+}
+
+.wm-stitch-about-points {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+}
+
+.wm-stitch-about-points span {
+    display: block;
+    color: var(--wm-muted);
+    font-size: .72rem;
+}
+
+.wm-stitch-about-points b {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--wm-ink);
+    font-size: .77rem;
+}
+
+.wm-stitch-seller {
+    padding: 64px 0;
+    color: #fff;
+    background: var(--wm-terra);
+}
+
+.wm-stitch-seller-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 34px;
+}
+
+.wm-stitch-seller h2 {
+    max-width: 700px;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
+}
+
+.wm-stitch-seller p:not(.wm-stitch-kicker) {
+    max-width: 580px;
+    margin: 12px 0 0;
+    color: #f1d4c7;
+    font-size: .86rem;
+}
+
+.wm-stitch-seller .wm-stitch-kicker {
+    color: #efc58e;
+}
+
+.wm-stitch-seller-actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+}
+
+.wm-stitch-seller-actions a {
+    padding: 12px 15px;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 7px;
+    font-size: .67rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.wm-stitch-seller-actions a:first-child {
+    color: var(--wm-terra) !important;
+    background: #f4d3a1;
+    border-color: #f4d3a1;
+}
+
+.wm-stitch-footer {
+    padding: 54px 0 25px;
+    color: #dce8df;
+    background: #0d2521;
+}
+
+.wm-stitch-footer-grid {
+    display: grid;
+    grid-template-columns: 1.7fr repeat(3, 1fr);
+    gap: 40px;
+}
+
+.wm-stitch-footer .wm-stitch-brand strong {
+    color: #fff;
+}
+
+.wm-stitch-footer .wm-stitch-brand small,
+.wm-stitch-footer p,
+.wm-stitch-footer a {
+    color: #b4c9be;
+}
+
+.wm-stitch-footer .wm-stitch-mark {
+    color: var(--wm-primary-deep);
+    background: #f4d3a1;
+}
+
+.wm-stitch-footer p {
+    max-width: 270px;
+    margin: 20px 0 0;
+    font-size: .75rem;
+}
+
+.wm-stitch-footer h3 {
+    margin: 0 0 15px;
+    color: #fff;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .61rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.wm-stitch-footer-grid > div:not(:first-child) a {
+    display: block;
+    margin: 7px 0;
+    font-size: .72rem;
+}
+
+.wm-stitch-footer a:hover,
+.wm-stitch-footer a:focus-visible {
+    color: #fff;
+}
+
+.wm-stitch-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 45px;
+    padding-top: 15px;
+    color: #8eaaa0;
+    border-top: 1px solid rgba(220, 232, 223, .18);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .56rem;
+    letter-spacing: .04em;
+}
+
+.wm-stitch-empty {
+    grid-column: 1 / -1;
+    padding: 55px 28px;
+    color: var(--wm-muted);
+    background: var(--wm-paper);
+    border: 1px dashed #b7b1a6;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.wm-stitch-empty > span {
+    display: block;
+    color: var(--wm-primary);
+    font-size: 1.8rem;
+}
+
+.wm-stitch-empty h3 {
+    margin: 8px 0 4px;
+    color: var(--wm-ink);
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.wm-stitch-empty p {
+    margin: 0 auto 17px;
+    max-width: 460px;
+    font-size: .8rem;
+}
+
+.wm-stitch-empty a {
+    color: var(--wm-primary);
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.wm-market-motion [data-wm-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 600ms ease, transform 600ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.wm-market-motion [data-wm-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wm-stitch *,
+    .wm-stitch *::before,
+    .wm-stitch *::after {
+        animation-duration: .001ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .wm-nav {
+        gap: 12px;
+        font-size: .65rem;
+    }
+
+    .wm-stitch-hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wm-stitch-hero-copy {
+        padding: 70px 54px;
+    }
+
+    .wm-stitch-hero-collage {
+        min-height: 480px;
+    }
+
+    .wm-stitch-filter,
+    .wm-stitch-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wm-stitch-filter input,
+    .wm-stitch-filter button,
+    .wm-stitch-filter-reset,
+    .wm-stitch-filters input,
+    .wm-stitch-filters button,
+    .wm-stitch-reset {
+        grid-column: span 2;
+    }
+
+    .wm-stitch-filter select,
+    .wm-stitch-filters select {
+        grid-column: span 1;
+    }
+
+    .wm-stitch-supplier-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wm-stitch-product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .wm-stitch-footer-grid {
+        grid-template-columns: 1.4fr repeat(3, 1fr);
+        gap: 25px;
+    }
+}
+
+@media (max-width: 720px) {
+    .wm-stitch-shell {
+        width: min(100% - 28px, 600px);
+    }
+
+    .wm-stitch-header {
+        top: 7px;
+        padding: 7px 0;
+    }
+
+    .wm-stitch-header-inner {
+        min-height: 60px;
+        padding: 9px 12px 9px 15px;
+    }
+
+    .wm-stitch-brand strong {
+        font-size: 1.22rem;
+    }
+
+    .wm-stitch-brand small {
+        font-size: .49rem;
+    }
+
+    .wm-stitch-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+
+    .wm-stitch-menu {
+        display: block;
+    }
+
+    .wm-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+        background: rgba(255, 253, 249, .98);
+        border: 1px solid var(--wm-line);
+        border-radius: 16px;
+        box-shadow: 0 16px 28px rgba(20, 24, 22, .14);
+    }
+
+    .wm-nav.is-open {
+        display: flex;
+    }
+
+    .wm-nav a {
+        padding: 11px 13px;
+        border-bottom: 1px solid rgba(222, 218, 210, .7);
+    }
+
+    .wm-nav a:last-child,
+    .wm-nav .wm-stitch-nav-login {
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .wm-stitch-nav-cta {
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .wm-stitch-hero {
+        padding-top: 10px;
+    }
+
+    .wm-stitch-hero-grid {
+        border-radius: 12px;
+    }
+
+    .wm-stitch-hero-copy {
+        padding: 54px 25px 48px;
+    }
+
+    .wm-stitch-hero h1 {
+        font-size: clamp(3rem, 14vw, 4.5rem);
+    }
+
+    .wm-stitch-search {
+        display: block;
+        padding: 5px;
+    }
+
+    .wm-stitch-search input {
+        display: block;
+        width: 100%;
+        min-height: 46px;
+    }
+
+    .wm-stitch-search button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+    .wm-stitch-stats {
+        gap: 19px;
+        margin-top: 32px;
+    }
+
+    .wm-stitch-hero-collage {
+        min-height: 400px;
+        padding: 12px;
+    }
+
+    .wm-stitch-hero-image:nth-child(1) { inset: 12px 42% 42% 12px; }
+    .wm-stitch-hero-image:nth-child(2) { inset: 12px 12px 55% 64%; }
+    .wm-stitch-hero-image:nth-child(3) { inset: 57% 45% 12px 12px; }
+    .wm-stitch-hero-image:nth-child(4) { inset: 48% 12px 12px 58%; }
+
+    .wm-stitch-hero-image-primary { inset: 12px 42% 42% 12px !important; }
+    .wm-stitch-hero-image-secondary { inset: 12px 12px 55% 64% !important; }
+    .wm-stitch-hero-stack { inset: 57% 12px 12px 12px; }
+
+    .wm-stitch-section,
+    .wm-stitch-process,
+    .wm-stitch-about {
+        padding: 72px 0;
+    }
+
+    .wm-stitch-section-heading {
+        display: block;
+        margin-bottom: 22px;
+    }
+
+    .wm-stitch-section-heading .wm-stitch-text-link,
+    .wm-stitch-section-heading .wm-stitch-outline-link {
+        display: inline-block;
+        margin-top: 12px;
+    }
+
+    .wm-stitch-filter,
+    .wm-stitch-filters {
+        display: block;
+    }
+
+    .wm-stitch-filter > *,
+    .wm-stitch-filters > * {
+        display: block;
+        width: 100%;
+        margin-top: 7px;
+    }
+
+    .wm-stitch-supplier-grid,
+    .wm-stitch-product-grid,
+    .wm-stitch-craft-grid,
+    .wm-stitch-process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wm-stitch-supplier-grid,
+    .wm-stitch-product-grid {
+        gap: 10px;
+    }
+
+    .wm-stitch-supplier-image,
+    .wm-stitch-supplier-media {
+        height: 170px;
+    }
+
+    .wm-stitch-supplier-body {
+        padding: 14px;
+    }
+
+    .wm-stitch-supplier-body h3 {
+        font-size: 1.35rem;
+    }
+
+    .wm-stitch-supplier-body p {
+        min-height: 0;
+        font-size: .7rem;
+    }
+
+    .wm-stitch-supplier-actions,
+    .wm-stitch-card-actions {
+        display: block;
+    }
+
+    .wm-stitch-supplier-actions a,
+    .wm-stitch-card-actions a {
+        display: block;
+        margin-top: 6px;
+    }
+
+    .wm-stitch-craft-card {
+        min-height: 150px;
+    }
+
+    .wm-stitch-craft-card strong {
+        font-size: 1.25rem;
+    }
+
+    .wm-stitch-product-body {
+        padding: 11px;
+    }
+
+    .wm-stitch-product-body h3 {
+        font-size: 1.12rem;
+    }
+
+    .wm-stitch-product-body p {
+        min-height: 37px;
+        margin-bottom: 10px;
+        font-size: .62rem;
+    }
+
+    .wm-stitch-product-body > div {
+        display: block;
+    }
+
+    .wm-stitch-product-body > div span {
+        display: block;
+        margin-top: 4px;
+    }
+
+    .wm-stitch-process-grid article {
+        padding: 18px;
+    }
+
+    .wm-stitch-process-grid h3 {
+        margin-top: 18px;
+        font-size: 1.35rem;
+    }
+
+    .wm-stitch-about-grid {
+        display: block;
+    }
+
+    .wm-stitch-about-art {
+        min-height: 240px;
+        margin-bottom: 40px;
+    }
+
+    .wm-stitch-about-art span {
+        font-size: 5rem;
+    }
+
+    .wm-stitch-about-points {
+        gap: 15px;
+    }
+
+    .wm-stitch-seller-inner,
+    .wm-stitch-footer-bottom {
+        display: block;
+    }
+
+    .wm-stitch-seller-actions {
+        display: block;
+        margin-top: 22px;
+    }
+
+    .wm-stitch-seller-actions a {
+        display: block;
+        width: 100%;
+        margin-top: 7px;
+        text-align: center;
+    }
+
+    .wm-stitch-footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 18px;
+    }
+
+    .wm-stitch-footer-grid > div:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .wm-stitch-footer-bottom span {
+        display: block;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 420px) {
+    .wm-stitch-shell {
+        width: calc(100% - 22px);
+    }
+
+    .wm-stitch-supplier-grid,
+    .wm-stitch-product-grid,
+    .wm-stitch-craft-grid,
+    .wm-stitch-process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wm-stitch-hero-collage {
+        min-height: 340px;
+    }
+
+    .wm-stitch-hero-image:nth-child(1) { inset: 12px 40% 43% 12px; }
+    .wm-stitch-hero-image:nth-child(2) { inset: 12px 12px 56% 66%; }
+    .wm-stitch-hero-image:nth-child(3) { inset: 58% 44% 12px 12px; }
+    .wm-stitch-hero-image:nth-child(4) { inset: 49% 12px 12px 59%; }
+
+    .wm-stitch-hero-image-primary { inset: 12px 40% 43% 12px !important; }
+    .wm-stitch-hero-image-secondary { inset: 12px 12px 56% 66% !important; }
+    .wm-stitch-hero-stack { inset: 58% 12px 12px 12px; }
+
+    .wm-stitch-about-points {
+        grid-template-columns: 1fr;
+    }
+}
