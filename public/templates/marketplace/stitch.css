@@ -47,6 +47,57 @@ body.marketplace-page {
     margin: 0 auto;
 }
 
+/* The shared storefront stylesheet contains legacy element-level rules for
+   header, nav, main and footer. Keep this marketplace layout isolated from
+   those rules so the shell stays centred and the navigation cannot inherit
+   grid/padding values from another template. */
+.wm-marketplace.wm-stitch .wm-stitch-header {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 14px 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.wm-marketplace.wm-stitch .wm-stitch-header-inner {
+    width: min(1240px, calc(100% - 40px));
+    min-width: 0;
+    margin: 0 auto;
+}
+
+.wm-marketplace.wm-stitch .wm-nav {
+    display: flex;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    gap: 16px;
+    justify-content: flex-end;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.wm-marketplace.wm-stitch .wm-nav a {
+    white-space: nowrap;
+}
+
+.wm-marketplace.wm-stitch main {
+    max-width: none;
+    margin: 0;
+}
+
+.wm-marketplace.wm-stitch .wm-stitch-footer {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border: 0;
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -1553,5 +1604,57 @@ body.marketplace-page {
 
     .wm-stitch-about-points {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Collapse the full navigation before it can wrap or push the CTA outside
+   the header on narrow laptop/tablet widths. */
+@media (max-width: 1120px) {
+    .wm-marketplace.wm-stitch .wm-stitch-header-inner {
+        width: min(100% - 32px, 960px);
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-header .wm-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+        background: rgba(255, 253, 249, .98);
+        border: 1px solid var(--wm-line);
+        border-radius: 16px;
+        box-shadow: 0 16px 28px rgba(20, 24, 22, .14);
+        white-space: normal;
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-header .wm-nav.is-open {
+        display: flex;
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-header .wm-nav a {
+        width: 100%;
+        padding: 11px 13px;
+        border-bottom: 1px solid rgba(222, 218, 210, .7);
+        white-space: normal;
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-header .wm-nav a:last-child,
+    .wm-marketplace.wm-stitch .wm-stitch-header .wm-nav .wm-stitch-nav-login {
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .wm-marketplace.wm-stitch .wm-stitch-menu {
+        display: block;
+    }
+}
+
+@media (min-width: 721px) and (max-width: 1120px) {
+    .wm-marketplace.wm-stitch .wm-stitch-header-inner {
+        padding-right: 14px;
     }
 }
